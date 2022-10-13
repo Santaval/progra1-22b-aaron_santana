@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+// procedure main()
+int main(void) {
+  // Copy your algorithm. Convert it to comments.
+  // Implement each step. Apply good programming practices.
+} // end procedure
