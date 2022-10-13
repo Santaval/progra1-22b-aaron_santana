@@ -1,3 +1,32 @@
 procedure main()
   // Solve the problem by yourself first, then deduce the steps
+  input row_count
+  input col_count
+
+ 
+  set originalMatix := lonng [row_count][col_count]
+  input originalMatix
+
+  if is_identity(originalMatix) do 
+    output "identityMatix"
+
+  else set transpose_matix := transpose(originalMatix)
+  output transposeMatrix
+
+end
 end procedure
+
+function is_identity (matrix) do 
+  if rows(matrix) != colums(main) do 
+    return false 
+  end
+
+  else do 
+    for rows == matirxRows do 
+      for rows == matirxRows do 
+          if row == col do 
+            
+          end
+  end
+  end
+end
