@@ -1,0 +1,238 @@
+set passageValue := input nextInt
+
+if validatePassage(passageValue) do
+    print passageValue \m
+    printTableHeaders(passageValue)
+    while existNextInt do
+        set payment  := input nextInt
+        print payment
+        
+      
+        printChange( passageValue, payment)
+        printCoinsAmount(payment, passageValue)
+   
+
+
+    end
+end
+
+//return array
+function calculateCoinsAmount(change) do 
+    assert change >= 0  
+    set coins = [6]
+
+
+
+    for counter < 6 do 
+        switch(counter) {
+            case 0:  
+            coins[counter] =  change / 500
+            change := cahnge % 500
+             break;
+
+            case 1: 
+                coins[counter] =  change / 100
+                change := cahnge % 100
+            break;
+
+            case 2: 
+            coins[counter] =  change / 50
+            change := cahnge % 50
+            break;
+
+            case 3: 
+            coins[counter] =  change / 25
+            change := cahnge % 25
+            break;
+
+            case 4: 
+            coins[counter] =  change / 10
+            change := cahnge % 10
+            break;
+
+            case 5: 
+            coins[counter] =  change / 5
+            change := cahnge % 5
+            break;
+        }
+    end
+
+    return coins
+
+end
+
+
+
+procedure printCoinsAmount(payment, passageValue) do 
+    if(validatePayment(payment)){
+        set coinsAmount := calculatecoinsAmount(change)
+    for counter < 6 do 
+        set currentCoinAmount := coinsAmount[counter]
+        if currentCoinAmount > 0 do 
+            print("%3d", currentCoinAmount)
+        end
+
+        else do 
+            if counter == 5 do 
+                print("    \n")
+            end
+
+            else do 
+                print("    ")
+            end
+        end
+
+    end
+
+    print("\n")
+    }
+end
+
+
+//return long
+
+function calculateChange(payment, passageValue) do 
+    assert payment >= passageValue
+    return payment - passageValue
+end
+
+//return boolean 
+function validateChange(payment, passageValue) do 
+
+    if payment >= passageValue return TRUE
+    return FALSE
+
+end
+
+
+//return boolean
+procedure printChange( passageValue, payment) do
+
+    set textSpace := calculateSpace(payment)
+    
+        if validatePayment(payment) do
+            if validateChange(payment,passageValue) do
+                set change := calculateChange(payment, passageValue)
+                print("%TEXTSPACEd", change)
+            end
+            
+            else print ("%TEXTSPACEs", "insuf")
+
+        end  
+        
+        else do 
+            print("%TEXTSPACEs", "error")
+            print \n
+        end
+end
+
+
+
+procedure  printTableHeaders() do
+    
+        println(" PAGO VUELT 500 100  50  25  10   5")
+        println("----- ----- --- --- --- --- --- ---")
+    
+end
+
+
+
+//return int 
+function calculateSpace(payment) do
+    set  paymentString := "" + payment
+    set paymentLength := payment.length()
+    if paymentLength > 5 do
+        return paymentLength
+    end
+
+    return 5 
+
+end
+
+
+procedure printPassage(passageValue) do
+        if validatePassage()  do
+            print passageValue
+            print "err \n"
+        end  
+
+        else do 
+            print passageValue
+        end
+        
+      
+end
+
+function validatePassage(passageValue) do 
+    if passageValue <= 0  do
+      
+        return FALSE
+  
+    end
+
+    return TRUE  
+end
+
+
+function validatePayment(payment) do 
+    if payment <= 0 return FALSE
+    return TRUE
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+   * Print the number of required coins of the given denomination. If no coins
+   * of this denomination are required, an empty field is printed instead.
+   *
+   * <p>For example printExchangeCoin(1700, 500) will print `   3` because 3
+   * coins of 500 colones are required to give 3x500=1500, and it will return
+   * 200 because 200 colones are left to be exchanged with other denominations.
+   *
+   * @param exchange The amount of money to give as exchange
+   * @param denomination The coin denomination, e.g: 500 or 25
+   *
+   * @return The exchange after subtract the coins for this denomination.
+   */
+
+
+    /*set stringPassageValue := passageValue.toString()
+    set spaceLenght := stringPassageValue.spaceLength
+
+    if(spaceLenght > 5) do 
+        print("%$SPACELENGTHs ", "PAGO")
+        print("%$SPACELENGTHs ", "VUELT")
+        print("%3s%3s%3s%3s%3s%3s\n","500", "100", "50", "25", "10", "5")
+        
+        for counter < 2 do 
+
+            for counter < spaceLenght do 
+                print("-")
+
+            end
+
+            print(" ")
+        end
+        
+        print("--- --- --- ---") 
+
+    end
+
+    else do
+        println(" PAGO VUELT 500 100  50  25  10   5")
+        println("----- ----- --- --- --- ---")
+    end*/

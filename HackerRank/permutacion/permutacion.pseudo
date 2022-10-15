@@ -1,0 +1,61 @@
+
+procedure main()do 
+    
+change delimiter  "[\\|\\:\\n]+"
+set originalHomework = extracWords()
+
+while (hasNextLine){
+    set currentHomework = extractWords();
+    totalDuplicateWords = matchWords(originalHomework, curentHomework)
+    printResults()
+}
+
+
+
+
+end
+
+
+function extractWords() do 
+
+    input nextInt
+    String[] words = {};
+
+    while (hasNext) do 
+       set currentWord = input next().trim()
+       words.append(currentWord) 
+    end
+
+end
+
+
+function matchWords(originalHomework, curentHomework) do 
+    set totalDuplicateWords = 0
+    for originalCounter < originalHomework.lenght do 
+        for currentCounter < curentHomework.lenght do 
+            if curentHomework[counter] == originalHomework[counter] do 
+                totalDuplicateWords += 1
+            end
+        end
+    end
+end
+
+
+
+procedure printResults(worsAmount, totalWordsRepeated) do 
+
+
+    print counter + 1 
+
+    if(totalWordsRepeated == 0) print original
+    if (totalWordsRepeated == wordsAmount) print plagiarism
+    
+    else do 
+        print calculatePlagiarism(wordsAmount, totalWordsRepeated) + "%"
+    end
+
+end
+
+function calculatePlagiarism(wordsAmount, totalWordsRepeated) do 
+    return (totalWordsRepeated/wordsAmount) * 100
+end

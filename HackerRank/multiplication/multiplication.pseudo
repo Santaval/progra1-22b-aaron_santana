@@ -1,0 +1,135 @@
+set orderNums = orderNum()
+set starNumber :=orderNums[0]
+set endNumber := orderNum[1]
+set increment := nextLong
+
+
+if(validateIncrement(increment)) do
+    set tableValues := calculateTableValues(starNumber, endNumber, increment) 
+    printTableHeaders(tableValues)
+    printTableRows(tableValues)
+end
+
+
+
+
+//trabaja bajo el supuesto que startNumber es menor o igual que final number, si no es asi lanza un error 
+function calculateTableValues(starNumber, finalNumber, increment) do 
+    if starNumber < finalNumber do 
+        set tableValues := []
+        
+        {
+            set counter := 0
+
+            while starNumber <= finalNumber do 
+                tableValues[counter] := starNumber
+                starNumber += increment
+                counter ++
+            end
+        }
+    
+        return tableValues
+    end
+
+    else throw new Exception("Exception message");
+end
+
+
+
+//return long array
+function orderNum() do
+    set firtsNumber := nextLong
+    set sencondNumber := nextLong
+    set orderNums = long[]
+    if firtsNumber < sencondNumber do 
+        orderNums[0] = firtsNumber
+        orderNums[1] = sencondNumber
+    end 
+    else if firtsNumber > sencondNumber do 
+        orderNums[0] = sencondNumber
+        orderNums[1] = firtsNumber
+    end
+
+    else do 
+        orderNums[0] = firtsNumber
+        orderNums[1] = sencondNumber
+    end
+
+    return orderNums
+end
+
+
+//validateIncrement
+function validateIncrement(increment) do 
+    if increment <= 0 return FALSE
+    print invalid increment
+    return TRUE 
+end
+
+//print
+procedure  printTableHeaders (tableValues) do 
+    set spaceWidth := calculateMaxWidth(tableValues)
+    print "%SPACEWIDTHs", "x"
+    print " | "
+    set tableValuesAmount = tableValues.lenght()
+    for counter < tableValuesAmount do 
+        print tableValue[counter] //%3d
+    end
+
+    printGuion(spaceWidth)
+    print "   "
+    for counter < tableValuesAmount do 
+        printGuion(spaceWidth)
+    end
+
+end
+
+
+
+function calculateMaxWidth(tableValues)do 
+    set tableValuesAmount := tableValues.lenght()
+    set biggestValue = tableValues[tableValuesAmount] * tableValues[tableValuesAmount]
+    set biggestValueToString = ""+ biggestValue
+    return biggestValue.lenght()
+end
+
+
+//calculate
+
+procedure printTableRows(tableValues) do 
+
+    set spaceWidth := calculateMaxWidth(tableValues)
+
+    for counter < tableValuesAmount do 
+        set curentValue = tableValues[counter]
+        printTableRowHeaders(curentValue)
+        printRowContent(tableValues, curentValue)
+
+
+    end
+end
+
+
+procedure printTableRowsHeader(currentValue){
+    print currentValue //format space width "%d"
+    print " | "
+}
+
+procedure printRowContent(tableValues, currentValue) do 
+    set spaceWidth := calculateMaxWidth(tableValues)
+    for counter < tableValuesAmount do 
+        set curentMultiplication := curentValue * tableValue[counter]
+        print curentMultiplication //format space width " %d"
+    end
+
+    print \n
+end
+
+
+
+
+procedure printGuion(number) do 
+    for counter < number do 
+        print("-")
+    end
+end
