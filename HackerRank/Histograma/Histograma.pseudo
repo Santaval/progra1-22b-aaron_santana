@@ -1,0 +1,65 @@
+input valuesAmount 
+input rangesAmount 
+input intAmount
+input decimalsAmount
+
+
+double[] values = readValues(valuesAmount)
+values := sort(values)
+printHistogram(values, rangesAmount)
+
+
+function readValues(valuesAmount) do
+    set values := double [valuesAmount] 
+    for index < valuesAmount do 
+        try do 
+            values[index] = input currentValue
+        end catch do 
+            throw Exception("Invalid or insufficient data")
+        end
+    end
+
+    return values
+end
+
+
+function calculateRangeWidth(values) do 
+    set min := values[0]
+    set max := values[values.length - 1]
+    return (max-min) / rangesAmount
+end
+
+
+procedure printHistogram(values, rangesAmount) do
+    set rangesValuesAmount := calculateValuesRangesAmount(values, rangesAmount)  
+    set rangesWidth:= calculateRangeWidth(values)
+    set min := values[0]
+
+    for index < rangesAmount - 1 do 
+        print "[" min "," min+rangesWidth "[ |" 
+        for counter < rangesAmount[index] do 
+            print "*"
+        end
+    end
+
+    print "[" min "," min+rangesWidth "] |" 
+        for counter < rangesAmount[rangesAmount - 1] do 
+            print "*"
+        end
+
+end
+
+function calculateValuesRangesAmount(values,rangesAmount) do 
+    set min := values[0]
+    set rangesWidth := calculateRangeWidth(values,rangesAmount);
+    set int[] rangesValuesAmount = int[rangesAmount]
+    for index < values.length do 
+        set valuesRangesIndex = (int) Math.floor((values[index] - min) / rangesWidth)
+        rangesValuesAmount[valuesRangesIndex] ++
+    end
+end
+
+
+
+
+
