@@ -1,0 +1,89 @@
+
+public static final String VALORS []= {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+public static final String PALOS [] = {"trebol", "corazones", "diamente", "espada"};
+
+ 
+
+for (counter < n ){
+
+
+    switch(counter % 4) {
+        case 0: PALOS[0]
+        case 1: PALOS[1]
+        case 2: PALOS[2]
+        case 3: PALOS[3]
+    }
+    
+    
+
+    n = 4 
+
+
+    counter = 4
+
+    4 % 4 = 0
+
+
+
+
+     16 / 4 = 2
+
+
+   
+
+
+}
+
+
+Cartas[] baraja = new Cartas[8]
+// cartas = {3 corazones,4 trebol ,2 diamante,6 picas}
+
+//counter = 3
+for counter < n do 
+
+    Carta nuevaCarta = new Cartas()
+
+    while (compararCartasGeneradas()) do 
+        nuevaCarta = new Cartas()
+    end
+
+    baraja[counter] = nuevaCarta
+
+end
+ 
+
+numeros = {1, 3 , 5 ,6}
+
+ 
+numeros.lenght // 4
+
+compararCartasGeneradas(nuevaCarta, baraja) do 
+
+    esIgual = false
+
+    for counter < baraja.lenght do 
+
+    if nuevaCarta == barja[contador] do 
+        esIgual = true
+        counter = baraja.lenght
+    end
+
+  return esIgual
+ 
+    end
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

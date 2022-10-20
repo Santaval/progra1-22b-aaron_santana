@@ -17,13 +17,20 @@ public class Solution {
    * @param args Command line arguments
    */
   public static void main(final String[] args) {
-    try{
-      // This try calls solution.close() automatically
+  
+
+    try {
+
     Solution solution = new Solution();
     solution.start();
-    }catch (InputMismatchException err){
-      System.out.println("invalid data");
+    } catch (InputMismatchException err){
+      System.out.println("Invalid data");
+    } catch (Exception err){
+      System.out.println("C kyo no c porque");
     }
+  
+    
+    
   }
 
   /**
