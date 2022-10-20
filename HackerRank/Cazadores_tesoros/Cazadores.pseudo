@@ -1,0 +1,165 @@
+set row_count := input row_count
+set col_count := input col_count
+set start_row := input start_row 
+set start_col := input start_col 
+set startNum := concatNums (start_row, start_col)
+set map := generateMatrix(row_count, col_count)
+set treasureWayCells := calculateTreasureWay(map, startCell)
+set printTableSymbols()
+
+
+
+
+
+function generateMatrix(col_count, row_count) do 
+
+
+    set matrix := int[row_count][col_count]
+
+    for (col_index = 0 to col_count) do 
+
+        for (row_index = 0 to row_count) do 
+
+        matrix[col_index][row_index] = input nextLong
+
+        end
+
+    end
+
+    return matrix
+end
+
+
+calculateTreasureWay(map, startNum) do 
+    set totalCells = calculateSteps(map, startNum)
+    set treasureMapWay = int[]
+    set int[] currentCell :=  separateDigits(startNum)
+    set previousNumber := 0;
+    set err := false
+    set cellsCounter  = 0
+    
+
+
+        while startNum != previousNumber and !err  do 
+
+            set nextCell := map[currentCell[0]][currentCell[1]]
+    
+            if(nextCell > (map.lengt + map[col].lenght))  do
+                output err
+                enLoop := true
+            end
+    
+            else if (nextCell < 0 ) do 
+                print sea
+                enLoop := true
+            end
+
+            else if (checkLoops(treasureMapWay, nextCell)) do 
+                endLoop := true
+            end
+
+            else if (previousNumber == currentCell) do 
+                output treasure
+                cellsCounter ++ 
+                treasureMapWay[cellsCounter] := concatNums(currentCell[0]][currentCell[1])
+            end
+    
+            else do 
+                cellsCounter ++ 
+                treasureMapWay[cellsCounter] := concatNums(currentCell[0]][currentCell[1])
+                previousNumber := concatNums(currentCell[0]][currentCell[1])
+                startNum = nextCell
+                currentCell := separateDigits(startNum)
+            end
+            
+        end
+   
+
+
+end
+
+
+function separateDigits(num) do 
+
+    int[] digits = new int[2]
+    num.toChatArray()
+
+    for count to 2 do 
+        digits[count] = num[count]
+    end
+
+end
+
+
+private int concatNums(int num1, int num2){
+    finalNum = String.valueOf(valor) +   String.valueOf(resultado);
+    return  Integer.parseInt(cadenaResultante); 
+ }
+
+
+ function calculateSteps (map ,startNum) do 
+    set int[] currentCell :=  separateDigits(startNum)
+    set previousNumber := 0;
+    set err := false
+    set cellsCounter  = 0
+    while startNum != previousNumber and !err  do 
+
+        set nextCell := map[currentCell[0]][currentCell[1]]
+
+        if(nextCell > (map.lengt + map[col].lenght))  do
+            enLoop := true
+        end
+
+        else if (cell < 0 ) do 
+            enLoop := true
+        end
+
+        else if (cellsCouter > (map.lengt * map[col].lenght)) do 
+            endLoop := true
+        end
+
+        else if (previousNumber == currentCell) do 
+            cellsCounter ++
+            endLoop := true
+        end
+
+        else do 
+            cellsCounter ++
+        end
+        
+    end
+
+    return cellsCounter
+
+ end
+
+
+ procedure printTableSymbols(map, treasureMapWay) do 
+
+        if(cell )
+
+
+ end
+
+
+
+
+ function checkLoops( intArray, num) do 
+
+    for counter1 to arrayLenght do 
+
+        set repeatedValues := 0
+
+        for counter2 to arrayLenght do 
+
+        if  intArray[counter1] == intArray {counter2} repeatedValues ++
+
+        end
+
+        if repeatedValues > 1 return true
+    end
+
+    return false
+
+ end
+
