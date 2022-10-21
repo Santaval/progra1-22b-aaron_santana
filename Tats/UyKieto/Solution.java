@@ -1,4 +1,4 @@
-package UyKieto;
+//package UyKieto;
 import java.util.Scanner;
 
 
@@ -23,6 +23,8 @@ public class Solution {
         for(int index = 0; index < cantidadNombres; index++){
             System.out.println(nombres[index] );
         }
+
+        busquedaBin(nombres);
 
 
         
@@ -123,6 +125,23 @@ public class Solution {
             return listaFinal;
 
         }
+        public static void busquedaBin (String [] nombres){
+          System.out.println("Digite el nombre que desea buscar");
+          Scanner scanner = new Scanner (System.in); 
+          String nombre = scanner.next(); 
+            int pos = -1; // asumo que no 
+       for(int i=0; pos==-1 && i < nombres.length; ++i){
+          if(nombres[i].equals(nombre)){
+             pos = i;  
+          }
+       }
+       if(pos!=-1){
+          System.out.println(""+ nombres[pos]+" está en la posicion: "+ pos); 
+       }
+
+       scanner.close();
+        }
+    
     
 
 }
