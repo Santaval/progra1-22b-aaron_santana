@@ -1,4 +1,4 @@
-package Tats;
+package Cartas;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

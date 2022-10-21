@@ -1,0 +1,22 @@
+["Tats, Aaron, Gypsi, Josue, Ana"]
+[4,5,5,5,3]
+
+[Ana. Tats, Aaron, Gypsi, Josue]
+
+
+nuevaLista[5]
+
+["Ana", ""]
+
+
+function compareList(listaCompleta, listaNueva) do 
+
+for counter to longitudLista do 
+    for counter to longitudLista do 
+        if(listaNueva[counter] == listaCompleta[counter]) return true
+    end
+end
+
+return false
+
+end

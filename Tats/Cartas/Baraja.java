@@ -1,4 +1,4 @@
-package Tats;
+package Cartas;
 
 public class Baraja {
     public Carta[] baraja;

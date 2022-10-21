@@ -1,4 +1,4 @@
-package Tats;
+package Cartas;
 class Carta {
     public String valor = "7";
     public String palo; 
