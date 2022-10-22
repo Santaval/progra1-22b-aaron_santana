@@ -79,9 +79,12 @@ public class Solution {
     int[] rangesValuesAmount = calculateValuesRangeAmount(values, rangeAmount);
     double rangeWidth = calculateRangeWidth(values, rangeAmount);
     double min = values[0];
+    double endRange = min;
+    double lastPrinted = min;
 
     for (int index = 0; index < rangeAmount - 1; index++){
-        System.out.printf("[%"+intDigits+"."+ decimalDigts +"f, %"+intDigits+"."+ decimalDigts +"f[ | ", min, (min+rangeWidth));
+      endRange = roundTo(min + rangeWidth) && decimalDigts == 0 ? Math.floor( min + rangeWidth) :  min + rangeWidth;
+        System.out.printf("[%"+intDigits+"."+ decimalDigts +"f, %"+intDigits+"."+ decimalDigts +"f[ | ", lastPrinted, endRange);
 
         for (int counter = 0; counter < rangesValuesAmount[index] ; counter++){
             System.out.print("*");
@@ -89,12 +92,13 @@ public class Solution {
 
         System.out.print("\n");
         min += rangeWidth;
+        lastPrinted = endRange;
 
     }
 
 
-
-    System.out.printf("[%"+intDigits+"."+ decimalDigts +"f, %"+intDigits+"."+ decimalDigts +"f] | ", min, (min+rangeWidth));
+    endRange = roundTo(min + rangeWidth) && decimalDigts == 0 ? Math.floor( min + rangeWidth) :  min + rangeWidth;
+    System.out.printf("[%"+intDigits+"."+ decimalDigts +"f, %"+intDigits+"."+ decimalDigts +"f] | ", lastPrinted, endRange);
 
         for (int counter = 0; counter <= rangesValuesAmount[rangeAmount -1]; counter++){
             System.out.print("*");
@@ -126,6 +130,16 @@ private double calculateRangeWidth(double[] values, int rangeAmount) {
     double min = values[0];
     double max = values[values.length - 1];
     return (max-min) / rangeAmount;
+}
+
+private boolean roundTo (double num){
+
+  double newNum = num + .4;
+
+  if (Math.floor(newNum) - Math.floor(num) == 1) return false;
+
+  return true;
+
 }
 
 
