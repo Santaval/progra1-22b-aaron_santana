@@ -110,7 +110,11 @@ public class Solution {
 
     for (int index = 0; index < values.length - 1; index++){
         int valuesRangeIndex = (int) Math.floor((values[index]- min) / rangeWidth);
-        rangesValuesAmount[valuesRangeIndex ] ++; 
+        try {
+          rangesValuesAmount[valuesRangeIndex ] ++;
+        } catch (Exception err){
+          rangesValuesAmount[valuesRangeIndex - 1] ++;
+        }
     }
 
     return rangesValuesAmount;
