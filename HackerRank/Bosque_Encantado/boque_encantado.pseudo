@@ -1,0 +1,137 @@
+class Solution {
+    procedure main () do 
+
+    set row_count:= input row_count
+    set col_count := input col_count
+    set night_count := input night_count
+
+    forest = new Forest()
+
+    
+    
+    
+
+
+    end
+}
+
+
+class Forest(){
+
+    set forest; //matrix
+    set row;
+    set col;
+
+    public void Forest(row,col){
+        row = row
+        col = col
+        forest = fillMatrix(row,col)
+    }
+
+
+    private fillMatrix(row,col){
+        set matrix
+        input matrix
+        return matrix
+    }
+
+    private UpdateCell(current_row,current_col){
+        set currentCellValue :=  forest[current_row,current_col]
+        set close_cells  := setCloseCells(current_col,current_row)
+
+        if currentCellValue == a do 
+            if searchValue("l", close_cells) == 4 return "l"
+            if searchValue("a", close_cells) == 4 return "-"
+        end
+
+        else if currentCell == "l" and searchValue("l", closeCells) < 3 return "-"
+
+        else if else if currentCell == "-" and searchValue("3", closeCells) == 3 return "a"
+
+        else return cell
+
+    }
+
+    private close_cells(current_row,current_col){
+        set  closeCells := [8]
+
+        if (checkValues(current_row,current_col)) close_cells[0] = forest[current_row -1, current_col]
+        if (checkValues(current_row,current_col)) close_cells[1] = forest[current_row +1, current_col]
+        if (checkValues(current_row,current_col)) close_cells[2] = forest[current_row , current_col - 1]
+        if (checkValues(current_row,current_col)) close_cells[3] = forest[current_row, current_col + 1]
+        if (checkValues(current_row,current_col)) close_cells[4] = forest[current_row -1, current_col - 1]
+        if (checkValues(current_row,current_col)) close_cells[5] = forest[current_row -1, current_col + 1]
+        if (checkValues(current_row,current_col)) close_cells[6] = forest[current_row + 1, current_col - 1]
+        if (checkValues(current_row,current_col)) close_cells[7] = forest[current_row +1, current_col + 1]
+
+        return closeCells
+
+    }
+
+    private checkValues(current_row,current_col){
+
+        if(current_col -1 >= 0 && current_col + 1 < col && current_row -1 >= 0 && current_row + 1 < row) return true
+        
+        return false
+
+    }
+
+    private searchValue(values, list){
+
+        set foundValue = 0
+
+        for counter to listlenght do 
+            if list[counter] == values do 
+                foundValue++
+            end
+        end
+
+        return foundValue
+
+    }
+
+
+    public updateForest(){
+       set newForest := [row,col]
+
+        for row to forestRows do 
+
+            for col to forestCol do 
+
+            newForest[row,col] = UpdateCell[row,col]
+
+
+
+            end
+
+
+        end
+
+        forest = newForest
+    }
+
+
+    public toString{
+
+    set matrix := ""
+
+    for row to forestRows do 
+
+        for col to forestCol do 
+
+        matrix += forest[row,col] + " "
+
+        end
+
+        matrix += "\n"
+
+    end
+
+    }
+
+
+
+
+
+
+}

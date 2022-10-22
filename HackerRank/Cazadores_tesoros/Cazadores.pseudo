@@ -61,13 +61,13 @@ calculateTreasureWay(map, startNum) do
             else if (previousNumber == currentCell) do 
                 output treasure
                 cellsCounter ++ 
-                treasureMapWay[cellsCounter] := concatNums(currentCell[0]][currentCell[1])
+                treasureMapWay[cellsCounter] := concatNums(currentCell[0][currentCell[1])
             end
     
             else do 
                 cellsCounter ++ 
-                treasureMapWay[cellsCounter] := concatNums(currentCell[0]][currentCell[1])
-                previousNumber := concatNums(currentCell[0]][currentCell[1])
+                treasureMapWay[cellsCounter] := concatNums(currentCell[0][currentCell[1])
+                previousNumber := concatNums(currentCell[0][currentCell[1])
                 startNum = nextCell
                 currentCell := separateDigits(startNum)
             end
@@ -136,7 +136,12 @@ private int concatNums(int num1, int num2){
 
  procedure printTableSymbols(map, treasureMapWay) do 
 
-        if(cell )
+        if(cell < 0) output ~
+        else if (checkList(treasureMapWay, cell)) output .
+        else if (cell == treasureMapWay[treasureMapWay.lenght-1]) output X
+        if (cell == concatNums(counter1, counter2)) output !
+        else output " "
+
 
 
  end
@@ -144,7 +149,7 @@ private int concatNums(int num1, int num2){
 
 
 
- function checkLoops( intArray, num) do 
+ function checkLoops( intArray) do 
 
     for counter1 to arrayLenght do 
 
@@ -163,3 +168,22 @@ private int concatNums(int num1, int num2){
 
  end
 
+
+
+ function checkList ( treasureMapWay, cell) do 
+
+        for index to arrayLenght -1 do 
+
+        if  treasureMapWay[counter1] == cell return true
+
+        end
+
+    return false
+
+ end
+
+
+
+ procedure pintSymbol(Symbol) do 
+    output symbil
+ end
