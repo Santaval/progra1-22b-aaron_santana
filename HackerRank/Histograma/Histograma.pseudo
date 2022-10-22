@@ -11,7 +11,7 @@ printHistogram(values, rangesAmount)
 
 function readValues(valuesAmount) do
     set values := double [valuesAmount] 
-    for index < valuesAmount do 
+    for index to valuesAmount do 
         try do 
             values[index] = input currentValue
         end catch do 
@@ -23,12 +23,6 @@ function readValues(valuesAmount) do
 end
 
 
-function calculateRangeWidth(values) do 
-    set min := values[0]
-    set max := values[values.length - 1]
-    return (max-min) / rangesAmount
-end
-
 
 procedure printHistogram(values, rangesAmount) do
     set rangesValuesAmount := calculateValuesRangesAmount(values, rangesAmount)  
@@ -37,13 +31,15 @@ procedure printHistogram(values, rangesAmount) do
 
     for index < rangesAmount - 1 do 
         print "[" min "," min+rangesWidth "[ |" 
-        for counter < rangesAmount[index] do 
+        for counter < rangesValuesAmount[index] do 
             print "*"
         end
+        print "\n"
+        min += rangesWidth
     end
 
     print "[" min "," min+rangesWidth "] |" 
-        for counter < rangesAmount[rangesAmount - 1] do 
+        for counter < rangesValuesAmount[rangesAmount - 1] do 
             print "*"
         end
 
@@ -57,7 +53,17 @@ function calculateValuesRangesAmount(values,rangesAmount) do
         set valuesRangesIndex = (int) Math.floor((values[index] - min) / rangesWidth)
         rangesValuesAmount[valuesRangesIndex] ++
     end
+
+    return rangesValuesAmount
 end
+
+function calculateRangeWidth(values, rangesAmount) do 
+    set min := values[0]
+    set max := values[values.length - 1]
+    return (max-min) / rangesAmount
+end
+
+
 
 
 
