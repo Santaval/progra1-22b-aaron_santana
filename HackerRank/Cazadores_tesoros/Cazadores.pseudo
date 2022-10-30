@@ -2,16 +2,23 @@ set row_count := input row_count
 set col_count := input col_count
 set start_row := input start_row 
 set start_col := input start_col 
-set startNum := concatNums (start_row, start_col)
+set startCell := concatNums (start_row, start_col)
 set map := generateMatrix(row_count, col_count)
 set treasureWayCells := calculateTreasureWay(map, startCell)
-set printTableSymbols()
+printTableSymbols(map, treasureMapWay)
 
 
 
 
 
-function generateMatrix(col_count, row_count) do 
+
+function concatNums(int num1, int num2){
+    set finalNum := String.valueOf(valor) +   String.valueOf(resultado);
+    return  Integer.parseInt(cadenaResultante); 
+ }
+
+
+function generateMatrix(row_count, col_count) do 
 
 
     set matrix := int[row_count][col_count]
@@ -30,31 +37,32 @@ function generateMatrix(col_count, row_count) do
 end
 
 
-calculateTreasureWay(map, startNum) do 
-    set totalCells = calculateSteps(map, startNum)
+calculateTreasureWay(map, startCell) do 
+    set totalCells = calculateSteps(map, startCell)
     set treasureMapWay = int[]
-    set int[] currentCell :=  separateDigits(startNum)
+    set int[] currentCell :=  separateDigits(startCell)
     set previousNumber := 0;
     set err := false
     set cellsCounter  = 0
     
 
 
-        while startNum != previousNumber and !err  do 
+        while startCell != previousNumber and !err  do 
 
             set nextCell := map[currentCell[0]][currentCell[1]]
     
             if(nextCell > (map.lengt + map[col].lenght))  do
                 output err
-                enLoop := true
+                err := true
             end
     
             else if (nextCell < 0 ) do 
                 print sea
-                enLoop := true
+                err := true
             end
 
             else if (checkLoops(treasureMapWay, nextCell)) do 
+                print loop
                 endLoop := true
             end
 
@@ -68,50 +76,33 @@ calculateTreasureWay(map, startNum) do
                 cellsCounter ++ 
                 treasureMapWay[cellsCounter] := concatNums(currentCell[0][currentCell[1])
                 previousNumber := concatNums(currentCell[0][currentCell[1])
-                startNum = nextCell
-                currentCell := separateDigits(startNum)
+                startCell = nextCell
+                currentCell := separateDigits(startCell)
             end
             
         end
-   
+        
+        return treasureMapWay
 
 
 end
 
 
-function separateDigits(num) do 
-
-    int[] digits = new int[2]
-    num.toChatArray()
-
-    for count to 2 do 
-        digits[count] = num[count]
-    end
-
-end
-
-
-private int concatNums(int num1, int num2){
-    finalNum = String.valueOf(valor) +   String.valueOf(resultado);
-    return  Integer.parseInt(cadenaResultante); 
- }
-
-
- function calculateSteps (map ,startNum) do 
-    set int[] currentCell :=  separateDigits(startNum)
+function calculateSteps (map ,startCell) do 
+    set int[] currentCell :=  separateDigits(startCell)
     set previousNumber := 0;
     set err := false
     set cellsCounter  = 0
-    while startNum != previousNumber and !err  do 
+    while startCell != previousNumber and !err  do 
 
         set nextCell := map[currentCell[0]][currentCell[1]]
 
         if(nextCell > (map.lengt + map[col].lenght))  do
-            enLoop := true
+            err := true
         end
 
         else if (cell < 0 ) do 
-            enLoop := true
+            err := true
         end
 
         else if (cellsCouter > (map.lengt * map[col].lenght)) do 
@@ -134,53 +125,50 @@ private int concatNums(int num1, int num2){
  end
 
 
- procedure printTableSymbols(map, treasureMapWay) do 
+ 
+function separateDigits(num) do 
 
-        if(cell < 0) output ~
-        else if (checkList(treasureMapWay, cell)) output .
-        else if (cell == treasureMapWay[treasureMapWay.lenght-1]) output X
-        if (cell == concatNums(counter1, counter2)) output !
-        else output " "
+    int[] digits = new int[2]
+    num.toChatArray()
 
-
-
- end
-
-
-
-
- function checkLoops( intArray) do 
-
-    for counter1 to arrayLenght do 
-
-        set repeatedValues := 0
-
-        for counter2 to arrayLenght do 
-
-        if  intArray[counter1] == intArray {counter2} repeatedValues ++
-
-        end
-
-        if repeatedValues > 1 return true
+    for count to 2 do 
+        digits[count] = num[count]
     end
 
-    return false
-
- end
+end
 
 
 
- function checkList ( treasureMapWay, cell) do 
 
-        for index to arrayLenght -1 do 
 
-        if  treasureMapWay[counter1] == cell return true
-
+function checkValue( intArray, values) do 
+    for counter1 to arrayLenght do 
+        if  intArray[counter1] == value do 
+            return true
         end
-
+    end
     return false
 
  end
+
+
+
+procedure printTableSymbols(map, treasureMapWay) do 
+
+    if(cell < 0) output ~
+    else if (checkValue(treasureMapWay, cell)) output .
+    else if (cell == treasureMapWay[treasureMapWay.lenght-1]) output X
+    if (cell == concatNums(counter1, counter2)) output !
+    else output " "
+
+
+
+end
+
+
+
+
+
 
 
 

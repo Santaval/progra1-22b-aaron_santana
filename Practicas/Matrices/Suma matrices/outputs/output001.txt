@@ -1,0 +1,17 @@
+1 0 1 3 
+7 1 0 1
+0 0 8 5
+0 0 0 0
+
+Fila #1: 5
+Fila #2: 9
+Fila #3: 13
+Fila #4: 0
+
+Columna #1: 8
+Columna #2: 1
+Columna #3: 9
+Columna #4: 9
+
+Diagonal principal: 10 
+Diagonal inversa: 3
