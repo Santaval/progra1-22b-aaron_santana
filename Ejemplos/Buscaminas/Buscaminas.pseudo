@@ -1,0 +1,164 @@
+//atributes
+set validBoard := true
+set gameBoard := null
+set boardCount := 0
+
+while hasNextInt AND validBoard do 
+    set rowCount := input nextInt
+    set colCount := input nextInt
+
+    if isValidBoard (rowCount, colCount) do 
+        this.printGameBoard()
+    end
+
+    else do 
+        output "invalid terrain"
+    end
+end
+
+
+//returns boolean
+function isValidBoard (rowCount, colCount) do 
+    set isValidBoard := true
+
+    if (rowCount < 0 OR colCount < 0) do
+        isValidBoard := false
+    end
+
+    if isValidBoard do 
+        this.generateGameBoard(rowCount,colCount)
+
+        for rowIndex to rowCount do 
+            for colIndex to colCount do 
+                set currentValue := this.gameBoard[rowIndex][colIndex]
+
+                if currentValue != '.' OR currentValue != '*' do 
+                    isValidBoard := false
+                end
+            end
+        end
+    end
+
+    this.isValidBoards := isValidBoard
+    return isValidBoard
+end
+
+
+procedure generateGameBoard (rowCount,colCount) do 
+    this.gameBoard = char[rowCount][colCount]
+    for rowIndex to rowCount do 
+
+        set currentValues := input nextLine
+
+        for colIndex to colCount do 
+            this.gameBoard[rowIndex][colIndex] = currentValues.chartAt(colIndex)
+        end
+    end
+    
+end
+
+procedure printGameBoard() do 
+    set rowCount := this.gameBoard.length
+    set colCount := this.gameBoard[0].length
+
+    set minesAmount := this.generateMinesAmount()
+
+    for rowIndex to rowCount do 
+
+        for colIndex to colCount do 
+            set currentValue := minesAmount[rowIndex][colIndex] 
+
+            if currentValue = -1 do 
+                output "*"
+            end
+
+            else if currentValue = 0 do 
+                output "-"
+            end
+
+            else output currentValue
+        end
+
+        output "\n"
+    end
+end
+
+
+//returns int matrix
+function generateMinesAmount () do 
+    set rowCount := this.gameBoard.length
+    set colCount := this.gameBoard[0].length
+    set minesAmount = int[rowCount][colCount]
+
+    for rowIndex to rowCount do 
+
+        for colIndex to colCount do 
+
+            if this.gameBoard[rowIndex][colIndex] = '*' do 
+                minesAmount [rowIndex][colIndex] := -1
+            end
+
+            else do 
+                minesAmount [rowIndex][colIndex] := this.checkCell(rowIndex,colIndex)
+            end
+
+        end
+    end
+
+    return minesAmount
+
+end
+
+
+//returns int
+function checkCell(rowIndex,colIndex) do 
+    set minesCounter = 0
+
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex][colIndex +1] = '*') minesCounter ++
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex][colIndex-1] = '*') minesCounter ++
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex+1][colIndex] = '*') minesCounter ++
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex-1][colIndex] = '*') minesCounter ++
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex+1][colIndex]-1 = '*') minesCounter ++
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex+1][colIndex]+1 = '*') minesCounter ++
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex-1][colIndex+1] = '*') minesCounter ++
+    if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex-1][colIndex-1] = '*') minesCounter ++
+
+    return minesCounter
+end
+
+//returns boolean
+function checkRange(rowIndex,colIndex) do 
+    if rowIndex -1 < 0 OR rowIndex >= this.gameBoard.length do 
+        return false
+    end
+
+    if colIndex -1 < 0 OR colIndex >= this.gameBoard.length do 
+        return false
+    end
+
+    return true
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
