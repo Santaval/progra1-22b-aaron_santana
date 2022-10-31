@@ -1,4 +1,5 @@
 //package Ejemplos.Buscaminas;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -38,7 +39,11 @@ public class Solution {
     this.input = new Scanner(System.in);
     // Run problem solution
   
+   try {
     this.run();
+   } catch (InputMismatchException err){
+    System.out.println(err.getMessage());
+   }
 
     
 
@@ -52,11 +57,18 @@ public class Solution {
   public void run() {
     // while hasNextInt AND validBoard do 
     while (this.validBoard) {
+        
         if((this.input.hasNextLine() || this.input.hasNextInt())){
-                        //set rowCount := input nextInt
-            final int rowCount = Integer.parseInt(this.input.next());
-            // set colCount := input nextInt
-            final int colCount = this.input.nextInt();
+            
+            int rowCount =  0 ; 
+            int colCount =  0 ; 
+            if(this.input.hasNextInt()) {
+                //set rowCount := input nextInt
+                rowCount = this.input.nextInt();
+                // set colCount := input nextInt
+                colCount = this.input.nextInt();
+            } else throw new InputMismatchException ("invalid terrain");
+          
         
             
             // if rowCount == 0 && colCount ==0 validBoard = false
@@ -85,9 +97,11 @@ public class Solution {
         
             if ( !this.input.hasNextInt() && this.input.hasNextLine()) {
             //discard lines
-            this.input.nextLine();
+            //this.input.nextLine();
+            
             }
         }
+
         else {
              //output "invalid terrain"
              System.out.printf("invalid terrain");
