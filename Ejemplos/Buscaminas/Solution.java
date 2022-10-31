@@ -111,6 +111,11 @@ public class Solution {
    
   }
 
+    
+    /** Validate if the board is valid. The rowCount and colCount must be more than 0 and the game board could not have symbols that not be '.' or '*'
+     * @param rowCount
+     * @param colCount
+     */
     // modify validBoard atribute boolean
     // function isValidBoard (rowCount, colCount) do 
     public void isValidBoard(int rowCount, int colCount){
@@ -142,6 +147,11 @@ public class Solution {
     }// end
 
 
+    
+    /** Reads the values from the stdin and generate a char matrix whith them 
+     * @param rowCount
+     * @param colCount
+     */
     // procedure generateGameBoard (rowCount,colCount) do 
     public void generateGameBoard(int rowCount, int colCount){
          //discard emptySpace  
@@ -210,6 +220,10 @@ public class Solution {
     }// end
 
 
+    
+    /** Generate a int mirror matrix from gameBoard matrix whith the numbers of mines arround each cell
+     * @return int[][]
+     */
     //returns int matrix
     // function generateMinesAmount () do 
     public int[][] generateMinesAmount(){
@@ -246,6 +260,12 @@ public class Solution {
     }// end
 
 
+    
+    /** Evaluate one cell of gameBoard and returns int that represents how much mines are arround that cell
+     * @param rowIndex
+     * @param colIndex
+     * @return int
+     */
     //returns int
     // function checkCell(rowIndex,colIndex) do 
     public int checkCell(int rowIndex, int colIndex){
@@ -273,6 +293,13 @@ public class Solution {
         return minesCounter;
     }// end
 
+    
+    /**Evaluate if the range of the colIndex or rowIndex are in range of th e matrix (more than 0 and minus than matrix,lenght -1)  and return a boolean 
+     * @param rowIndex
+     * @param colIndex
+     * @param config
+     * @return boolean
+     */
     // //returns boolean
     // function checkRange(rowIndex,colIndex) do 
     public boolean checkRange(int rowIndex, int colIndex, int config){
