@@ -55,7 +55,7 @@ public class Solution {
    * Run the solution. This method is called from main().
    */
   public void run() {
-    // while hasNextInt AND validBoard do 
+    // while  validBoard do 
     while (this.validBoard) {
         
         if((this.input.hasNextLine() || this.input.hasNextInt())){
