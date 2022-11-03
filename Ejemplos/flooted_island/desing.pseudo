@@ -1,0 +1,25 @@
+enumeration CellState
+    notVisited
+    uderWater
+    aboveWater
+
+procedure main() do
+    readIsland()
+    while dataExist do
+        input year, seaLevel
+        floodIsland(seaLevel)
+        set porcent := calculateFloodedPorcent()
+        output year, ":", seaLevel, porcent, "%"
+    end 
+end
+
+
+procedure readIsland()do
+    input row, cols
+    atrribute island := float[row][cols]
+    input island 
+end
+
+procedure floodIsland(seaLevel) do 
+    atrribute states := CellState[rows][cols]
+end
