@@ -1,0 +1,92 @@
+procedure main () do 
+
+    //atributes
+    set firstValue := 0;
+    set secondVaue := 0;
+    set MCD = 0;
+    set MCDCounter := 0;
+
+
+    while exist next int do 
+        readValues()
+        MCD := calculateMCD()
+        printResult()
+        resetAtributes()
+    end
+
+
+end
+
+
+    procedure readValues() do
+        try do 
+            
+            firstValue := absolute(input nextInt)
+            secondVaue := absolute(input secondVaue)
+
+        end 
+        catch(err) do
+            output invalid data
+        end
+    end
+
+
+    procedure calculateMCD(lastMultiple) do 
+        recursionCounter++
+        if secondValue == 0 return firstValue
+        else do 
+            if (NOT verifyDivisors()) return lastMultiple
+            else return calculateMCD(findDivisor() * lastMultiple)
+        end
+
+    end
+
+
+
+
+    function verifyDivisor() do 
+        set lastDivisor := 0
+        
+        for index 0 to minNumber do 
+
+            if firstValue % index == 0 AND secondValue % index == 0 do 
+            return TRUE
+            end
+
+        end
+        return FALSE
+    end
+
+
+    function findDivisor() do 
+        set lastDivisor := 0
+        
+        for index 0 to minNumber do 
+
+            if firstValue % index == 0 AND secondValue % index == 0 do 
+                lastDivisor := index
+                index := minNumber
+                firstValue /= index
+                secondValue /= index
+            end
+
+        end
+    end
+
+
+procedure printResult()do 
+    
+    output firstValue secondValue":" MCD (MCDCounter)
+
+end
+
+procedure resetAtributes() do 
+    firstValue := 0;
+    secondVaue := 0;
+    MCD = 0;
+    MCDCounter := 0;
+end
+ 
+
+
+

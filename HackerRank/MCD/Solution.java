@@ -1,0 +1,181 @@
+import java.math.BigInteger;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ * Calculates the greatest common divisor of two integers recursively
+ * and prints the number of function calls required to calculate them.
+ */
+public class Solution {
+  /**
+   * Parse formatted data from standard input.
+   */
+  private Scanner input = null;
+
+  /**
+   * Number of function calls requierd to calculate the gcd.
+   */
+  private long callCount = 0;
+
+  //atributes
+  //set firstValue := 0;
+  long firstValue = 0;  
+  //set secondVaue := 0;
+  long secondValue = 0;
+  //set MCD = 0;
+  long MCD = 0;
+  //set MCDCounter := 0;
+  int MCDCounter = 0;
+
+  /**
+   * Start the execution of the solution.
+
+   * @param args Command line arguments
+   */
+  public static void main(final String[] args) {
+    // This try calls solution.close() automatically
+    Solution solution = new Solution();
+    solution.start();
+  }
+
+  /**
+   * Start the solution.
+   */
+  public void start() {
+    // Create object to read data from standard input
+    this.input = new Scanner(System.in);
+    // Run problem solution
+    this.run();
+    // Close the scanner of standard input
+    this.input.close();
+  }
+
+  /**
+   * Run the solution. This method is called from main().
+   */
+  public void run() {
+    // while exist next int do 
+    while(this.input.hasNextInt()){
+        // readValues()
+        this.readValues();
+        // MCD := calculateMCD()
+        this.MCD = this.calculateMCD(1);
+        // printResult()
+        this.printResult();
+        // resetAtributes()
+        this.resetAtributes();
+    }// end
+  }
+
+
+  //procedure readValues() do
+  public void readValues(){
+
+    //try do 
+    try{    
+        //firstValue := absolute(input nextInt)
+        this.firstValue = Math.abs(this.input.nextInt());
+        //secondVaue := absolute(input secondVaue)
+        this.secondValue = Math.abs(this.input.nextInt());
+
+    }//end 
+    //catch(err) do
+    catch (InputMismatchException err){
+        //output invalid data
+        System.out.println("Invalid data");
+    } //end 
+  }//end
+
+
+
+  //procedure calculateMCD(lastMultiple) do 
+  public long calculateMCD(long lastMultiple){
+    //MCDCounter++
+    this.MCDCounter++;
+    //if secondValue == 0 return firstValue
+    if (this.secondValue == 0) return this.firstValue;
+    //else do
+    else { 
+        //if (NOT verifyDivisor()) return lastMultiple
+        if(!this.verifyDivisor() || this.firstValue == 1 || this.secondValue == 1) return lastMultiple;
+        //else return calculateMCD(findDivisor() * lastMultiple)
+        else return this.calculateMCD(this.findDivisor() * lastMultiple);
+    }//end
+
+  }//end
+
+  //function verifyDivisor() do 
+  public boolean verifyDivisor(){
+    //set lastDivisor := 0
+    long lastDivisor = 0;
+    long minNumber = this.findMinor();
+
+    //for divisorCounter = 0 to minNumber do 
+    for (int divisorCounter = 2; divisorCounter <= minNumber; divisorCounter ++){
+
+        //if firstValue % index == 0 AND secondValue % index == 0  return TRUE
+        if((firstValue % divisorCounter == 0) && (secondValue % divisorCounter == 0)) return true;
+    
+    }//end
+    //return FALSE
+    return false;
+  }//end
+
+  public long findMinor(){
+    if (this.firstValue >= this.secondValue) return secondValue;
+    else return firstValue;
+  }
+
+
+  //function findDivisor() do
+  public long findDivisor(){
+
+    //set lastDivisor := 0
+    long lastDivisor = 0;
+
+    long minNumber = this.findMinor();
+    //for index 0 to minNumber do 
+    for (int divisorCounter = 2; divisorCounter <= minNumber; divisorCounter ++){
+
+        //if firstValue % index == 0 AND secondValue % index == 0 do 
+        if((firstValue % divisorCounter == 0) && (secondValue % divisorCounter == 0)){
+            //lastDivisor := index
+            lastDivisor = divisorCounter;
+            //index := minNumber
+            //divisorCounter =(int)minNumber;
+            //firstValue /= index
+            this.firstValue /= divisorCounter;
+            //secondValue /= index
+            this.secondValue /= divisorCounter;
+            return lastDivisor;
+        }//end
+
+    }//end
+
+    return lastDivisor;
+  }//end
+
+
+  //procedure printResult()do 
+  public void printResult(){
+    
+    //output firstValue secondValue":" MCD (MCDCounter)
+    System.out.printf("%d %d: %d (%d)\n", this.firstValue, this.secondValue, this.MCD,  this.MCDCounter);
+
+  }//end
+
+
+  //procedure resetAtributes() do
+  public void resetAtributes(){
+
+    //firstValue := 0;
+    this.firstValue = 0;
+    //secondVaue := 0;
+    this.secondValue = 0;
+    //MCD = 0;
+    this.MCD = 0;
+    //MCDCounter := 0;
+    this.MCDCounter = 0;
+  }//end
+
+}
