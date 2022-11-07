@@ -273,21 +273,21 @@ public class Solution {
         int minesCounter = 0;
 
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex][colIndex +1] = '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 1) && this.gameBoard[rowIndex][colIndex +1 ] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex][colIndex +1 ] == '*') minesCounter ++;
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex][colIndex-1] = '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 2) && this.gameBoard[rowIndex][colIndex -1 ] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex][colIndex -1 ] == '*') minesCounter ++;
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex+1][colIndex] = '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 3)&& this.gameBoard[rowIndex + 1 ][colIndex] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex + 1 ][colIndex] == '*') minesCounter ++;
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex-1][colIndex] = '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 4)&& this.gameBoard[rowIndex - 1 ][colIndex] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex - 1 ][colIndex] == '*') minesCounter ++;
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex+1][colIndex -1] = '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 5) && this.gameBoard[rowIndex + 1 ][colIndex -1 ] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex + 1 ][colIndex -1 ] == '*') minesCounter ++;
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex+1][colIndex + 1]= '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 6) && this.gameBoard[rowIndex + 1][colIndex + 1 ] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex + 1][colIndex + 1 ] == '*') minesCounter ++;
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex-1][colIndex+1] = '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 7) && this.gameBoard[rowIndex - 1 ][colIndex + 1 ] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex - 1 ][colIndex + 1 ] == '*') minesCounter ++;
         //if(checkRange(rowIndex, colIndex) AND this.gameBoard[rowIndex-1][colIndex-1] = '*') minesCounter ++
-        if(checkRange(rowIndex, colIndex, 8) && this.gameBoard[rowIndex - 1 ][colIndex -1 ] == '*') minesCounter ++;
+        if( this.gameBoard[rowIndex - 1 ][colIndex -1 ] == '*') minesCounter ++;
 
         //return minesCounter
         return minesCounter;
