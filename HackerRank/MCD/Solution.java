@@ -27,6 +27,11 @@ public class Solution {
   //set MCDCounter := 0;
   int MCDCounter = 0;
 
+  long originalFirstValue = 0;
+
+  long originalSecondValue = 0;
+
+
   /**
    * Start the execution of the solution.
 
@@ -77,7 +82,8 @@ public class Solution {
         this.firstValue = Math.abs(this.input.nextInt());
         //secondVaue := absolute(input secondVaue)
         this.secondValue = Math.abs(this.input.nextInt());
-
+        this.originalFirstValue = this.firstValue;
+        this.originalSecondValue = this.secondValue;
     }//end 
     //catch(err) do
     catch (InputMismatchException err){
@@ -160,7 +166,7 @@ public class Solution {
   public void printResult(){
     
     //output firstValue secondValue":" MCD (MCDCounter)
-    System.out.printf("%d %d: %d (%d)\n", this.firstValue, this.secondValue, this.MCD,  this.MCDCounter);
+    System.out.printf("%d %d: %d (%d)\n", this.originalFirstValue, this.originalSecondValue, this.MCD,  this.MCDCounter +1);
 
   }//end
 
