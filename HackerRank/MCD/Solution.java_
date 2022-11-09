@@ -64,23 +64,24 @@ public class Solution {
         // readValues()
         this.readValues();
         // MCD := calculateMCD()
-        this.MCD = this.calculateMCD(Math.abs(this.firstValue), Math.abs(this.secondValue));
+        this.MCD = this.calculateMCD(1);
         // printResult()
         this.printResult();
         // resetAtributes()
         this.resetAtributes();
     }// end
-
   }
+
+
   //procedure readValues() do
   public void readValues(){
 
     //try do 
     try{    
         //firstValue := absolute(input nextInt)
-        this.firstValue = this.input.nextInt();
+        this.firstValue = Math.abs(this.input.nextInt());
         //secondVaue := absolute(input secondVaue)
-        this.secondValue = this.input.nextInt();
+        this.secondValue = Math.abs(this.input.nextInt());
         this.originalFirstValue = this.firstValue;
         this.originalSecondValue = this.secondValue;
     }//end 
@@ -94,33 +95,82 @@ public class Solution {
 
 
   //procedure calculateMCD(lastMultiple) do 
-  public long calculateMCD(long firstValue, long secondValue){
+  public long calculateMCD(long lastMultiple){
     //MCDCounter++
     this.MCDCounter++;
     //if secondValue == 0 return firstValue
-    if (secondValue == 0) return firstValue;
+    if (this.secondValue == 0) return this.firstValue;
     //else do
     else { 
-        return this.calculateMCD(secondValue, firstValue % secondValue);
+        //if (NOT verifyDivisor()) return lastMultiple
+        if(!this.verifyDivisor() || this.firstValue == 1 || this.secondValue == 1 || this.MCDCounter == this.findMinor()) return lastMultiple;
+        //else return calculateMCD(findDivisor() * lastMultiple)
+        else return this.calculateMCD(this.findDivisor() * lastMultiple);
     }//end
 
   }//end
 
+  //function verifyDivisor() do 
+  public boolean verifyDivisor(){
+    //set lastDivisor := 0
+    long minNumber = this.findMinor();
 
-  
+    //for divisorCounter = 0 to minNumber do 
+    for (int divisorCounter = 1; divisorCounter <= minNumber; divisorCounter ++){
 
-
-    //procedure printResult()do 
-    public void printResult(){
+        //if firstValue % index == 0 AND secondValue % index == 0  return TRUE
+        if((firstValue % divisorCounter == 0) && (secondValue % divisorCounter == 0)) return true;
     
-        //output firstValue secondValue":" MCD (MCDCounter)
-        System.out.printf("%d %d: %d (%d)\n", this.originalFirstValue, this.originalSecondValue, this.MCD,  this.MCDCounter );
+    }//end
+    //return FALSE
+    return false;
+  }//end
+
+  public long findMinor(){
+    if (this.firstValue >= this.secondValue) return secondValue;
+    else return firstValue;
+  }
+
+
+  //function findDivisor() do
+  public long findDivisor(){
+
+    //set lastDivisor := 0
+    long lastDivisor = 1;
+
+    long minNumber = this.findMinor();
+    //for index 0 to minNumber do 
+    for (int divisorCounter = 2; divisorCounter <= minNumber; divisorCounter ++){
+
+        //if firstValue % index == 0 AND secondValue % index == 0 do 
+        if((firstValue % divisorCounter == 0) && (secondValue % divisorCounter == 0)){
+            //lastDivisor := index
+            lastDivisor = divisorCounter;
+            //index := minNumber
+            //divisorCounter =(int)minNumber;
+            //firstValue /= index
+            this.firstValue /= divisorCounter;
+            //secondValue /= index
+            this.secondValue /= divisorCounter;
+            return lastDivisor;
+        }//end
+
+    }//end
+
+    return lastDivisor;
+  }//end
+
+
+  //procedure printResult()do 
+  public void printResult(){
     
-      }//end
+    //output firstValue secondValue":" MCD (MCDCounter)
+    System.out.printf("%d %d: %d (%d)\n", this.originalFirstValue, this.originalSecondValue, this.MCD,  this.MCDCounter +1);
+
+  }//end
 
 
-
-        //procedure resetAtributes() do
+  //procedure resetAtributes() do
   public void resetAtributes(){
 
     //firstValue := 0;
@@ -134,9 +184,3 @@ public class Solution {
   }//end
 
 }
-
-
-
-  
-
-
