@@ -1,13 +1,99 @@
+//atributes
+set labyrinthBoard := null
+set wayFound := false
+ 
 procedure main() do 
+    input rowCount,colCount
+    readLabyrinthBoard(row,col);
+    set startCell := findStartCell() //returns int array
+    findLabyrinthWay(startCell[0], startCell[1]) //recursive procedure
+    printLabyrinthBoard()
 
-    //atributes
-    set labyrinthBoard := null
-    set wayStart = 
-
-    input row,col 
-    
-
-
+end
 
 
-endhello 
+procedure readLabyrinthBoard(rowCount,colCount) do 
+    labyrinthBoard = char[rowCount][ColCount]
+    for rowIndex to row(labyrinthBoard) do 
+        for colIndex to col(labyrinthBoard) do 
+            labyrinthBoard[rowIndex][colIndex] = input nextChar 
+        end
+    end
+end 
+
+function findStartCell() do //returns int array
+    set startCell := int[]
+    for rowIndex to row(labyrinthBoard) do 
+        for colIndex to col(labyrinthBoard) do 
+            if (labyrinthBoard[rowIndex][colIndex] == 'A') do 
+                startCell[0] ""= rowIndex
+                startCell[1] := colIndex
+                return startCell
+            end
+        end
+    end
+end
+
+
+procedure findLabyrinthWay(rowIndex, colIndex) do 
+    labyrinthBoard[rowIndex][colIndex] := '.'
+
+    if checkCell(rowIndex - 1, colIndex + 0) AND NOT wayFound do 
+        set nextCellValue = labyrinthBoard[rowIndex - 1][colIndex + 0]
+            if nextCellValue == 'B' do 
+                wayFound :true
+            end
+            else if nextCellValue == ' ' do 
+                recursive(rowIndex -1, colIndex)
+            end
+    end
+
+    if checkCell(rowIndex + 1, colIndex + 0) AND NOT wayFound do 
+        set nextCellValue = labyrinthBoard[rowIndex + 1][colIndex + 0]
+            if nextCellValue == 'B' do 
+                wayFound :true
+            end
+            else if nextCellValue == ' ' do 
+                recursive(rowIndex + 1, colIndex)
+            end 
+    end
+
+    if checkCell(rowIndex + 0, colIndex - 1) AND NOT wayFound do 
+        set nextCellValue = labyrinthBoard[rowIndex + 0][colIndex - 1]
+            if nextCellValue == 'B' do 
+                wayFound :true
+            end
+            else if nextCellValue == ' ' do 
+                recursive(rowIndex + 0, colIndex - 1)
+            end
+    end
+
+    if checkCell(rowIndex + 0, colIndex + 1) AND NOT wayFound do 
+        set nextCellValue = labyrinthBoard[rowIndex + 0][colIndex + 1]
+            if nextCellValue == 'B' do 
+                wayFound :true
+            end
+            else if nextCellValue == ' ' do 
+                recursive(rowIndex + 0, colIndex + 1)
+            end
+    end 
+    else labyrinthBoard[rowIndex][colIndex] = "-"
+
+end
+
+
+procedure printLabyrinthBoard() do 
+    for rowIndex to row(labyrinthBoard) do 
+        for colIndex to col(labyrinthBoard) do 
+            if (labyrinthBoard[rowIndex][colIndex] == '-') do 
+                output " "
+            end
+            else do 
+                output labyrinthBoard[rowIndex][colIndex]
+            end
+        end
+    end
+end
+
+
+
