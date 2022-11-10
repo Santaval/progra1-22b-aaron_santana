@@ -25,13 +25,13 @@ public class Solution {
   //set secondVaue := null;
   private BigInteger secondValue = null;
   //set MCD = null;
-  BigInteger MCD = null;
+  private BigInteger MCD = null;
   //set MCDCounter := null;
   private int MCDCounter = 0;
 
-  BigInteger originalFirstValue = null;
+  private BigInteger originalFirstValue = null;
 
-  BigInteger originalSecondValue = null;
+  private BigInteger originalSecondValue = null;
 
 
   /**
