@@ -1,8 +1,0 @@
-# procedure main()
-def main():
-    """ Start program execution """
-    # Copy your algorithm. Convert it to comments.
-    # Implement each step. Apply good programming practices.
-
-if __name__ == '__main__':
-    main()
