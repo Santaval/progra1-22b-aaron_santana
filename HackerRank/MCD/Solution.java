@@ -1,5 +1,6 @@
 //ximport java.math.BigInteger;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -115,9 +116,9 @@ public class Solution {
 
     //procedure printResult()do 
     public void printResult(){
-    
+        DecimalFormat format = new DecimalFormat("###,###");
         //output firstValue secondValue":" MCD (MCDCounter)
-        System.out.printf("%d %d: %d (%d)\n", this.originalFirstValue, this.originalSecondValue, this.MCD,  this.MCDCounter );
+        System.out.printf("%s %s: %s (%d)\n", format.format(this.originalFirstValue), format.format(this.originalSecondValue), format.format(this.MCD),  this.MCDCounter );
     
       }//end
 
