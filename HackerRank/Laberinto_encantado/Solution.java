@@ -8,9 +8,9 @@ public class Solution{
 
   //atributes
   //set labyrinthBoard := null
-  char[][] labyrinthBoard = null;
+  private char[][] labyrinthBoard = null;
   //set wayFound := false
-  boolean wayFound = false;
+  private boolean wayFound = false;
   /**
    * Parse formatted data from standard input.
    */

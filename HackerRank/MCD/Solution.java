@@ -13,7 +13,7 @@ public class Solution {
    * Parse formatted data from standard input.
    */
   private Scanner input = null;
-
+  
   /**
    * Number of function calls requierd to calculate the gcd.
    */
@@ -21,13 +21,13 @@ public class Solution {
 
   //atributes
   //set firstValue := null;
-  BigInteger firstValue = null;  
+  private BigInteger firstValue = null;  
   //set secondVaue := null;
-  BigInteger secondValue = null;
+  private BigInteger secondValue = null;
   //set MCD = null;
   BigInteger MCD = null;
   //set MCDCounter := null;
-  int MCDCounter = 0;
+  private int MCDCounter = 0;
 
   BigInteger originalFirstValue = null;
 
