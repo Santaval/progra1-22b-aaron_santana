@@ -82,6 +82,17 @@ procedure findLabyrinthWay(rowIndex, colIndex) do
 end
 
 
+function checkCell(row Count, colCount) do  //returns boolean
+    if(row >= 0 AND colCount < col  Count(labyrinthBoard))do
+        if(labyrinthBoard[rowCount][colCount] != '.' AND labyrinthBoard[rowCount][colCount] != '-') do 
+            return true
+        end
+    end  
+    
+    return false
+end
+
+
 procedure printLabyrinthBoard() do 
     for rowIndex to row(labyrinthBoard) do 
         for colIndex to col(labyrinthBoard) do 
