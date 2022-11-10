@@ -1,4 +1,5 @@
 //ximport java.math.BigInteger;
+import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,18 +19,18 @@ public class Solution {
 
 
   //atributes
-  //set firstValue := 0;
-  long firstValue = 0;  
-  //set secondVaue := 0;
-  long secondValue = 0;
-  //set MCD = 0;
-  long MCD = 0;
-  //set MCDCounter := 0;
+  //set firstValue := null;
+  BigInteger firstValue = null;  
+  //set secondVaue := null;
+  BigInteger secondValue = null;
+  //set MCD = null;
+  BigInteger MCD = null;
+  //set MCDCounter := null;
   int MCDCounter = 0;
 
-  long originalFirstValue = 0;
+  BigInteger originalFirstValue = null;
 
-  long originalSecondValue = 0;
+  BigInteger originalSecondValue = null;
 
 
   /**
@@ -60,11 +61,11 @@ public class Solution {
    */
   public void run() {
     // while exist next int do 
-    while(this.input.hasNextInt()){
+    while(this.input.hasNextBigInteger()){
         // readValues()
         this.readValues();
         // MCD := calculateMCD()
-        this.MCD = this.calculateMCD(Math.abs(this.firstValue), Math.abs(this.secondValue));
+        this.MCD = this.calculateMCD(this.firstValue.abs(), this.secondValue.abs());
         // printResult()
         this.printResult();
         // resetAtributes()
@@ -74,13 +75,13 @@ public class Solution {
   }
   //procedure readValues() do
   public void readValues(){
-
+    
     //try do 
     try{    
         //firstValue := absolute(input nextInt)
-        this.firstValue = this.input.nextInt();
+        this.firstValue = this.input.nextBigInteger();
         //secondVaue := absolute(input secondVaue)
-        this.secondValue = this.input.nextInt();
+        this.secondValue = this.input.nextBigInteger();
         this.originalFirstValue = this.firstValue;
         this.originalSecondValue = this.secondValue;
     }//end 
@@ -94,14 +95,16 @@ public class Solution {
 
 
   //procedure calculateMCD(lastMultiple) do 
-  public long calculateMCD(long firstValue, long secondValue){
+  public BigInteger calculateMCD(BigInteger firstValue, BigInteger secondValue){
     //MCDCounter++
     this.MCDCounter++;
+
     //if secondValue == 0 return firstValue
-    if (secondValue == 0) return firstValue;
+   
+    if (secondValue.equals(BigInteger.valueOf(0))) return firstValue;
     //else do
     else { 
-        return this.calculateMCD(secondValue, firstValue % secondValue);
+        return this.calculateMCD(secondValue, firstValue.mod(secondValue));
     }//end
 
   }//end
@@ -124,11 +127,11 @@ public class Solution {
   public void resetAtributes(){
 
     //firstValue := 0;
-    this.firstValue = 0;
+    this.firstValue = null;
     //secondVaue := 0;
-    this.secondValue = 0;
+    this.secondValue = null;
     //MCD = 0;
-    this.MCD = 0;
+    this.MCD = null;
     //MCDCounter := 0;
     this.MCDCounter = 0;
   }//end
