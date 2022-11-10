@@ -1,4 +1,4 @@
-package Laberinto_encantado;
+//package Laberinto_encantado;
 import java.util.Scanner;
 
 /**
@@ -54,6 +54,7 @@ public class Solution{
   this.findLabyrinthWay(startCell[0], startCell[1]);
   //printLabyrinthBoard()
   this.printLabyrinthBoard();
+ 
 
   }
 
@@ -62,13 +63,16 @@ public class Solution{
   public void readLabyrinthBoard(int rowCount, int colCount) {
     //labyrinthBoard = char[rowCount][ColCount]
     this.labyrinthBoard = new char[rowCount][colCount];
-    input.useDelimiter("[\\s]");
+    this.input.nextLine();
+    //this.input.nextLine();
     //for rowIndex to row(labyrinthBoard) do
     for (int rowIndex = 0; rowIndex < this.labyrinthBoard.length; rowIndex++){ 
       //for colIndex to col(labyrinthBoard) do
+      String currentValues = this.input.nextLine();
       for (int colIndex = 0; colIndex < this.labyrinthBoard[rowIndex].length; colIndex++){ 
         //labyrinthBoard[rowIndex][colIndex] = input nextChar
-        this.labyrinthBoard[rowIndex][colIndex] = this.input.next().charAt(0); 
+        //System.out.println(currentValues);
+        this.labyrinthBoard[rowIndex][colIndex] = currentValues.charAt(colIndex); 
       }//end
     }//end
   }//end 
@@ -102,9 +106,9 @@ public class Solution{
     //labyrinthBoard[rowIndex][colIndex] := '.'
     this.labyrinthBoard[rowIndex][colIndex] = this.labyrinthBoard[rowIndex][colIndex] == 'A' ? 'A': '.';
     //if checkCell(rowIndex - 1, colIndex + 0) AND NOT wayFound do
-    if (this.checkCell(rowIndex - 1, colIndex = 0) && !this.wayFound){ 
+    if (this.checkCell(rowIndex - 1, colIndex + 0) && !this.wayFound){ 
       //set nextCellValue = labyrinthBoard[rowIndex - 1][colIndex + 0]
-      char nextCellValue = this.labyrinthBoard[rowIndex -1][colIndex = 0];
+      char nextCellValue = this.labyrinthBoard[rowIndex - 1][colIndex + 0];
       //if nextCellValue == 'B' do
       if(nextCellValue == 'B'){ 
         //wayFound :true
@@ -118,9 +122,9 @@ public class Solution{
     }//end
 
         //if checkCell(rowIndex + 1, colIndex + 0) AND NOT wayFound do
-    if (this.checkCell(rowIndex + 1, colIndex = 0) && !this.wayFound){ 
+    if (this.checkCell(rowIndex + 1, colIndex + 0) && !this.wayFound){ 
       //set nextCellValue = labyrinthBoard[rowIndex + 1][colIndex + 0]
-      char nextCellValue = this.labyrinthBoard[rowIndex+-1][colIndex = 0];
+      char nextCellValue = this.labyrinthBoard[rowIndex + 1][colIndex + 0];
       //if nextCellValue == 'B' do
       if(nextCellValue == 'B'){ 
         //wayFound :true
@@ -137,7 +141,7 @@ public class Solution{
         //if checkCell(rowIndex - 0, colIndex - 1) AND NOT wayFound do
     if (this.checkCell(rowIndex - 0, colIndex - 1) && !this.wayFound){ 
       //set nextCellValue = labyrinthBoard[rowIndex - 0][colIndex - 1]
-      char nextCellValue = this.labyrinthBoard[rowIndex -0][colIndex - 1];
+      char nextCellValue = this.labyrinthBoard[rowIndex - 0][colIndex - 1];
       //if nextCellValue == 'B' do
       if(nextCellValue == 'B'){ 
         //wayFound :true
@@ -153,7 +157,7 @@ public class Solution{
         //if checkCell(rowIndex - 0, colIndex + 1) AND NOT wayFound do
     if (this.checkCell(rowIndex - 0, colIndex + 1) && !this.wayFound){ 
       //set nextCellValue = labyrinthBoard[rowIndex - 0][colIndex + 1]
-      char nextCellValue = this.labyrinthBoard[rowIndex -0][colIndex + 1];
+      char nextCellValue = this.labyrinthBoard[rowIndex - 0][colIndex + 1];
       //if nextCellValue == 'B' do
       if(nextCellValue == 'B'){ 
         //wayFound :true
@@ -166,7 +170,7 @@ public class Solution{
       }//end
     }//end
     //else do
-    else {
+    if (!this.wayFound){
       //labyrinthBoard[rowIndex][colIndex] := "-"
       this.labyrinthBoard[rowIndex][colIndex] = '-';
 
@@ -178,7 +182,7 @@ public class Solution{
   //function checkCell(rowCount, colCount) do  //returns boolean
   public boolean checkCell(int rowCount, int colCount){
     //if(rowCount >= 0 AND colCount < colCount(labyrinthBoard))do
-    if (rowCount >= 0 && colCount < this.labyrinthBoard[rowCount].length){
+    if ((rowCount >= 0 && rowCount < this.labyrinthBoard.length) && (colCount >= 0 && colCount < this.labyrinthBoard[rowCount].length)){
       //if(labyrinthBoard[rowCount][colCount] != '.' AND labyrinthBoard[rowCount][colCount] != '-') do 
       if(this.labyrinthBoard[rowCount][colCount] != '.' && this.labyrinthBoard[rowCount][colCount] != '-'){
         //return true
@@ -192,7 +196,8 @@ public class Solution{
 
   //procedure printLabyrinthBoard() do
   public void printLabyrinthBoard(){ 
-    //for rowIndex to row(labyrinthBoard) do 
+    if(this.wayFound){
+          //for rowIndex to row(labyrinthBoard) do 
     for (int rowIndex = 0; rowIndex < this.labyrinthBoard.length; rowIndex ++){
       //for colIndex to col(labyrinthBoard) do
       for (int colIndex = 0; colIndex < this.labyrinthBoard[rowIndex].length; colIndex ++){ 
@@ -209,6 +214,10 @@ public class Solution{
       }//end
       System.out.printf("\n");
     }//end
+    }
+    else {
+      System.out.println("No solution path");
+    }
   }//end
 
 }
