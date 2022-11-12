@@ -105,71 +105,14 @@ public class Solution{
   public void findLabyrinthWay(int rowIndex, int colIndex){ 
     //labyrinthBoard[rowIndex][colIndex] := '.'
     this.labyrinthBoard[rowIndex][colIndex] = this.labyrinthBoard[rowIndex][colIndex] == 'A' ? 'A': '.';
-    //if checkCell(rowIndex - 1, colIndex + 0) AND NOT wayFound do
-    if (this.checkCell(rowIndex - 1, colIndex + 0) && !this.wayFound){ 
-      //set nextCellValue = labyrinthBoard[rowIndex - 1][colIndex + 0]
-      char nextCellValue = this.labyrinthBoard[rowIndex - 1][colIndex + 0];
-      //if nextCellValue == 'B' do
-      if(nextCellValue == 'B'){ 
-        //wayFound :true
-        this.wayFound = true;
-      }//end
-      //else if nextCellValue == ' ' do
-      else if (nextCellValue == ' '){ 
-      //recursive(rowIndex -1, colIndex)
-      this.findLabyrinthWay(rowIndex - 1, colIndex + 0);
-      }//end
-    }//end
+    
+    //searchInNextCell(rowCount, colCount)
 
-        //if checkCell(rowIndex + 1, colIndex + 0) AND NOT wayFound do
-    if (this.checkCell(rowIndex + 1, colIndex + 0) && !this.wayFound){ 
-      //set nextCellValue = labyrinthBoard[rowIndex + 1][colIndex + 0]
-      char nextCellValue = this.labyrinthBoard[rowIndex + 1][colIndex + 0];
-      //if nextCellValue == 'B' do
-      if(nextCellValue == 'B'){ 
-        //wayFound :true
-        this.wayFound = true;
-      }//end
-      //else if nextCellValue == ' ' do
-      else if (nextCellValue == ' '){ 
-      //recursive(rowIndex+-1, colIndex)
-      this.findLabyrinthWay(rowIndex + 1, colIndex + 0);
-      }//end
-    }//end
+    searchInNextCell(rowIndex - 1, colIndex + 0); //up
+    searchInNextCell(rowIndex + 1, colIndex + 0); //down
+    searchInNextCell(rowIndex + 0, colIndex + 1); //right
+    searchInNextCell(rowIndex + 0, colIndex - 1); //left
 
-
-        //if checkCell(rowIndex - 0, colIndex - 1) AND NOT wayFound do
-    if (this.checkCell(rowIndex - 0, colIndex - 1) && !this.wayFound){ 
-      //set nextCellValue = labyrinthBoard[rowIndex - 0][colIndex - 1]
-      char nextCellValue = this.labyrinthBoard[rowIndex - 0][colIndex - 1];
-      //if nextCellValue == 'B' do
-      if(nextCellValue == 'B'){ 
-        //wayFound :true
-        this.wayFound = true;
-      }//end
-      //else if nextCellValue == ' ' do
-      else if (nextCellValue == ' '){ 
-      //recursive(rowIndex -0, colIndex)- 1    
-      this.findLabyrinthWay(rowIndex - 0, colIndex - 1);
-      }//end
-    }//end
-
-        //if checkCell(rowIndex - 0, colIndex + 1) AND NOT wayFound do
-    if (this.checkCell(rowIndex - 0, colIndex + 1) && !this.wayFound){ 
-      //set nextCellValue = labyrinthBoard[rowIndex - 0][colIndex + 1]
-      char nextCellValue = this.labyrinthBoard[rowIndex - 0][colIndex + 1];
-      //if nextCellValue == 'B' do
-      if(nextCellValue == 'B'){ 
-        //wayFound :true
-        this.wayFound = true;
-      }//end
-      //else if nextCellValue == ' ' do
-      else if (nextCellValue == ' '){ 
-      //recursive(rowIndex -0, colIndex)+ 1    
-      this.findLabyrinthWay(rowIndex - 0, colIndex + 1);
-      }//end
-    }//end
-    //else do
     if (!this.wayFound){
       //labyrinthBoard[rowIndex][colIndex] := "-"
       this.labyrinthBoard[rowIndex][colIndex] = '-';
@@ -177,6 +120,29 @@ public class Solution{
     }//do
 
   }// end
+
+
+  //pricedure searchInNextCell(rowCount, colCount) do
+  public void searchInNextCell(int rowIndex, int colIndex){
+  //if checkCell(rowIndex - 1, colIndex + 0) AND NOT wayFound do
+  if (this.checkCell(rowIndex, colIndex) && !this.wayFound){ 
+    //set nextCellValue = labyrinthBoard[rowIndex - 1][colIndex + 0]
+    char nextCellValue = this.labyrinthBoard[rowIndex][colIndex];
+    //if nextCellValue == 'B' do
+    if(nextCellValue == 'B'){ 
+      //wayFound :true
+      this.wayFound = true;
+    }//end
+    //else if nextCellValue == ' ' do
+    else if (nextCellValue == ' '){ 
+    //recursive(rowIndex -1, colIndex)
+    this.findLabyrinthWay(rowIndex, colIndex);
+    }//end
+  }//end
+  
+  
+  }//end
+
 
 
   //function checkCell(rowCount, colCount) do  //returns boolean
