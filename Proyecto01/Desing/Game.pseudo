@@ -1,0 +1,16 @@
+game class do 
+	//atributes 
+	set gameBoard = null
+	set gameBoardCount = 0
+	procedure main do 
+		while hasNextInt do 
+			input rowCount,colCount	
+			gameBoard := new GameBoard(row, count)
+			if(gameBoard.validate()) do 
+			end
+			else do 
+				output invalid terrain
+			end
+		end
+	end
+end

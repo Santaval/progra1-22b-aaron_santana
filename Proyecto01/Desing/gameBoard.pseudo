@@ -1,0 +1,33 @@
+GameBoard class do
+	//atributes
+	set gameBoard := null
+	set boardStructures := null
+	constructor GameBoard (rowCount, colCount) do 
+			if (rowCount >=  AND colCount >= 3) do
+				gameBoard := new Cell[rowCount][colCount]
+			end 
+			else do 
+				throw ERR
+			end
+	end
+	procedure readGameBoard() do
+		for rowIndex to gameBoard(row) do 
+			for colIndex to gameBoard(col) do 
+				input cellString
+				set currentCell := new Cell(cellString, rowIndex, colIndex)
+				gameBoard[rowIndex][colIndex] = currentCell;
+			end
+		end
+	end
+	function validate() do
+		for 0 to gameBoard(row) do 
+			for 0 to gameBoard(col) do 
+				if(!gameBoard[rowIndex][colIndex].validate()) do
+					return false
+				end
+			end
+		end
+		return true
+	end
+end class 
+
