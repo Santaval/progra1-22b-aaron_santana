@@ -35,10 +35,15 @@ GameBoard class do
 	end
 
 	procedure searchBoardFigures() do
-		boardFigures :=  Figure[n]
 		for rowIndex to gameBoard(row) do 
 			for colIndex to gameBoard(col) do 
-				searchBoardFigures(rowIndex, colIndex)
+				if gameBoard[rowIndex][colIndex].horizontalFigure == null do
+					figures add searchHorizontalFigure(rowIndex, colIndex) only if has 3 or more elements
+				end
+
+				if gameBoard[rowIndex][colIndex].verticalFigure == null do
+					figures add searchVerticalFigure(rowIndex, colIndex) only if has 3 or more elements
+				end
 			end
 		end
 
@@ -53,7 +58,8 @@ GameBoard class do
 
 	function recursiveHorizontalSearch(curentFigure, rowIndex, colIndex) do 
 		curentFigure add currentCell
-		if  rowIndex >= gameBoard(col) OR NOT neighboor cell equals to current OR  rowIndex >= gameBoard(rows) do 
+		current cell reference figure
+		if  rowIndex >= gameBoard(col) OR NOT neighboor cell equals to current  do 
 			return curentFigure
 		end
 		return recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)	
@@ -69,6 +75,7 @@ GameBoard class do
 
 	function recursiveVerticalalSearch(curentFigure, rowIndex, colIndex) do 
 		curentFigure add currentCell
+		current cell reference figure
 		if rowIndex >= gameBoard(row) OR  NOT neighboor cell equals to current do 
 			return curentFigure
 		end

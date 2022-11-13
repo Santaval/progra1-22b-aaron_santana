@@ -7,6 +7,7 @@ game class do
 			input rowCount,colCount	
 			gameBoard := new GameBoard(row, count)
 			if(gameBoard.validate()) do 
+				gameBoard.searchFigures()
 			end
 			else do 
 				output invalid terrain

@@ -19,13 +19,15 @@ public class Game {
         // Create object to read data from standard input
         this.input = new Scanner(System.in);
         // Run problem solution
-       try {
-        this.start();
-       }
-       catch (IndexOutOfBoundsException err){
-            System.out.println(this.gameBoardCount + ":");
-            System.out.println(err.getMessage());
-       }
+    //    try {
+    //     this.start();
+    //    }
+    //    catch (IndexOutOfBoundsException err){
+    //         System.out.println(this.gameBoardCount + ":");
+    //         System.out.println(err.getMessage());
+    //    }
+
+    this.start();
         // Close the scanner of standard input
         this.input.close();
     }
@@ -43,6 +45,8 @@ public class Game {
             this.gameBoard.read(input);
 	 		//if(gameBoard.validate()) do
             if (this.gameBoard.validate()){
+                //gameBoard.searchFigures()
+                gameBoard.searchFigures();
                 System.out.printf("%d:\n", this.gameBoardCount); 
                 this.gameBoard.print();
 			}//end

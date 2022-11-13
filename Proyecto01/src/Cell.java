@@ -1,13 +1,17 @@
 public class Cell {
   //atributes 
 	// set rowIndex := 0
-	private int rowIndex = 0;
+	public int rowIndex = 0;
   // set colIndex := 0
-	private int colIndex  = 0;
+	public int colIndex  = 0;
   // set type := '\0'
-	private char type = '\0';
+	public char type = '\0';
   // set color := '\0'
-	private char color = '\0';
+	public char color = '\0';
+	// set horizontalFigure := null
+	public Figure horizontalFigure = null;
+  //   set verticalFigure := null
+	public Figure verticalFigure = null;
   // set TYPES := "RVHWB"
 	private final String TYPES = "RVHWB";
   // set COLORS := "123456"
@@ -36,12 +40,30 @@ public class Cell {
 		return false;
   }
 
-	public char getType(){
-		return this.type;
-	}
 
-	public char getColor(){
-		return this.color;
-	}
+	// function compareEquals (otherCell) do 
+	public boolean compareEquals(Cell otherCell){
+		// if this Cell color equals to otherCell color do
+		if (this.color == otherCell.color){ 
+			//return true
+			return true;
+		}// end
+		//return false
+		return false;
+	}// end
+
+	// function exists (gameBoard, rowIndex, colIndex) do
+	public static boolean exists (Cell[][] gameBoard, int rowIndex, int colIndex){
+		// if row < gameBoard(row) AND col < gameBoard(col) do
+		if (rowIndex < gameBoard.length && colIndex < gameBoard[rowIndex].length){
+			// return true
+			return true;
+		}// end
+		// return false
+		return false;
+	}// end
+
+	
+
 
 }

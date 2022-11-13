@@ -4,9 +4,11 @@ Cell class do
     set colIndex := 0
     set type := '\0'
     set color := '\0'
+    set horizontalFigure := null
+    set verticalFigure := null
     set TYPES := "RVHWB"
     set COLORS := "123456"
-    constructor Cell(cellString, rowIndex, colIndex) do 
+    constructor Cell(cellString, rowIndex, colIndex) do
         rowIndex := rowIndex
         colIndex := colIndex
         type := cellString[0]
@@ -14,6 +16,19 @@ Cell class do
     end
     function validate () do     //returns boolean
         if TYPES have type AND COLORS have color do 
+            return true
+        end
+        return false
+    end
+
+    function compareEquals (otherCell) do 
+        if this Cell color equals to otherCell color do 
+            return ture
+        end
+    end
+
+    function exists (gameBoard, rowIndex, colIndex) do 
+        if row < gameBoard(row) AND col < gameBoard(col) do
             return true
         end
         return false

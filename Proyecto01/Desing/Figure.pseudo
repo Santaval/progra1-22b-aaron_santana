@@ -1,0 +1,16 @@
+Figure class do 
+
+//atributes 
+set figure = Cell[]
+set type := '\0'
+
+constructor Figure(type) do 
+    type := type
+end
+
+
+function items() do 
+    return figure(col)
+end
+
+end

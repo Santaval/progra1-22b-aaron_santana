@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameBoard {
 		//atributes
 		// set gameBoard := null
 		private Cell[][] gameBoard = null;
-		// set boardStructures := null
+		// set boardFigures := null
+		private ArrayList <Figure> boardFigures = null;
 
 	// constructor GameBoard (rowCount, colCount) do 
 	public GameBoard(int rowCount, int colCount){
@@ -12,6 +14,7 @@ public class GameBoard {
 		if (rowCount >= 3 && colCount >= 3){
 			// gameBoard := new Cell[rowCount][colCount]
 			this.gameBoard = new Cell[rowCount][colCount];
+			this.boardFigures = new ArrayList<>(0);
 		}// end 
 		// else do
 		else { 
@@ -51,15 +54,131 @@ public class GameBoard {
 		return true;
 	}// end
 
+
+	// procedure searchBoardFigures() do
+	public void searchFigures(){
+		//for rowIndex to gameBoard(row) do
+		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++){
+			//for colIndex to gameBoard(col) do
+			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
+				//if gameBoard[rowIndex][colIndex].horizontalFigure == null do
+				if  (this.gameBoard[rowIndex][colIndex].horizontalFigure == null){
+					//figures add searchHorizontalFigure(rowIndex, colIndex) only if has 3 or more elements
+					Figure horizontalFigure = this.searchHorizontalFigure(rowIndex, colIndex);
+					if (horizontalFigure.items() >= 3){
+						this.boardFigures.add(horizontalFigure);
+					}
+				}//end
+
+				//if gameBoard[rowIndex][colIndex].verticalFigure == null do
+				if (this.gameBoard[rowIndex][colIndex].verticalFigure == null){
+					// figures add searchVerticalFigure(rowIndex, colIndex)
+					Figure verticalFigure = this.searchVerticalFigure(rowIndex, colIndex);
+					if (verticalFigure.items() >= 3){
+						this.boardFigures.add(verticalFigure);
+					}
+				}//end
+			}//end
+		}//end
+	}//end
+
+	// procedure searchHorizontalFigure(rowIndex, colIndex) do
+	private Figure searchHorizontalFigure(int rowIndex, int colIndex){ 
+		// set currentFigure = new Figure("H")
+		Figure currentFigure = new Figure('H');
+		// if  neighboor cell equals to current do
+		if (Cell.exists(gameBoard, rowIndex + 0, colIndex + 1) && this.gameBoard[rowIndex][colIndex]
+				.compareEquals(this.gameBoard[rowIndex + 0] [colIndex + 1])){
+			// 	currentFigure := recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)
+			currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+			return this.recursiveHorizontalSearch(currentFigure, rowIndex , colIndex);
+		}// end 
+	
+		return currentFigure;
+
+	}// end
+
+	// function recursiveHorizontalSearch(curentFigure, rowIndex, colIndex) do
+	public Figure recursiveHorizontalSearch(Figure currentFigure, int rowIndex, int colIndex){
+		// curentFigure add currentCell
+		currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+		//current cell reference figure
+		this.gameBoard[rowIndex][colIndex].horizontalFigure = currentFigure;
+		// if  rowIndex >= gameBoard(col) OR NOT neighboor cell equals to current  do
+		if (colIndex + 1 >= this.gameBoard[rowIndex].length){
+			// 	return curentFigure
+			return currentFigure;
+		}// end
+		
+		if( !this.gameBoard[rowIndex][colIndex].compareEquals(this.gameBoard[rowIndex + 0] [colIndex + 1])){
+			return currentFigure;
+		}
+		// return recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)
+		return this.recursiveHorizontalSearch(currentFigure, rowIndex + 0, colIndex + 1);	
+	}// end
+
+		// procedure searchVerticalFigure(rowIndex, colIndex) do
+		private Figure searchVerticalFigure(int rowIndex, int colIndex){ 
+			// set currentFigure = new Figure("V")
+			Figure currentFigure = new Figure('V');
+			// if  neighboor cell equals to current do
+			if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0) && this.gameBoard[rowIndex][colIndex]
+					.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
+				//currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
+				currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+				return this.recursiveVerticalSearch(currentFigure, rowIndex, colIndex);
+			}// end 
+	
+			return currentFigure;
+	
+		}// end
+	
+		// function recursiveVerticalSearch(curentFigure, rowIndex, colIndex) do
+		public Figure recursiveVerticalSearch(Figure currentFigure, int rowIndex, int colIndex){
+			// curentFigure add currentCell
+			currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+			//current cell reference figure
+			this.gameBoard[rowIndex][colIndex].verticalFigure = currentFigure;
+			// if  rowIndex >= gameBoard(row) OR NOT neighboor cell equals to current  do
+			if (rowIndex + 1 >= this.gameBoard.length || !this.gameBoard[rowIndex][colIndex]
+				.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
+				// 	return curentFigure
+				return currentFigure;
+			}// end
+			// return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
+			return this.recursiveVerticalSearch(currentFigure, rowIndex + 1, colIndex + 0);	
+		}// end
+
+
+
 	// procedure print() do
 	public void print(){ 
 		// output gameBoard
 		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
 			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
 				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
-				System.out.printf("%s%s ", currentCell.getType(), currentCell.getColor());
+				try{
+					System.out.printf("%s%s ", currentCell.horizontalFigure.type, currentCell.color);
+				} catch (Exception err){
+					System.out.printf("-- ");
+				}
+			}
+			System.out.print("\n");
+		} 
+
+		System.out.println("1:\n");
+		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
+			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
+				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+				try{
+				
+					System.out.printf("%s%s ", currentCell.verticalFigure.type, currentCell.color);
+				} catch (Exception err){
+					System.out.printf("-- ");
+				}
 			}
 			System.out.print("\n");
 		} 
 	}// end 
+
 }
