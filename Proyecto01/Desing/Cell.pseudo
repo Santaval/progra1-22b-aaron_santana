@@ -1,18 +1,18 @@
 Cell class do 
     //atributes 
-    set rowCount := 0
-    set colCount := 0
+    set rowIndex := 0
+    set colIndex := 0
     set type := '\0'
     set color := '\0'
     set TYPES := "RVHWB"
     set COLORS := "123456"
-    constructor Cell(cellString, rowCount, colCount) do 
-        rowCount := rowCount
-        colCount := colCount
+    constructor Cell(cellString, rowIndex, colIndex) do 
+        rowIndex := rowIndex
+        colIndex := colIndex
         type := cellString[0]
         color := cellString[1]
     end
-    function validateCell () do     //returns boolean
+    function validate () do     //returns boolean
         if TYPES have type AND COLORS have color do 
             return true
         end

@@ -2,7 +2,7 @@ game class do
 	//atributes 
 	set gameBoard = null
 	set gameBoardCount = 0
-	procedure main do 
+	procedure start do 
 		while hasNextInt do 
 			input rowCount,colCount	
 			gameBoard := new GameBoard(row, count)

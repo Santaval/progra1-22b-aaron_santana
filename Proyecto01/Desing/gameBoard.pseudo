@@ -10,7 +10,7 @@ GameBoard class do
 				throw ERR
 			end
 	end
-	procedure readGameBoard() do
+	procedure read() do
 		for rowIndex to gameBoard(row) do 
 			for colIndex to gameBoard(col) do 
 				input cellString
@@ -22,12 +22,16 @@ GameBoard class do
 	function validate() do
 		for 0 to gameBoard(row) do 
 			for 0 to gameBoard(col) do 
-				if(!gameBoard[rowIndex][colIndex].validate()) do
+				if(NOT gameBoard[rowIndex][colIndex].validate()) do
 					return false
 				end
 			end
 		end
 		return true
+	end
+
+	procedure print() do 
+		output gameBoard
 	end
 end class 
 
