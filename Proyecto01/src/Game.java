@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Game {
     //atributes
@@ -52,6 +53,10 @@ public class Game {
 	 		}//end
 	 	}//end
     }//end
+
+
+
+
     
 
 

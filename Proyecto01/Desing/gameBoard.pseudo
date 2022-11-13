@@ -1,7 +1,7 @@
 GameBoard class do
 	//atributes
 	set gameBoard := null
-	set boardStructures := null
+	set boardFigures := null
 	constructor GameBoard (rowCount, colCount) do 
 			if (rowCount >=  AND colCount >= 3) do
 				gameBoard := new Cell[rowCount][colCount]
@@ -33,5 +33,50 @@ GameBoard class do
 	procedure print() do 
 		output gameBoard
 	end
+
+	procedure searchBoardFigures() do
+		boardFigures :=  Figure[n]
+		for rowIndex to gameBoard(row) do 
+			for colIndex to gameBoard(col) do 
+				searchBoardFigures(rowIndex, colIndex)
+			end
+		end
+
+	end
+
+	procedure searchHorizontalFigure(rowIndex, colIndex) do 
+		set currentFigure = new Figure("H")
+		if neighboor cell equals to current do
+			currentFigure := recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)
+		end 
+	end
+
+	function recursiveHorizontalSearch(curentFigure, rowIndex, colIndex) do 
+		curentFigure add currentCell
+		if  rowIndex >= gameBoard(col) OR NOT neighboor cell equals to current OR  rowIndex >= gameBoard(rows) do 
+			return curentFigure
+		end
+		return recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)	
+	end
+
+	
+	procedure searchVerticalalFigure(rowIndex, colIndex) do 
+		set currentFigure = new Figure("V")
+		if neighboor cell equals to current do
+			currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
+		end 
+	end
+
+	function recursiveVerticalalSearch(curentFigure, rowIndex, colIndex) do 
+		curentFigure add currentCell
+		if rowIndex >= gameBoard(row) OR  NOT neighboor cell equals to current do 
+			return curentFigure
+		end
+		return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)	
+	end
+
+
+
+
 end class 
 
