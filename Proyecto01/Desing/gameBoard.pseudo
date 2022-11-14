@@ -44,6 +44,8 @@ GameBoard class do
 				if gameBoard[rowIndex][colIndex].verticalFigure == null do
 					figures add searchVerticalFigure(rowIndex, colIndex) only if has 3 or more elements
 				end
+
+				searchLFigure()
 			end
 		end
 
@@ -80,6 +82,15 @@ GameBoard class do
 			return curentFigure
 		end
 		return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)	
+	end
+
+
+	procedure searchLFigure(rowIndex, colIndex) do 
+		if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure == null do 
+			set LFigure := new Figure('L')
+			LFigure.figure.add(horizontalFigure and verticalFigure cells)
+
+		end
 	end
 
 

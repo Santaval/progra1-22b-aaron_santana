@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class GameBoard {
@@ -78,6 +79,11 @@ public class GameBoard {
 						this.boardFigures.add(verticalFigure);
 					}
 				}//end
+				
+				//searchLFigure()
+				this.searchLFigure(rowIndex, colIndex);
+				this.searchTFigure(rowIndex, colIndex);
+
 			}//end
 		}//end
 	}//end
@@ -99,7 +105,7 @@ public class GameBoard {
 	}// end
 
 	// function recursiveHorizontalSearch(curentFigure, rowIndex, colIndex) do
-	public Figure recursiveHorizontalSearch(Figure currentFigure, int rowIndex, int colIndex){
+	private Figure recursiveHorizontalSearch(Figure currentFigure, int rowIndex, int colIndex){
 		// curentFigure add currentCell
 		currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
 		//current cell reference figure
@@ -118,20 +124,20 @@ public class GameBoard {
 	}// end
 
 		// procedure searchVerticalFigure(rowIndex, colIndex) do
-		private Figure searchVerticalFigure(int rowIndex, int colIndex){ 
-			// set currentFigure = new Figure("V")
-			Figure currentFigure = new Figure('V');
-			// if  neighboor cell equals to current do
-			if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0) && this.gameBoard[rowIndex][colIndex]
-					.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
-				//currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
-				currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
-				return this.recursiveVerticalSearch(currentFigure, rowIndex, colIndex);
-			}// end 
-	
-			return currentFigure;
-	
-		}// end
+	private Figure searchVerticalFigure(int rowIndex, int colIndex){ 
+		// set currentFigure = new Figure("V")
+		Figure currentFigure = new Figure('V');
+		// if  neighboor cell equals to current do
+		if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0) && this.gameBoard[rowIndex][colIndex]
+				.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
+			//currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
+			currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+			return this.recursiveVerticalSearch(currentFigure, rowIndex, colIndex);
+		}// end 
+
+		return currentFigure;
+
+	}// end
 	
 		// function recursiveVerticalSearch(curentFigure, rowIndex, colIndex) do
 		public Figure recursiveVerticalSearch(Figure currentFigure, int rowIndex, int colIndex){
@@ -147,6 +153,45 @@ public class GameBoard {
 			}// end
 			// return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
 			return this.recursiveVerticalSearch(currentFigure, rowIndex + 1, colIndex + 0);	
+		}// end
+
+		// procedure searchLFigure(rowIndex, colIndex) do
+		private void searchLFigure(int rowIndex, int colIndex){ 
+			// if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure == null do
+			Cell curentCell = this.gameBoard[rowIndex][colIndex];
+			if (curentCell.horizontalFigure != null && curentCell.horizontalFigure.isLastOrFirstCell(curentCell)){
+				if (curentCell.verticalFigure != null && curentCell.verticalFigure.isLastOrFirstCell(curentCell)){
+					if	(curentCell.LFigure == null){
+						//LFigure := new Figure('L')
+						// LFigure.figure.add(horizontalFigure and verticalFigure cells)
+						Figure LFigure = Figure.combine(curentCell.horizontalFigure, curentCell.verticalFigure, 'L');
+						this.boardFigures.add(LFigure);
+
+		
+					}
+				}
+			} // end
+				
+			
+		}// end
+
+		// procedure searchLFigure(rowIndex, colIndex) do
+		private void searchTFigure(int rowIndex, int colIndex){ 
+			// if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure == null do
+			Cell curentCell = this.gameBoard[rowIndex][colIndex];
+			if (curentCell.horizontalFigure != null && curentCell.verticalFigure != null){
+				if ((!curentCell.verticalFigure.isLastOrFirstCell(curentCell) && curentCell.horizontalFigure.isLastOrFirstCell(curentCell)) || (curentCell.verticalFigure.isLastOrFirstCell(curentCell) && !curentCell.horizontalFigure.isLastOrFirstCell(curentCell)) ){
+					if	(curentCell.TFigure == null){
+						//LFigure := new Figure('T')
+						// LFigure.figure.add(horizontalFigure and verticalFigure cells)
+						Figure TFigure = Figure.combine(curentCell.horizontalFigure, curentCell.verticalFigure, 'T');
+						this.boardFigures.add(TFigure);
+						
+					}
+				}
+			} // end
+				
+			
 		}// end
 
 
@@ -179,6 +224,36 @@ public class GameBoard {
 			}
 			System.out.print("\n");
 		} 
+
+
+		System.out.println("1:\n");
+		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
+			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
+				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+				try{
+				
+					System.out.printf("%s%s ", currentCell.LFigure.type, currentCell.color);
+				} catch (Exception err){
+					System.out.printf("-- ");
+				}
+			}
+			System.out.print("\n");
+		} 
+
+
+		System.out.println("1:\n");
+		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
+			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
+				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+				try{
+				
+					System.out.printf("%s%s ", currentCell.TFigure.type, currentCell.color);
+				} catch (Exception err){
+					System.out.printf("-- ");
+				}
+			}
+			System.out.print("\n");
+		}
 	}// end 
 
 }

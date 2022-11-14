@@ -13,4 +13,26 @@ function items() do
     return figure(col)
 end
 
+function combine(figure1, figure2, type) do 
+    create new Figure('type')
+
+    for index to figure1 figure size do
+        figure1.figure[index].LFigure = newFigure;
+        newFigure.figure.add(figure1.figure[index]);
+    end
+
+    for index to figure2 figure size do
+        figure2.figure[index].LFigure = newFigure;
+        newFigure.figure.add(figure2.figure[index]);
+    end   
+end
+
+function isLastOrFirstCell(cell) do
+	if cell equals figure[0] or figure[last] do 
+		return true
+	end
+
+	return false
+end
+
 end
