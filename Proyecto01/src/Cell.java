@@ -48,6 +48,7 @@ public class Cell {
 	// function compareEquals (otherCell) do 
 	public boolean compareEquals(Cell otherCell){
 		// if this Cell color equals to otherCell color do
+		System.out.println(this.color + " " + otherCell.color);
 		if (this.color == otherCell.color){ 
 			//return true
 			return true;

@@ -21,7 +21,6 @@ public class Figure {
 
 	public static Figure combine(Figure first, Figure second, char type){
 			Figure newFigure = new Figure(type);
-		System.out.println(type);
 			for (int index = 0; index < first.figure.size(); index++){
 					if (type == 'L'){
 						first.figure.get(index).LFigure = newFigure;
@@ -47,7 +46,6 @@ public class Figure {
 
 	// function isLastOrFirstCell(cell) do
 	public boolean isLastOrFirstCell(Cell cell){
-		System.out.println(cell == this.figure.get(0) || cell == this.figure.get(this.figure.size() - 1));
 		//if cell equals figure[0] or figure[last] do );
 		if (cell == this.figure.get(0) || cell == this.figure.get(this.figure.size() - 1)){
 			//return true

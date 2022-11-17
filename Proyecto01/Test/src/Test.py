@@ -1,0 +1,21 @@
+import random
+def generateValidCell():
+  TYPES = 'RVHWB'
+  COLORS = '123456'
+  type =  TYPES[random.randint(1,4)]
+  color =  COLORS[random.randint(1,4)]
+  return type + color + ' '
+
+
+
+def main():
+  rowCount = random.randint(0,40)
+  colCount = random.randint(0,40)
+  print(str(rowCount) + " " + str(colCount)) 
+  for rowIndex in range(rowCount):
+    for colIndex in range(colCount):
+      print(generateValidCell(), end="")
+    print("")
+
+
+main()
