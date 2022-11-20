@@ -2,10 +2,17 @@
 
 #java compiler
 JC = javac 
+JFLAGS = -g
+
+#java start
+JS = java
+
+# Project objects
+OBJS = Game Cell Figure GameBoard  
+
 
 
 # Directoties 
-
 BIN_PATH = bin
 OBJ_PATH = build
 SRC_PATH = src
@@ -13,4 +20,10 @@ MAIN_FILE = Game.java
 
 # commands 
 
-debug: $(JC) $(MAIN_FILE) -d $(OBJ_PATH)
+
+run: compile
+	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS)
+	 
+compile: 
+	@$(JC) $(JFLAGS) $(wildcard $(SRC_PATH))/*.java  $< -d $(OBJ_PATH)
+	
