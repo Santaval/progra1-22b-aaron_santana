@@ -79,7 +79,7 @@ public class Cell {
 	}// end
 
 
-	public void eliminate(){
+	public void delete(){
 		this.type = '-';
 		this.color = '-';
 	}

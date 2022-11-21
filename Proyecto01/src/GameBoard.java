@@ -192,13 +192,9 @@ public class GameBoard {
 			} // end
 		}// end
 
-
-
-
-		// function selectFigureToEliminate() do
-		public Figure selectFigureToEliminate(){
-		
-			return	Figure.priorityFigure(this.boardFigures);
+		// function selectFigureToDelete() do
+		public Figure selectFigureToDelete(){
+			return Figure.priorityFigure(this.boardFigures);
 		
 		}//end
 
@@ -220,10 +216,10 @@ public class GameBoard {
 	}// end
 	
 	
-	public void printFigureTypes(){
-		for (int index = 0; index < boardFigures.size(); index++){
-			System.out.println(this.boardFigures.get(index).type);
-		}
-	}
+	// public void printFigureTypes(){
+	// 	for (int index = 0; index < boardFigures.size(); index++){
+	// 		System.out.println(this.boardFigures.get(index).type);
+	// 	}
+	// }
 
 }

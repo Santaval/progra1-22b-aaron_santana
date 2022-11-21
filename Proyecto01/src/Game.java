@@ -46,9 +46,8 @@ public class Game {
             if (this.gameBoard.validate()){
                 //gameBoard.searchFigures()
                 gameBoard.searchFigures();
-                Figure eliminate = gameBoard.selectFigureToEliminate();
+                Figure eliminate = gameBoard.selectFigureToDelete();
                 eliminate.eliminate();
-                gameBoard.printFigureTypes();
                 System.out.printf("\n%d:\n", this.gameBoardCount); 
                 this.gameBoard.print();
 			}//end
