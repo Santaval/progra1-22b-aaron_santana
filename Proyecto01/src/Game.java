@@ -20,15 +20,14 @@ public class Game {
         // Create object to read data from standard input
         this.input = new Scanner(System.in);
         // Run problem solution
-    //    try {
-    //     this.start();
-    //    }
-    //    catch (IndexOutOfBoundsException err){
-    //         System.out.println(this.gameBoardCount + ":");
-    //         System.out.println(err.getMessage());
-    //    }
+       try {
+        this.start();
+       }
+       catch (IndexOutOfBoundsException err){
+            System.out.println(this.gameBoardCount + ":");
+            System.out.println(err.getMessage());
+       }
 
-    this.start();
         // Close the scanner of standard input
         this.input.close();
     }
@@ -48,11 +47,7 @@ public class Game {
             if (this.gameBoard.validate()){
                 //gameBoard.searchFigures()
                 gameBoard.searchFigures();
-                Figure eliminate = gameBoard.selectFigureToEliminate();
-                for (int index = 0; index < eliminate.figure.size(); index++){
-                    System.out.println(eliminate.figure.get(index).rowIndex + "" + eliminate.figure.get(index).colIndex);
-                    eliminate.figure.get(index).eliminate();;
-                }
+                gameBoard.selectFigureToEliminate();
                 System.out.printf("%d:\n", this.gameBoardCount); 
                 this.gameBoard.print();
 			}//end

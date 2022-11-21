@@ -9,6 +9,10 @@ constructor Figure(type) do
 end
 
 
+function getColor() do 
+    return figure[0].color
+end
+
 function items() do 
     return figure(col)
 end
