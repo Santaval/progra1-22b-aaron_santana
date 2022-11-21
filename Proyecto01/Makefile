@@ -30,6 +30,7 @@ TEST_IN = $(TEST_PATH)/input/gen_test.txt
 
 # commands 
 run: compile gen_test
+	@cat Title.txt
 	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(TEST_IN)
 	 
 compile: 
