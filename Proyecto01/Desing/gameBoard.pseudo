@@ -95,15 +95,17 @@ GameBoard class do
 
 
 
-	procedure eliminateFigure() do 
-		set eliminateFigure = selectFigureToEliminate()
-
-		eliminateFigure[0].determinateType(eliminateFigure)
+	procedure deleteFigure() do 
+		set deleteFigure = selectFigureTodelete()
+		for index to deleteFigure.items() do 
+			figure[index].delete(gameBoard)
+		end
+		deleteFigure[0].determinateType(eliminateFigure)
 
 	end
 
 
-	function selectFigureToEliminate() do
+	function selectFigureTodDelete() do
 		for rowIndex to gameBoard(row) do 
 			for colIndex to gameBoard(col) do 
 				if currentCell.hasFigure() do 

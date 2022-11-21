@@ -76,4 +76,57 @@ Cell class do
             color = eliminateFigure.getColor()
         end
     end
+
+
+    procedure delete (gameBoard) do 
+        switch (type) do 
+            case 'R': setDefaultValues()
+            case 'V': deleteCol(gameBoard)
+            case 'H': deleteRow(gameBoard)
+            case 'W': wrapped(gameBoard)
+            case 'B': colorBomb()gameBoard
+        end
+    end
+
+    procedure setDefaultValues () do 
+        type = '-'
+        color = '-'set horizontalFigure := null
+        verticalFigure := null
+        Lfigure := null
+        Tfigure := null
+    end
+
+    procedure deleteCol()do
+        setDefaultValues()
+        for rowIndex to gameBoard(row) do 
+            gameBoard[rowIndex][col].delete()
+        end
+    end
+
+    procedure deleteRow(rowIndex)do
+        setDefaultValues()
+        for colIndex to gameBoard(col) do 
+            gameBoard[row][colIndex].delete()
+        end
+    end
+
+    procedure wrapped(gameBoard) do 
+        setDefaultValues()
+        for rowIndex = row 1 to row + 2 do 
+            for colIndex = col - 1 to row + 2 do 
+                gameBoard[rowIndex][colIndex].delete()
+            end
+        end
+    end
+
+    procedure colorBomb(gameBoard) do
+        setDefaultValues()
+        for rowIndex to gameBoard(row) do 
+            for colIndex to gameBoard(col) do 
+                if compareEquals(gameBoard[rowIndex][colIndex]) do 
+                    gameBoard[rowIndex][colIndex].delete()
+                end
+            end
+        end
+    end
 end
