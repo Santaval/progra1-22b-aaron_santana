@@ -9,8 +9,8 @@ def generateValidCell():
 
 
 def main():
-  rowCount = random.randint(0,40)
-  colCount = random.randint(0,40)
+  rowCount = random.randint(0,50)
+  colCount = random.randint(0,50)
   print(str(rowCount) + " " + str(colCount)) 
   for rowIndex in range(rowCount):
     for colIndex in range(colCount):
