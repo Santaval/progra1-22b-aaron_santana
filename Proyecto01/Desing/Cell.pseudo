@@ -44,30 +44,7 @@ Cell class do
         return false
     end
 
-    function priorityFigure() do  //returns Figure object
-        if verticalFigure exist and verticalFigure(Cells) >= 5 do 
-            return verticalFigure
-        end
-        else if horizontalalFigure exist and horizontalalFigure(Cells) >= 5 do 
-            return horizontalalFigure
-        end
-        else if LFigure extist do 
-            return LFigure
-        end
-        else if Tfigure exist do 
-            return Tfigure
-        end
-        else if verticalFigure exist do 
-            return verticalFigure
-        end
-        else if horizontalalFigure exist do 
-            return horizontalalFigure
-        end
 
-        else do 
-            return null
-        end
-    end
 
     procedure determinateType(eliminateFigure) do 
         switch(eliminateFigure.type) do 

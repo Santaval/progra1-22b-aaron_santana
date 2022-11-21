@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-import javax.lang.model.element.Element;
 public class Game {
     //atributes
     //input declaration
@@ -47,14 +46,16 @@ public class Game {
             if (this.gameBoard.validate()){
                 //gameBoard.searchFigures()
                 gameBoard.searchFigures();
-                gameBoard.selectFigureToEliminate();
-                System.out.printf("%d:\n", this.gameBoardCount); 
+                Figure eliminate = gameBoard.selectFigureToEliminate();
+                eliminate.eliminate();
+                gameBoard.printFigureTypes();
+                System.out.printf("\n%d:\n", this.gameBoardCount); 
                 this.gameBoard.print();
 			}//end
 			//else do
             else { 
 	 			//output invalid terrain
-                System.out.printf("%d:\n%s", this.gameBoardCount, "invalid terrain"); 
+                System.out.printf("\n%d:\n%s", this.gameBoardCount, "invalid terrain"); 
 	 		}//end
 	 	}//end
     }//end

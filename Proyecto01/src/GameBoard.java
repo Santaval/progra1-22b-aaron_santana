@@ -187,41 +187,21 @@ public class GameBoard {
 					}
 				}
 			} // end
-				
-			
 		}// end
+
+
 
 
 		// function selectFigureToEliminate() do
 		public Figure selectFigureToEliminate(){
-			//for rowIndex to gameBoard(row) do 
-			for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++){
-				//for colIndex to gameBoard(col) do
-				for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){ 
-					// if currentCell.hasFigure() do
-					if (this.gameBoard[rowIndex][colIndex].hasFigure()){ 
-						//return curentFigure.priorityFigure()
-						return this.gameBoard[rowIndex][colIndex].priorityFigure();
-					}//end
-				}// end
-			}//end
-
-			// return null
-			return null;
-		}// end
-
-
 		
-
-
+			return	Figure.priorityFigure(this.boardFigures);
 		
-
+		}//end
 
 
 	// procedure print() do
 	public void print(){ 
-
-
 		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
 			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
 				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
@@ -234,6 +214,13 @@ public class GameBoard {
 			}
 			System.out.print("\n");
 		}
-	}// end 
+	}// end
+	
+	
+	public void printFigureTypes(){
+		for (int index = 0; index < boardFigures.size(); index++){
+			System.out.println(this.boardFigures.get(index).type);
+		}
+	}
 
 }

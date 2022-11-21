@@ -39,4 +39,31 @@ function isLastOrFirstCell(cell) do
 	return false
 end
 
+
+function priorityFigure(boardFigures) do 
+    for index to boardFigures.items() do
+        if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'V') AND size >= 5 do
+            return boardFigures[index]
+        end
+    end
+    for index to boardFigures.items() do
+        if boardFigures[index].type == 'L' OR boardFigures[index].type == 'T' do 
+            return boardFigures[index]
+        end
+    end
+    for index to boardFigures.items() do
+        if (boardFigures[index].type == 'H' OR boardFigures[index].type == 'V') AND size == 4 do
+            return boardFigures[index]
+        end
+    end
+    for index to boardFigures.items() do
+        if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'H') AND size == 3ß do
+            return boardFigures[index]
+        end
+    end
+
+    return null
 end
+
+end
+

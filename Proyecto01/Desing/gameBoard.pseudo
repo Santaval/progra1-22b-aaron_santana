@@ -97,7 +97,9 @@ GameBoard class do
 
 	procedure eliminateFigure() do 
 		set eliminateFigure = selectFigureToEliminate()
+
 		eliminateFigure[0].determinateType(eliminateFigure)
+
 	end
 
 
@@ -105,7 +107,7 @@ GameBoard class do
 		for rowIndex to gameBoard(row) do 
 			for colIndex to gameBoard(col) do 
 				if currentCell.hasFigure() do 
-					return curentFigure.priorityFigure()
+					return Figure.priorityFigure()
 				end
 			end
 		end

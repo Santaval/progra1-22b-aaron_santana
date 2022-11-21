@@ -56,6 +56,51 @@ public class Figure {
 		return false;
 	}//end
 
+	//function priorityFigure(boardFigures) do 
+	public static Figure priorityFigure(ArrayList <Figure> boardFigures){
+		//for index to boardFigures.items() do
+		for (int index = 0; index < boardFigures.size(); index++){
+			//if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'V') AND size >= 5 do
+			if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H') && boardFigures.get(index).items() >= 5){
+				//return boardFigures[index]
+				return boardFigures.get(index);
+			}//end
+		}// end
+		//for index to boardFigures.items() do
+		for (int index = 0; index < boardFigures.size(); index++){
+			//if boardFigures[index].type == 'L' OR boardFigures[index].type == 'T' do
+			if ((boardFigures.get(index).type == 'L' || boardFigures.get(index).type == 'T') && boardFigures.get(index).items() >= 6) {
+				//return boardFigures[index]
+				return boardFigures.get(index);
+			}//end
+		}//end
+		//for index to boardFigures.items() do
+		for (int index = 0; index < boardFigures.size(); index++){
+			//if (boardFigures[index].type == 'H' OR boardFigures[index].type == 'V') AND size == 4 do
+			if((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H') && boardFigures.size() == 4){
+				//return boardFigures[index]
+				return boardFigures.get(index);
+			}//end
+		}//end
+			//for index to boardFigures.items() do
+		for (int index = 0; index < boardFigures.size(); index++){
+			//if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'H') AND size == 3 do
+			if((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H') && boardFigures.size() == 3){
+				//return boardFigures[index]
+				return boardFigures.get(index);
+			}//end
+		}//end
+		//return null
+		return null;
+	}//end
+
+
+	public void eliminate(){
+		for (int index = 0; index < this.figure.size(); index ++){
+			figure.get(index).type = '-';
+			figure.get(index).color = '-';
+		}
+	}
 
 	// public void print(){
 	//     for (int counter = 0; counter < this.figure.size(); counter++){

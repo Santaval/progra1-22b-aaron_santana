@@ -32,7 +32,6 @@ public class Cell {
   // color := cellString[1]
 	this.color = cellString.charAt(1);
   }// end
-
   // function validate () do
 	public boolean validate(){
 		// if TYPES have type AND COLORS have color do 
@@ -43,8 +42,6 @@ public class Cell {
 		// return false
 		return false;
   }
-
-
 	// function compareEquals (otherCell) do 
 	public boolean compareEquals(Cell otherCell){
 		// if this Cell color equals to otherCell color do
@@ -55,7 +52,6 @@ public class Cell {
 		//return false
 		return false;
 	}// end
-
 	// function exists (gameBoard, rowIndex, colIndex) do
 	public static boolean exists (Cell[][] gameBoard, int rowIndex, int colIndex){
 		// if row < gameBoard(row) AND col < gameBoard(col) do
@@ -80,45 +76,6 @@ public class Cell {
 		}// end
 		// return false
 		return false;
-	}// end
-
-	// function priorityFigure() do  returns Figure object
-	public Figure priorityFigure() {
-		// if verticalFigure exist and verticalFigure(Cells) >= 5 do 
-		if(this.verticalFigure != null && this.verticalFigure.figure.size() >= 5){
-				// return verticalFigure
-				return this.verticalFigure;
-		}// end
-			//else if horizontalalFigure exist and horizontalalFigure(Cells) >= 5 do 
-		if (this.horizontalFigure != null && this.horizontalFigure.items()  >= 5){
-			//return horizontalalFigure
-			return this.horizontalFigure;
-		}// end
-		// else if LFigure extist do 
-		if (this.LFigure != null && verticalFigure.items() >= 5){
-			//return LFigure
-			return this.LFigure;
-		}// end
-		// else if Tfigure exist do 
-		if (this.TFigure != null && TFigure.items() >= 6){
-			//return Tfigure
-			return this.TFigure;
-		}// end
-		// else if verticalFigure exist do
-		if (this.verticalFigure != null){ 
-		 	//return verticalFigure
-			return this.verticalFigure;
-		}// end
-		// else if horizontalalFigure exist do
-		if (this.horizontalFigure != null){ 
-			//return horizontalalFigure
-			return this.horizontalFigure;
-		}// end
-		// else do 
-		else {
-			// return null
-			return null;
-		}	// end
 	}// end
 
 
