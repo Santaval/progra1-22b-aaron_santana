@@ -94,6 +94,13 @@ GameBoard class do
 	end
 
 
+
+	procedure eliminateFigure() do 
+		set eliminateFigure = selectFigureToEliminate()
+		eliminateFigure[0].determinateType(eliminateFigure)
+	end
+
+
 	function selectFigureToEliminate() do
 		for rowIndex to gameBoard(row) do 
 			for colIndex to gameBoard(col) do 
@@ -106,7 +113,7 @@ GameBoard class do
 		return null
 	end
 
-	
+
 
 
 
