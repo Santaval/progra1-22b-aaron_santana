@@ -14,8 +14,8 @@ public class Cell {
 	public Figure verticalFigure = null;
 	//set LFigure := null
 	public Figure LFigure = null;
-		//set TFigure := null
-		public Figure TFigure = null;
+	//set TFigure := null
+	public Figure TFigure = null;
   // set TYPES := "RVHWB"
 	private final String TYPES = "RVHWB";
   // set COLORS := "123456"

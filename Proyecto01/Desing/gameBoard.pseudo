@@ -94,6 +94,21 @@ GameBoard class do
 	end
 
 
+	function selectFigureToEliminate() do
+		for rowIndex to gameBoard(row) do 
+			for colIndex to gameBoard(col) do 
+				if currentCell.hasFigure() do 
+					return curentFigure.priorityFigure()
+				end
+			end
+		end
+
+		return null
+	end
+
+	
+
+
 
 
 end class 

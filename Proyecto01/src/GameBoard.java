@@ -195,58 +195,20 @@ public class GameBoard {
 
 
 
+		
+
+
+
 	// procedure print() do
 	public void print(){ 
-		// output gameBoard
-		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
-			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
-				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
-				try{
-					System.out.printf("%s%s ", currentCell.horizontalFigure.type, currentCell.color);
-				} catch (Exception err){
-					System.out.printf("-- ");
-				}
-			}
-			System.out.print("\n");
-		} 
 
-		System.out.println("1:\n");
+
 		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
 			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
 				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
 				try{
 				
-					System.out.printf("%s%s ", currentCell.verticalFigure.type, currentCell.color);
-				} catch (Exception err){
-					System.out.printf("-- ");
-				}
-			}
-			System.out.print("\n");
-		} 
-
-
-		System.out.println("1:\n");
-		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
-			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
-				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
-				try{
-				
-					System.out.printf("%s%s ", currentCell.LFigure.type, currentCell.color);
-				} catch (Exception err){
-					System.out.printf("-- ");
-				}
-			}
-			System.out.print("\n");
-		} 
-
-
-		System.out.println("1:\n");
-		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex ++){ 
-			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
-				final Cell currentCell = this.gameBoard[rowIndex][colIndex];
-				try{
-				
-					System.out.printf("%s%s ", currentCell.TFigure.type, currentCell.color);
+					System.out.printf("%s%s ", currentCell.type, currentCell.color);
 				} catch (Exception err){
 					System.out.printf("-- ");
 				}
