@@ -158,13 +158,15 @@ public class GameBoard {
 			Cell curentCell = this.gameBoard[rowIndex][colIndex];
 			if (curentCell.horizontalFigure != null && curentCell.horizontalFigure.isLastOrFirstCell(curentCell)){
 				if (curentCell.verticalFigure != null && curentCell.verticalFigure.isLastOrFirstCell(curentCell)){
-					if	(curentCell.LFigure == null){
-						//LFigure := new Figure('L')
-						// LFigure.figure.add(horizontalFigure and verticalFigure cells)
-						Figure LFigure = Figure.combine(curentCell.horizontalFigure, curentCell.verticalFigure, 'L');
-						this.boardFigures.add(LFigure);
+					if (curentCell.verticalFigure.items() >= 3 && curentCell.horizontalFigure.items() >= 3){
+						if	(curentCell.LFigure == null){
+							//LFigure := new Figure('L')
+							// LFigure.figure.add(horizontalFigure and verticalFigure cells)
+							Figure LFigure = Figure.combine(curentCell.horizontalFigure, curentCell.verticalFigure, 'L');
+							this.boardFigures.add(LFigure);
 
-		
+			
+						}
 					}
 				}
 			} // end
@@ -178,12 +180,13 @@ public class GameBoard {
 			Cell curentCell = this.gameBoard[rowIndex][colIndex];
 			if (curentCell.horizontalFigure != null && curentCell.verticalFigure != null){
 				if ((!curentCell.verticalFigure.isLastOrFirstCell(curentCell) && curentCell.horizontalFigure.isLastOrFirstCell(curentCell)) || (curentCell.verticalFigure.isLastOrFirstCell(curentCell) && !curentCell.horizontalFigure.isLastOrFirstCell(curentCell)) ){
-					if	(curentCell.TFigure == null){
-						//LFigure := new Figure('T')
-						// LFigure.figure.add(horizontalFigure and verticalFigure cells)
-						Figure TFigure = Figure.combine(curentCell.horizontalFigure, curentCell.verticalFigure, 'T');
-						this.boardFigures.add(TFigure);
-						
+					if (curentCell.verticalFigure.items() >= 3 && curentCell.horizontalFigure.items() >= 3){
+						if	(curentCell.TFigure == null){
+							//LFigure := new Figure('T')
+							// LFigure.figure.add(horizontalFigure and verticalFigure cells)
+							Figure TFigure = Figure.combine(curentCell.horizontalFigure, curentCell.verticalFigure, 'T');
+							this.boardFigures.add(TFigure);
+						}	
 					}
 				}
 			} // end
