@@ -37,7 +37,7 @@ Cell class do
     end
 
     function boolean hasFigure() do 
-        if (verticalFigure OR horizontalFigure OR LFigure OR Tfigure ) NOT null do 
+        if (verticalFigure OR horizontalFigure  ) NOT null do 
             return true
         end
 

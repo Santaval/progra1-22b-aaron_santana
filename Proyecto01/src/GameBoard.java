@@ -95,7 +95,6 @@ public class GameBoard {
 		if (Cell.exists(gameBoard, rowIndex + 0, colIndex + 1) && this.gameBoard[rowIndex][colIndex]
 				.compareEquals(this.gameBoard[rowIndex + 0] [colIndex + 1])){
 			// 	currentFigure := recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)
-			currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
 			return this.recursiveHorizontalSearch(currentFigure, rowIndex , colIndex);
 		}// end 
 	
@@ -130,7 +129,6 @@ public class GameBoard {
 		if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0) && this.gameBoard[rowIndex][colIndex]
 				.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
 			//currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
-			currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
 			return this.recursiveVerticalSearch(currentFigure, rowIndex, colIndex);
 		}// end 
 
@@ -193,6 +191,27 @@ public class GameBoard {
 			
 		}// end
 
+
+		// function selectFigureToEliminate() do
+		public Figure selectFigureToEliminate(){
+			//for rowIndex to gameBoard(row) do 
+			for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++){
+				//for colIndex to gameBoard(col) do
+				for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){ 
+					// if currentCell.hasFigure() do
+					if (this.gameBoard[rowIndex][colIndex].hasFigure()){ 
+						//return curentFigure.priorityFigure()
+						return this.gameBoard[rowIndex][colIndex].priorityFigure();
+					}//end
+				}// end
+			}//end
+
+			// return null
+			return null;
+		}// end
+
+
+		
 
 
 		

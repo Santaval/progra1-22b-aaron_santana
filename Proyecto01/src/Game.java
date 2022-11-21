@@ -1,5 +1,6 @@
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.lang.model.element.Element;
 public class Game {
     //atributes
     //input declaration
@@ -47,6 +48,11 @@ public class Game {
             if (this.gameBoard.validate()){
                 //gameBoard.searchFigures()
                 gameBoard.searchFigures();
+                Figure eliminate = gameBoard.selectFigureToEliminate();
+                for (int index = 0; index < eliminate.figure.size(); index++){
+                    System.out.println(eliminate.figure.get(index).rowIndex + "" + eliminate.figure.get(index).colIndex);
+                    eliminate.figure.get(index).eliminate();;
+                }
                 System.out.printf("%d:\n", this.gameBoardCount); 
                 this.gameBoard.print();
 			}//end

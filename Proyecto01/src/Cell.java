@@ -48,7 +48,6 @@ public class Cell {
 	// function compareEquals (otherCell) do 
 	public boolean compareEquals(Cell otherCell){
 		// if this Cell color equals to otherCell color do
-		System.out.println(this.color + " " + otherCell.color);
 		if (this.color == otherCell.color){ 
 			//return true
 			return true;
@@ -68,7 +67,65 @@ public class Cell {
 		return false;
 	}// end
 
-	
+	// function boolean hasFigure() do 
+	public boolean hasFigure(){
+		// if (verticalFigure OR horizontalFigure) NOT null do 
+		if (this.verticalFigure != null && this.verticalFigure.items() >= 3){
+			// return true
+			return true;
+		}// end
+		if (this.horizontalFigure != null && this.horizontalFigure.items() >= 3){
+			// return true
+			return true;
+		}// end
+		// return false
+		return false;
+	}// end
 
+	// function priorityFigure() do  returns Figure object
+	public Figure priorityFigure() {
+		// if verticalFigure exist and verticalFigure(Cells) >= 5 do 
+		if(this.verticalFigure != null && this.verticalFigure.figure.size() >= 5){
+				// return verticalFigure
+				return this.verticalFigure;
+		}// end
+			//else if horizontalalFigure exist and horizontalalFigure(Cells) >= 5 do 
+		if (this.horizontalFigure != null && this.horizontalFigure.items()  >= 5){
+			//return horizontalalFigure
+			return this.horizontalFigure;
+		}// end
+		// else if LFigure extist do 
+		if (this.LFigure != null && verticalFigure.items() >= 5){
+			//return LFigure
+			return this.LFigure;
+		}// end
+		// else if Tfigure exist do 
+		if (this.TFigure != null && TFigure.items() >= 6){
+			//return Tfigure
+			return this.TFigure;
+		}// end
+		// else if verticalFigure exist do
+		if (this.verticalFigure != null){ 
+		 	//return verticalFigure
+			return this.verticalFigure;
+		}// end
+		// else if horizontalalFigure exist do
+		if (this.horizontalFigure != null){ 
+			//return horizontalalFigure
+			return this.horizontalFigure;
+		}// end
+		// else do 
+		else {
+			// return null
+			return null;
+		}	// end
+	}// end
+
+
+	public void eliminate(){
+		this.type = '-';
+		this.color = '-';
+	}
+	
 
 }
