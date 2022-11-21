@@ -4,8 +4,13 @@
 JC = javac 
 JFLAGS = -g
 
+#Pythin interpreter 
+PY = Python3 
+
 #java start
 JS = java
+
+
 
 # Project objects
 OBJS = Game Cell Figure GameBoard  
@@ -18,12 +23,18 @@ OBJ_PATH = build
 SRC_PATH = src
 MAIN_FILE = Game.java 
 
+#Testing 
+TEST_PATH = test
+MAIN_TEST_FL = $(TEST_PATH)/src/test.py
+TEST_IN = $(TEST_PATH)/input/gen_test.txt
+
 # commands 
-
-
-run: compile
-	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS)
+run: compile gen_test
+	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(TEST_IN)
 	 
 compile: 
 	@$(JC) $(JFLAGS) $(wildcard $(SRC_PATH))/*.java  $< -d $(OBJ_PATH)
+
+gen_test: 
+	@$(PY) $(MAIN_TEST_FL) > $(TEST_IN)
 	
