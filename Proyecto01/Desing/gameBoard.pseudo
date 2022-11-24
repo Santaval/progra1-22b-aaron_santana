@@ -101,7 +101,6 @@ GameBoard class do
 			figure[index].delete(gameBoard)
 		end
 		deleteFigure[0].determinateType(eliminateFigure)
-
 	end
 
 

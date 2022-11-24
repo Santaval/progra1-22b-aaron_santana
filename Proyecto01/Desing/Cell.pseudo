@@ -46,38 +46,6 @@ Cell class do
 
 
 
-    procedure determinateType(eliminateFigure) do 
-        switch(eliminateFigure.type) do 
-            case 'V': setTypeHorizontalOrVerticalFigures('V', eliminateFigure)
-            case 'H': setTypeHorizontalOrVerticalFigures('H', eliminateFigure)
-            case 'L': 
-                type = 'W'
-                color = eliminateFigure.getColor()
-            case 'T': 
-                type = 'W'
-                color = eliminateFigure.getColor()
-                
-        end
-    end
-
-    procedure setTypeHorizontalOrVerticalFigures (type, eliminateFigure) do
-        if eliminateFigure.items() <= 3 do
-            type = '-'
-            color = '-'
-        end
-
-        else if eliminateFigure.items() == 4 do
-            type = type
-            color = eliminateFigure.getColor()
-        end
-
-        else if eliminateFigure.items() >= 5 do
-            type = 'B'
-            color = eliminateFigure.getColor()
-        end
-    end
-
-
     procedure delete (gameBoard) do 
         switch (type) do 
             case 'R': setDefaultValues()
@@ -127,6 +95,37 @@ Cell class do
                     gameBoard[rowIndex][colIndex].delete()
                 end
             end
+        end
+    end
+
+    procedure determinateType(eliminateFigure) do 
+        switch(eliminateFigure.type) do 
+            case 'V': setTypeHorizontalOrVerticalFigures('V', eliminateFigure)
+            case 'H': setTypeHorizontalOrVerticalFigures('H', eliminateFigure)
+            case 'L': 
+                type = 'W'
+                color = eliminateFigure.getColor()
+            case 'T': 
+                type = 'W'
+                color = eliminateFigure.getColor()
+                
+        end
+    end
+
+    procedure setTypeHorizontalOrVerticalFigures (type, eliminateFigure) do
+        if eliminateFigure.items() <= 3 do
+            type = '-'
+            color = '-'
+        end
+
+        else if eliminateFigure.items() == 4 do
+            type = type
+            color = eliminateFigure.getColor()
+        end
+
+        else if eliminateFigure.items() >= 5 do
+            type = 'B'
+            color = eliminateFigure.getColor()
         end
     end
 end
