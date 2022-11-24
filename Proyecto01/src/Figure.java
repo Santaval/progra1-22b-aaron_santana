@@ -95,13 +95,6 @@ public class Figure {
 	}//end
 
 
-	public void eliminate(){
-		for (int index = 0; index < this.figure.size(); index ++){
-			figure.get(index).type = '-';
-			figure.get(index).color = '-';
-		}
-	}
-
 	// public void print(){
 	//     for (int counter = 0; counter < this.figure.size(); counter++){
 	//         Cell currentCell = figure.get(counter);

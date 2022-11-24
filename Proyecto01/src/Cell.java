@@ -78,11 +78,121 @@ public class Cell {
 		return false;
 	}// end
 
+	// 	procedure delete (gameBoard) do 
+	public void delete (Cell[][] gameBoard){
+		// switch (type) do
+		switch(this.type){
+			//case 'R': setDefaultValues()
+			case 'R': setDefaultValues(); break;
+			//case 'V': deleteCol(gameBoard)
+			case 'V': deleteCol(gameBoard); break;
+			//case 'H': deleteRow(gameBoard)
+			case 'H': deleteRow(gameBoard); break;
+			//case 'W': wrapped(gameBoard)
+			case 'W': wrapped(gameBoard); break;
+			//case 'B': colorBomb(gameBoard)
+			case 'B': colorBomb(gameBoard); break;
+		}// end
+	}// end
 
-	public void delete(){
+	// procedure setDefaultValues () do
+	public void setDefaultValues(){ 
+		//type = '-'
 		this.type = '-';
+		//color = '-'set horizontalFigure := null
 		this.color = '-';
-	}
-	
+		//figures := null
+		this.verticalFigure = null;
+		this.horizontalFigure = null;
+		this.TFigure = null;
+		this.LFigure = null;
+	}// end
+
+	// procedure deleteCol()do
+	public void deleteCol(Cell[][] gameBoard){
+		//setDefaultValues()
+		this.setDefaultValues();
+		//for rowIndex to gameBoard(row) do
+		for (int rowIndex = 0; rowIndex < gameBoard.length; rowIndex++){
+			//gameBoard[rowIndex][col].delete()
+			gameBoard[rowIndex][this.colIndex].delete(gameBoard);
+		}//end
+	}// end
+
+	// procedure deleteCol()do
+	public void deleteRow(Cell[][] gameBoard){
+		//setDefaultValues()
+		this.setDefaultValues();
+		//for rowIndex to gameBoard(row) do
+		for (int colIndex = 0; colIndex < gameBoard[this.rowIndex].length; colIndex++){
+			//gameBoard[rowIndex][col].delete()
+			gameBoard[this.rowIndex][colIndex].delete(gameBoard);
+		}//end
+	}// end
+
+	//procedure wrapped(gameBoard) do 
+	public void wrapped(Cell[][] gameBoard){
+		//setDefaultValues()
+		this.setDefaultValues();
+		//for rowIndex = row 1 to row + 2 do 
+		for (int rowIndex = this.rowIndex - 1; rowIndex < this.rowIndex + 1; rowIndex ++){
+			//for colIndex = col - 1 to row + 2 do 
+			for (int colIndex = this.colIndex - 1; colIndex < this.colIndex + 1; colIndex++){
+				if(colIndex >= 0 && rowIndex >= 0){
+					//gameBoard[rowIndex][colIndex].delete()
+					gameBoard[rowIndex][colIndex].delete(gameBoard);
+				}
+			}//end
+		}//end
+	}// end
+
+	// procedure colorBomb(gameBoard) do
+	public void colorBomb(Cell[][] gameBoard){
+		//setDefaultValues()
+		this.setDefaultValues();
+		//for rowIndex to gameBoard(row) do 
+		for (int rowIndex = 0; rowIndex < gameBoard.length; rowIndex++){
+			//for colIndex to gameBoard(col) do
+			for (int colIndex = 0; colIndex < gameBoard[this.rowIndex].length; colIndex ++){ 
+				//if compareEquals(gameBoard[rowIndex][colIndex]) do
+				if (this.compareEquals(gameBoard[rowIndex][colIndex])){
+					//gameBoard[rowIndex][colIndex].delete()
+					gameBoard[rowIndex][colIndex].delete(gameBoard);
+				}//end
+			}//end
+		}//end
+	}// end
+
+	// procedure determinateType(eliminateFigure) do 
+	// 	switch(eliminateFigure.type) do 
+	// 			case 'V': setTypeHorizontalOrVerticalFigures('V', eliminateFigure)
+	// 			case 'H': setTypeHorizontalOrVerticalFigures('H', eliminateFigure)
+	// 			case 'L': 
+	// 					type = 'W'
+	// 					color = eliminateFigure.getColor()
+	// 			case 'T': 
+	// 					type = 'W'
+	// 					color = eliminateFigure.getColor()
+						
+	// 	end
+	// end
+
+	// procedure setTypeHorizontalOrVerticalFigures (type, eliminateFigure) do
+	// 	if eliminateFigure.items() <= 3 do
+	// 			type = '-'
+	// 			color = '-'
+	// 	end
+
+	// 	else if eliminateFigure.items() == 4 do
+	// 			type = type
+	// 			color = eliminateFigure.getColor()
+	// 	end
+
+	// 	else if eliminateFigure.items() >= 5 do
+	// 			type = 'B'
+	// 			color = eliminateFigure.getColor()
+	// 	end
+	// end
+
 
 }

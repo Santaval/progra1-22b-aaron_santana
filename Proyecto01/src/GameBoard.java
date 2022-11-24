@@ -23,6 +23,20 @@ public class GameBoard {
 		}// end
 	}// end
 
+	public int getRows(){
+		return this.gameBoard.length;
+	}
+
+	public int getCols(){
+		return this.gameBoard[0].length;
+	}
+
+	public Cell[][] getGameBoard(){
+		return this.gameBoard;
+	}
+
+	
+
 	// procedure read() do
 	public void read(Scanner input){
 		// for rowIndex to gameBoard(row) do
@@ -61,21 +75,23 @@ public class GameBoard {
 		for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++){
 			//for colIndex to gameBoard(col) do
 			for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++){
+
+
+							//if gameBoard[rowIndex][colIndex].verticalFigure == null do
+							if (this.gameBoard[rowIndex][colIndex].verticalFigure == null){
+								// figures add searchVerticalFigure(rowIndex, colIndex)
+								Figure verticalFigure = this.searchVerticalFigure(rowIndex, colIndex);
+								if (verticalFigure.items() >= 3){
+									this.boardFigures.add(verticalFigure);
+								}
+							}//end
+
 				//if gameBoard[rowIndex][colIndex].horizontalFigure == null do
 				if  (this.gameBoard[rowIndex][colIndex].horizontalFigure == null){
 					//figures add searchHorizontalFigure(rowIndex, colIndex) only if has 3 or more elements
 					Figure horizontalFigure = this.searchHorizontalFigure(rowIndex, colIndex);
 					if (horizontalFigure.items() >= 3){
 						this.boardFigures.add(horizontalFigure);
-					}
-				}//end
-
-				//if gameBoard[rowIndex][colIndex].verticalFigure == null do
-				if (this.gameBoard[rowIndex][colIndex].verticalFigure == null){
-					// figures add searchVerticalFigure(rowIndex, colIndex)
-					Figure verticalFigure = this.searchVerticalFigure(rowIndex, colIndex);
-					if (verticalFigure.items() >= 3){
-						this.boardFigures.add(verticalFigure);
 					}
 				}//end
 				
@@ -86,6 +102,38 @@ public class GameBoard {
 			}//end
 		}//end
 	}//end
+
+		// procedure searchVerticalFigure(rowIndex, colIndex) do
+		private Figure searchVerticalFigure(int rowIndex, int colIndex){ 
+			// set currentFigure = new Figure("V")
+			Figure currentFigure = new Figure('V');
+			// if  neighboor cell equals to current do
+			if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0) && this.gameBoard[rowIndex][colIndex]
+					.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
+				//currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
+				return this.recursiveVerticalSearch(currentFigure, rowIndex, colIndex);
+			}// end 
+	
+			return currentFigure;
+	
+		}// end
+		
+			// function recursiveVerticalSearch(curentFigure, rowIndex, colIndex) do
+			public Figure recursiveVerticalSearch(Figure currentFigure, int rowIndex, int colIndex){
+				// curentFigure add currentCell
+				currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+				//current cell reference figure
+				this.gameBoard[rowIndex][colIndex].verticalFigure = currentFigure;
+				// if  rowIndex >= gameBoard(row) OR NOT neighboor cell equals to current  do
+				if (rowIndex + 1 >= this.gameBoard.length || !this.gameBoard[rowIndex][colIndex]
+					.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
+					// 	return curentFigure
+					return currentFigure;
+				}// end
+				// return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
+				return this.recursiveVerticalSearch(currentFigure, rowIndex + 1, colIndex + 0);	
+			}// end
+
 
 	// procedure searchHorizontalFigure(rowIndex, colIndex) do
 	private Figure searchHorizontalFigure(int rowIndex, int colIndex){ 
@@ -121,36 +169,8 @@ public class GameBoard {
 		return this.recursiveHorizontalSearch(currentFigure, rowIndex + 0, colIndex + 1);	
 	}// end
 
-		// procedure searchVerticalFigure(rowIndex, colIndex) do
-	private Figure searchVerticalFigure(int rowIndex, int colIndex){ 
-		// set currentFigure = new Figure("V")
-		Figure currentFigure = new Figure('V');
-		// if  neighboor cell equals to current do
-		if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0) && this.gameBoard[rowIndex][colIndex]
-				.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
-			//currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
-			return this.recursiveVerticalSearch(currentFigure, rowIndex, colIndex);
-		}// end 
 
-		return currentFigure;
-
-	}// end
 	
-		// function recursiveVerticalSearch(curentFigure, rowIndex, colIndex) do
-		public Figure recursiveVerticalSearch(Figure currentFigure, int rowIndex, int colIndex){
-			// curentFigure add currentCell
-			currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
-			//current cell reference figure
-			this.gameBoard[rowIndex][colIndex].verticalFigure = currentFigure;
-			// if  rowIndex >= gameBoard(row) OR NOT neighboor cell equals to current  do
-			if (rowIndex + 1 >= this.gameBoard.length || !this.gameBoard[rowIndex][colIndex]
-				.compareEquals(this.gameBoard[rowIndex + 1] [colIndex + 0])){
-				// 	return curentFigure
-				return currentFigure;
-			}// end
-			// return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
-			return this.recursiveVerticalSearch(currentFigure, rowIndex + 1, colIndex + 0);	
-		}// end
 
 		// procedure searchLFigure(rowIndex, colIndex) do
 		private void searchLFigure(int rowIndex, int colIndex){ 
@@ -192,12 +212,19 @@ public class GameBoard {
 			} // end
 		}// end
 
-		// function selectFigureToDelete() do
-		public Figure selectFigureToDelete(){
-			return Figure.priorityFigure(this.boardFigures);
-		
-		}//end
 
+		//procedure deleteFigure() do 
+		public void deleteFigure() {
+			//set deleteFigure = Figure.priorityFigure(boardFigures);
+			Figure deleteFigure = Figure.priorityFigure(this.boardFigures);
+			//for index to deleteFigure.items() do 
+			for (int index = 0; index < deleteFigure.items(); index ++){
+				//figure[index].delete(gameBoard)
+				deleteFigure.figure.get(index).delete(this.gameBoard);
+			}//end
+			//deleteFigure[0].determinateType(deleteFigure)
+			//deleteFigure.figure.get(0).determinateType(deleteFigure);
+		}//end
 
 	// procedure print() do
 	public void print(){ 
@@ -223,3 +250,7 @@ public class GameBoard {
 	// }
 
 }
+
+
+
+
