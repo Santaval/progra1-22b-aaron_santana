@@ -22,6 +22,7 @@ BIN_PATH = bin
 OBJ_PATH = build
 SRC_PATH = src
 MAIN_FILE = Game.java 
+CONSOLE_TXT = console
 
 #Testing 
 TEST_PATH = Test
@@ -29,13 +30,26 @@ MAIN_TEST_FL = $(TEST_PATH)/src/Test.py
 TEST_IN = $(TEST_PATH)/input/gen_test.txt
 TEST_PREV = $(TEST_PATH)/input/input001.txt
 
+#Linting
+JAVA_LINT = linter.jar
+
 # commands 
+
+
+lint: 
+	@cat $(CONSOLE_TXT)/google_lint.txt	
+	@$(JS) -jar $(JAVA_LINT) -c /google_checks.xml $(wildcard $(SRC_PATH))/*.java
+
+	
+# @cat $(CONSOLE_TXT)/sun_lint.txt	
+#@$(JS) -jar $(JAVA_LINT) -c /sun_checks.xml $(wildcard $(SRC_PATH))/*.java
+	
 
 excecute: 
 		@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(TEST_PREV)
 
 run: compile gen_test
-	@cat Title.txt
+	@cat $(CONSOLE_TXT)/Title.txt
 	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(TEST_IN)
 	 
 compile: 

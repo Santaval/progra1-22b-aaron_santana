@@ -26,6 +26,7 @@ public class Game {
 
   /**
    * Main function.
+
    * @param args parametros
    */
   public static void main(final String[] args) {
@@ -35,6 +36,7 @@ public class Game {
 
   /**
    * Run the app Run the start function and create an instance of stdin Scanner.
+
    * @throws IllegalArgumentException if board is invalid
    */
   public void runApp() {

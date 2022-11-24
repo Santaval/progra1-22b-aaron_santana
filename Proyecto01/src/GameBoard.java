@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Game board object
+ * Keeps the Cells in a matrix and all the figures found there.
+ */
 public class GameBoard {
   // atributes
   // set gameBoard := null
@@ -12,7 +16,7 @@ public class GameBoard {
   /**
    * Game board constructor Generate a new Game Board that is a matrix of Cells with the params row
    * and col count.
-   * 
+
    * @param rowCount amount of rows
    * @param colCount amount of colunms
    * 
@@ -35,7 +39,7 @@ public class GameBoard {
    * Read game board from stdin In a for cicle reads the next token from the stdin and generates a
    * new Cells object, then keeps that Cell in the atribure gameBoard at the position row and col
    * index.
-   * 
+
    * @param input Scanner instance
    */
   public void read(Scanner input) {
@@ -54,7 +58,7 @@ public class GameBoard {
 
   /**
    * Valdiates game board Cehck te game board and calls validate function from each Cell.
-   * 
+
    * @return boolean
    */
   public boolean validate() {
@@ -74,6 +78,12 @@ public class GameBoard {
   } // end
 
   // procedure deleteFigure() do
+  /**
+   * Delte figure
+   * Calls priority figure function to get the most priority figure
+   * and in cicle eliminate each Cell in the cicle with the
+   * Cell method delete.
+   */
   public void deleteFigure() {
     // set deleteFigure = Figure.priorityFigure(boardFigures);
     Figure deleteFigure = Figure.priorityFigure(this.boardFigures);
@@ -114,14 +124,23 @@ public class GameBoard {
           }
         } // end
         // searchLFigure()
-        this.searchLFigure(rowIndex, colIndex);
-        this.searchTFigure(rowIndex, colIndex);
+        this.searchlFigure(rowIndex, colIndex);
+        this.searchtFigure(rowIndex, colIndex);
 
       } // end
     } // end
   } // end
 
   // procedure searchHorizontalFigure(rowIndex, colIndex) do
+  /**
+   * Search H figure
+   * Create new H type Figure and check the game board matrix calling
+   * the recursive horizontal search.
+
+   * @param rowIndex cell row 
+   * @param colIndex cell col
+   * @return Figure with cell appends
+   */
   private Figure searchHorizontalFigure(int rowIndex, int colIndex) {
     // set currentFigure = new Figure("H")
     Figure currentFigure = new Figure('H');
@@ -136,7 +155,17 @@ public class GameBoard {
 
   } // end
 
-  // function recursiveHorizontalSearch(curentFigure, rowIndex, colIndex) do
+  //function recursiveHorizontalSearch(curentFigure, rowIndex, colIndex) do
+  /**
+   * Search horizontal figure
+   * Check the matrix and compare the cell down of the current and if is equals
+   * call the function again and add the current cell to figure instance.
+
+   * @param currentFigure figure to append cells
+   * @param rowIndex current cell row
+   * @param colIndex current cell col
+   * @return Figure with cells appends
+   */
   private Figure recursiveHorizontalSearch(Figure currentFigure, int rowIndex, int colIndex) {
     // curentFigure add currentCell
     currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
@@ -172,6 +201,16 @@ public class GameBoard {
   } // end
 
   // function recursiveVerticalSearch(curentFigure, rowIndex, colIndex) do
+  /**
+   * Search veritcal figure
+   * Check the matrix and compare the right cell of the current and if is equals
+   * call the function again and add the current cell to figure instance.
+
+   * @param currentFigure figure to append cells
+   * @param rowIndex current cell row
+   * @param colIndex current cell col
+   * @return Figure with cells appends
+   */
   public Figure recursiveVerticalSearch(Figure currentFigure, int rowIndex, int colIndex) {
     // curentFigure add currentCell
     currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
@@ -185,10 +224,10 @@ public class GameBoard {
     } // end
     // return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
     return this.recursiveVerticalSearch(currentFigure, rowIndex + 1, colIndex + 0);
-  }// end
+  } //end
 
   // procedure searchLFigure(rowIndex, colIndex) do
-  private void searchLFigure(int rowIndex, int colIndex) {
+  private void searchlFigure(int rowIndex, int colIndex) {
     // if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure ==
     // null do
     Cell curentCell = this.gameBoard[rowIndex][colIndex];
@@ -211,10 +250,10 @@ public class GameBoard {
     } // end
 
 
-  }// end
+  } //end
 
   // procedure searchLFigure(rowIndex, colIndex) do
-  private void searchTFigure(int rowIndex, int colIndex) {
+  private void searchtFigure(int rowIndex, int colIndex) {
     // if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure ==
     // null do
     Cell curentCell = this.gameBoard[rowIndex][colIndex];
@@ -234,16 +273,20 @@ public class GameBoard {
         }
       }
     } // end
-  }// end
+  } // end
 
   // function selectFigureToDelete() do
   public Figure selectFigureToDelete() {
     return Figure.priorityFigure(this.boardFigures);
 
-  }// end
+  } // end
 
 
   // procedure print() do
+  /**
+   * Print game board
+   * Check the game board and print each cell type and color.
+   */
   public void print() {
     for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++) {
       for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++) {
@@ -257,7 +300,7 @@ public class GameBoard {
       }
       System.out.print("\n");
     }
-  }// end
+  } //end
 
 
 }

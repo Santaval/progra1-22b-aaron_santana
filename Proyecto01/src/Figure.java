@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Figure object
+ * Must be tYpe Horizontal, Vertical L or t , keeps the Cells that are in one
+ * of this type of Figure.
+ */
 public class Figure {
   // atributes
   // set figure = Cell[]
@@ -23,6 +28,7 @@ public class Figure {
    * Combine figures
    * Combine Cells of horizontal and vertical figures to create
     a new T or L figure.
+
    * @param first first figure to combine
    * @param second second figure to combine
    * @param type type of figure generated
@@ -55,8 +61,9 @@ public class Figure {
   /**
    * Last or first Cell
    * Verify if one Cell is the first or last in a Fifure.
+
    * @param cell Cell to check
-   * @return
+   * @return boolean
    */
   public boolean isLastOrFirstCell(Cell cell) {
     // if cell equals figure[0] or figure[last] do );
@@ -76,6 +83,7 @@ public class Figure {
    * 2) T or L
    * 3) Vertical or horizontal with 4 Cells
    * 4) Vertical or horizontal.
+
    * @param boardFigures all the figures found in the board
    * @return most priority Figure
    */
