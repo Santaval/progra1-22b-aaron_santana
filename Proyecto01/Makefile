@@ -27,8 +27,13 @@ MAIN_FILE = Game.java
 TEST_PATH = test
 MAIN_TEST_FL = $(TEST_PATH)/src/test.py
 TEST_IN = $(TEST_PATH)/input/gen_test.txt
+TEST_PREV = $(TEST_PATH)/input/input001.txt
 
 # commands 
+
+excecute: 
+		@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(TEST_PREV)
+
 run: compile gen_test
 	@cat Title.txt
 	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(TEST_IN)
@@ -38,4 +43,6 @@ compile:
 
 gen_test: 
 	@$(PY) $(MAIN_TEST_FL) > $(TEST_IN)
-	
+
+clean: 
+	rm -rf build
