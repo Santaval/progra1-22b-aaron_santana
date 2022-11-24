@@ -5,7 +5,7 @@ JC = javac
 JFLAGS = -g
 
 #Pythin interpreter 
-PY = Python3 
+PY = python3 
 
 #java start
 JS = java
@@ -24,8 +24,8 @@ SRC_PATH = src
 MAIN_FILE = Game.java 
 
 #Testing 
-TEST_PATH = test
-MAIN_TEST_FL = $(TEST_PATH)/src/test.py
+TEST_PATH = Test
+MAIN_TEST_FL = $(TEST_PATH)/src/Test.py
 TEST_IN = $(TEST_PATH)/input/gen_test.txt
 TEST_PREV = $(TEST_PATH)/input/input001.txt
 
