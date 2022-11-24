@@ -20,27 +20,30 @@ public class Figure {
   } // nd
 
   /**
-   * @param first 
-   * @param second
-   * @param type
-   * @return
+   * Combine figures
+   * Combine Cells of horizontal and vertical figures to create
+    a new T or L figure.
+   * @param first first figure to combine
+   * @param second second figure to combine
+   * @param type type of figure generated
+   * @return new Figure T or L
    */
   public static Figure combine(Figure first, Figure second, char type) {
     Figure newFigure = new Figure(type);
     for (int index = 0; index < first.figure.size(); index++) {
       if (type == 'L') {
-        first.figure.get(index).LFigure = newFigure;
+        first.figure.get(index).lfigure = newFigure;
       } else {
-        first.figure.get(index).TFigure = newFigure;
+        first.figure.get(index).tfigure = newFigure;
       }
       newFigure.figure.add(first.figure.get(index));
     }
 
     for (int index = 0; index < second.figure.size(); index++) {
       if (type == 'L') {
-        second.figure.get(index).LFigure = newFigure;
+        second.figure.get(index).lfigure = newFigure;
       } else {
-        second.figure.get(index).TFigure = newFigure;
+        second.figure.get(index).tfigure = newFigure;
       }
       newFigure.figure.add(second.figure.get(index));
     }
@@ -49,6 +52,12 @@ public class Figure {
   }
 
   // function isLastOrFirstCell(cell) do
+  /**
+   * Last or first Cell
+   * Verify if one Cell is the first or last in a Fifure.
+   * @param cell Cell to check
+   * @return
+   */
   public boolean isLastOrFirstCell(Cell cell) {
     // if cell equals figure[0] or figure[last] do );
     if (cell == this.figure.get(0) || cell == this.figure.get(this.figure.size() - 1)) {
@@ -58,9 +67,18 @@ public class Figure {
 
     // return false
     return false;
-  }// end
+  } //end
 
   // function priorityFigure(boardFigures) do
+  /**
+   * Return the first Figure found  with the priority:
+   * 1) Vertical or horizontal more than 4 Cells
+   * 2) T or L
+   * 3) Vertical or horizontal with 4 Cells
+   * 4) Vertical or horizontal.
+   * @param boardFigures all the figures found in the board
+   * @return most priority Figure
+   */
   public static Figure priorityFigure(ArrayList<Figure> boardFigures) {
     // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
@@ -71,7 +89,7 @@ public class Figure {
         return boardFigures.get(index);
       } // end
     } // end
-      // for index to boardFigures.items() do
+    // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
       // if boardFigures[index].type == 'L' OR boardFigures[index].type == 'T' do
       if ((boardFigures.get(index).type == 'L' || boardFigures.get(index).type == 'T')
@@ -80,7 +98,7 @@ public class Figure {
         return boardFigures.get(index);
       } // end
     } // end
-      // for index to boardFigures.items() do
+    // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
       // if (boardFigures[index].type == 'H' OR boardFigures[index].type == 'V') AND size == 4 do
       if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H')
@@ -89,7 +107,7 @@ public class Figure {
         return boardFigures.get(index);
       } // end
     } // end
-      // for index to boardFigures.items() do
+    // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
       // if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'H') AND size == 3 do
       if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H')
@@ -98,31 +116,8 @@ public class Figure {
         return boardFigures.get(index);
       } // end
     } // end
-      // return null
+    // return null
     return null;
-  }// end
+  } // end
 
-
-<<<<<<< HEAD
-	// public void print(){
-	//     for (int counter = 0; counter < this.figure.size(); counter++){
-	//         Cell currentCell = figure.get(counter);
-	//         System.out.printf("%s%s ", currentCell, currentCell.colIndex);
-	//     }
-	// }
-=======
-  public void eliminate() {
-    for (int index = 0; index < this.figure.size(); index++) {
-      figure.get(index).type = '-';
-      figure.get(index).color = '-';
-    }
-  }
-
-  // public void print(){
-  // for (int counter = 0; counter < this.figure.size(); counter++){
-  // Cell currentCell = figure.get(counter);
-  // System.out.printf("%s%s ", currentCell, currentCell.colIndex);
-  // }
-  // }
->>>>>>> 0d7bae5 (linting corrections)
 }

@@ -1,18 +1,31 @@
 import java.util.Scanner;
 
+/**
+ * Game class
+ * Main logic of Match3 engine. Call all the necesaries
+ * functions to work
+ */
 public class Game {
   // atributes
   // input declaration
+  /**
+   * Instance of Scanner to read values from stdin.
+   */
   private Scanner input = null;
   // set gameBoard = null
+  /**
+   * Instance of the class GameBoard.
+   */
   private GameBoard gameBoard = null;
   // set gameBoardCount = 0
+  /**
+   *Number of boards processed.
+   */
   private int gameBoardCount = 1;
 
 
   /**
    * Main function.
-   * 
    * @param args parametros
    */
   public static void main(final String[] args) {
@@ -22,7 +35,6 @@ public class Game {
 
   /**
    * Run the app Run the start function and create an instance of stdin Scanner.
-   * 
    * @throws IllegalArgumentException if board is invalid
    */
   public void runApp() {
