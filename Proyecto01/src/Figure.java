@@ -8,21 +8,30 @@ import java.util.ArrayList;
 public class Figure {
   // atributes
   // set figure = Cell[]
-  public ArrayList<Cell> figure = new ArrayList<>(0);
+  /**
+   * Array of cells that are in a Figure.
+   */
+  private ArrayList<Cell> figure = new ArrayList<>(0);
   // set type := '\0'
-  public char type = '\0';
+  /**
+   * Figure type must be L, T, V or H.
+   */
+  private char type = '\0';
   // set color := '\0'
-  public char color = '\0';
+  /**
+  * Figure type must be 1, 2, 3, 4, 5 or 6.
+  */
+  private char color = '\0';
 
   // constructor Figure(type) do
   /**
    * Figure constructor
    * CReate new Figure.
 
-   * @param inType figure type 
+   * @param inType figure type
    * @param inColor figure color
    */
-  public Figure(char inType, char inColor) {
+  public Figure(final char inType, final char inColor) {
     // type and color = params
     this.type = inType;
     this.color = inColor;
@@ -30,6 +39,11 @@ public class Figure {
   } //end
 
   // function items() do
+  /**
+   * Return amount of cells in the figure.
+
+   * @return amount of cells in the figure
+  */
   public int items() {
     // return figure(col)
     return figure.size();
@@ -46,7 +60,8 @@ public class Figure {
    * @param type type of figure generated
    * @return new Figure T or L
    */
-  public static Figure combine(Figure first, Figure second, char type) {
+  public static Figure combine(final Figure first, final Figure second,
+      final char type) {
     Figure newFigure = new Figure(type, first.color);
     for (int index = 0; index < first.figure.size(); index++) {
       if (type == 'L') {
@@ -77,9 +92,10 @@ public class Figure {
    * @param cell Cell to check
    * @return boolean
    */
-  public boolean isLastOrFirstCell(Cell cell) {
+  public boolean isLastOrFirstCell(final Cell cell) {
     // if cell equals figure[0] or figure[last] do );
-    if (cell == this.figure.get(0) || cell == this.figure.get(this.figure.size() - 1)) {
+    if (cell == this.figure.get(0) || cell
+         == this.figure.get(this.figure.size() - 1)) {
       // return true
       return true;
     } // end
@@ -99,11 +115,13 @@ public class Figure {
    * @param boardFigures all the figures found in the board
    * @return most priority Figure
    */
-  public static Figure priorityFigure(ArrayList<Figure> boardFigures) {
+  public static Figure priorityFigure(final ArrayList<Figure> boardFigures) {
     // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
-      // if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'V') AND size >= 5 do
-      if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H')
+      // if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'V')
+      // AND size >= 5 do
+      if ((boardFigures.get(index).type == 'V'
+          || boardFigures.get(index).type == 'H')
           && boardFigures.get(index).items() >= 5) {
         // return boardFigures[index]
         return boardFigures.get(index);
