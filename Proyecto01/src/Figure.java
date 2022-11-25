@@ -11,11 +11,21 @@ public class Figure {
   public ArrayList<Cell> figure = new ArrayList<>(0);
   // set type := '\0'
   public char type = '\0';
+  // set color := '\0'
+  public char color = '\0';
 
   // constructor Figure(type) do
-  public Figure(char type) {
-    // type := type
-    this.type = type;
+  /**
+   * Figure constructor
+   * CReate new Figure.
+   * @param inType figure type 
+   * @param inColor figure color
+   */
+  public Figure(char inType, char inColor) {
+    // type and color = params
+    this.type = inType;
+    this.color = inColor;
+
   } //end
 
   // function items() do
@@ -23,6 +33,7 @@ public class Figure {
     // return figure(col)
     return figure.size();
   } // nd
+
 
   /**
    * Combine figures
@@ -35,7 +46,7 @@ public class Figure {
    * @return new Figure T or L
    */
   public static Figure combine(Figure first, Figure second, char type) {
-    Figure newFigure = new Figure(type);
+    Figure newFigure = new Figure(type, first.color);
     for (int index = 0; index < first.figure.size(); index++) {
       if (type == 'L') {
         first.figure.get(index).lfigure = newFigure;
@@ -110,7 +121,7 @@ public class Figure {
     for (int index = 0; index < boardFigures.size(); index++) {
       // if (boardFigures[index].type == 'H' OR boardFigures[index].type == 'V') AND size == 4 do
       if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H')
-          && boardFigures.size() == 4) {
+          && boardFigures.get(index).items() == 4) {
         // return boardFigures[index]
         return boardFigures.get(index);
       } // end
@@ -119,7 +130,7 @@ public class Figure {
     for (int index = 0; index < boardFigures.size(); index++) {
       // if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'H') AND size == 3 do
       if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H')
-          && boardFigures.size() == 3) {
+          && boardFigures.get(index).items() == 3) {
         // return boardFigures[index]
         return boardFigures.get(index);
       } // end
@@ -127,5 +138,20 @@ public class Figure {
     // return null
     return null;
   } // end
+
+  /**
+   * Check the first cell of the Figure that appears in the game board.
+   * @return Cell
+   */
+  public Cell generateSpecialCell() {
+    Cell minor = this.figure.get(0);
+    for (int index = 0; index < this.figure.size(); index++) {
+      if (this.figure.get(index).isFirst(minor)) {
+        minor = this.figure.get(index);
+      }
+      minor.determinateType(this);
+    }
+    return minor;
+  }
 
 }

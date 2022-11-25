@@ -1,6 +1,6 @@
 import random
 def generateValidCell():
-  TYPES = 'RRRRR'
+  TYPES = 'RRRRB'
   COLORS = '123456'
   type =  TYPES[random.randint(1,4)]
   color =  COLORS[random.randint(1,4)]

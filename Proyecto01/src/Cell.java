@@ -24,9 +24,9 @@ public class Cell {
   // set TFigure := null
   public Figure tfigure = null;
   // set types := "RVHWB"
-  private final String types = "RVHWB";
+  private final String types = "RVHWB-";
   // set colors := "123456"
-  private final String colors = "123456";
+  private final String colors = "123456-";
 
   // constructor Cell(cellString, rowIndex, colIndex) do
   /**
@@ -72,7 +72,7 @@ public class Cell {
    */
   public boolean compareEquals(final Cell otherCell) {
     // if this Cell color equals to otherCell color do
-    if (this.color == otherCell.color) {
+    if (this.color != '-' && this.color == otherCell.color) {
       // return true
       return true;
     } // end
@@ -92,7 +92,8 @@ public class Cell {
   public static boolean exists(final Cell[][] gameBoard, final int rowIndex,
       final int colIndex) {
     // if row < gameBoard(row) AND col < gameBoard(col) do
-    if (rowIndex < gameBoard.length && colIndex < gameBoard[rowIndex].length) {
+    if ((rowIndex < gameBoard.length && rowIndex >= 0) && (colIndex
+         < gameBoard[rowIndex].length && colIndex >= 0)) {
       // return true
       return true;
     } // end
@@ -112,23 +113,23 @@ public class Cell {
     switch (this.type) {
       // case 'R': setDefaultValues()
       case 'R':
-        setDefaultValues();
+        this.setDefaultValues();
         break;
       // case 'V': deleteCol(gameBoard)
       case 'V':
-        deleteCol(gameBoard);
+        this.deleteCol(gameBoard);
         break;
       // case 'H': deleteRow(gameBoard)
       case 'H':
-        deleteRow(gameBoard);
+        this.deleteRow(gameBoard);
         break;
       // case 'W': wrapped(gameBoard)
       case 'W':
-        wrapped(gameBoard);
+        this.wrapped(gameBoard);
         break;
       // case 'B': colorBomb(gameBoard)
       case 'B':
-        colorBomb(gameBoard);
+        this.colorBomb(gameBoard);
         break;
       default:
         this.setDefaultValues();
@@ -166,7 +167,7 @@ public class Cell {
     // for rowIndex to gameBoard(row) do
     for (int rowPosition = 0; rowPosition < gameBoard.length; rowPosition++) {
       // gameBoard[rowIndex][col].delete()
-      gameBoard[rowIndex][this.colIndex].delete(gameBoard);
+      gameBoard[rowPosition][this.colIndex].delete(gameBoard);
     } // end
   } //end
 
@@ -216,22 +217,120 @@ public class Cell {
 
    * @param gameBoard game board matrix
   */
-  public void colorBomb(final Cell[][] gameBoard) {
-    // setDefaultValues()
+  public void colorBomb(Cell[][] gameBoard) {
+    char bombColor = this.color;
+    //setDefaultValues()
     this.setDefaultValues();
-    // for rowIndex to gameBoard(row) do
-    for (int rowPosition = 0; rowPosition < gameBoard.length; rowPosition++) {
-      // for colIndex to gameBoard(col) do
-      for (int colPosition = 0; colPosition < gameBoard[this.rowIndex].length;
-          colPosition++) {
-        // if compareEquals(gameBoard[rowIndex][colIndex]) do
-        if (this.compareEquals(gameBoard[rowIndex][colIndex])) {
-          // gameBoard[rowIndex][colIndex].delete()
+    //for rowIndex to gameBoard(row) do 
+    for (int rowIndex = 0; rowIndex < gameBoard.length; rowIndex++) {
+      //for colIndex to gameBoard(col) do
+      for (int colIndex = 0; colIndex < gameBoard[this.rowIndex].length; colIndex++) { 
+        //if compareEquals(gameBoard[rowIndex][colIndex]) do
+        if (gameBoard[rowIndex][colIndex].color == bombColor) {
+          //gameBoard[rowIndex][colIndex].delete()
           gameBoard[rowIndex][colIndex].delete(gameBoard);
-        } // end
-      } // end
-    } // end
+        } //end
+      } //end
+    } //end
+
+  } // end
+
+  //procedure determinateType(deletedFigure) do 
+  /**
+   * Determinate type
+   * Verify is after eliminates a Figure in the first Cell 
+   * of it generate a new Cells with an special type.
+   * @param deletedFigure deleted figure
+   */
+  public void determinateType(Figure deletedFigure) {
+    //switch(deletedFigure.type) do 
+    switch (deletedFigure.type) {
+      //case colors'V': setTypeHorizontalOrVerticalFigures('V', deletedFigure)
+      case 'V': this.setTypeHorizontalOrVerticalFigures('V', deletedFigure);
+        break;
+      //case 'H': setTypeHorizontalOrVerticalFigures('H', deletedFigure)
+      case 'H': this.setTypeHorizontalOrVerticalFigures('H', deletedFigure);
+        break;
+      //case 'L':
+      case 'L': 
+        //type = 'W'
+        this.type = 'W';
+        //color = deletedFigure.getColor()
+        this.color = deletedFigure.color;
+        break;
+      //case 'T':
+      case 'T': 
+        //type = 'W'
+        this.type = 'W';
+        //color = deletedFigure.getColor()
+        this.color = deletedFigure.color;  
+        break;
+      default: 
+        this.color = '-';
+        this.type = '-';       
+    } //end
+  } // end
+
+  // procedure setTypeHorizontalOrVerticalFigures (type, deletedFigure) do
+  private void setTypeHorizontalOrVerticalFigures(char deletedType, Figure deletedFigure) {
+    //if deletedFigure.items() <= 3 do
+    if (deletedFigure.items() <= 3) {
+      //type = '-'
+      this.color = '-';
+      //color = '-'
+      this.type = '-';
+    } else if (deletedFigure.items() == 4) {
+      //type = type
+      this.type = deletedType;
+      //color = deletedFigure.getColor()
+      this.color = deletedFigure.color;
+    } else if (deletedFigure.items() >= 5) {
+      //type = 'B'
+      this.type = 'B';
+      //color = deletedFigure.getColor()
+      this.color = deletedFigure.color;
+    } //end
   } //end
 
+
+  /**
+   * Check if one Cell appear first tham other in the game board.
+   * @param otherCell other Cell to compare
+   * @return
+   */
+  public boolean isFirst(Cell otherCell) {
+    if (otherCell.colIndex > this.colIndex && otherCell.rowIndex > this.rowIndex) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Exchange the type and value of two cells.
+   * @param otherCell other cell to change
+   */
+  public void changeCells(Cell otherCell) {
+    final char auxiliarColor = this.color;
+    final char auxiliarType = this.type;
+
+    this.color = otherCell.color;
+    otherCell.color = auxiliarColor;
+
+    this.type = otherCell.type;
+    otherCell.type = auxiliarType;
+
+  }
+
+  /**
+   * Verify if the cell have no type and color.
+   * @return boolean
+   */
+  public boolean isEmpty() {
+    if (this.color == '-' && this.type == '-') {
+      return true;
+    }
+
+    return false;
+  }
 
 }

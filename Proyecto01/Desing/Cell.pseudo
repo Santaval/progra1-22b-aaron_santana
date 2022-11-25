@@ -98,34 +98,34 @@ Cell class do
         end
     end
 
-    procedure determinateType(eliminateFigure) do 
-        switch(eliminateFigure.type) do 
-            case 'V': setTypeHorizontalOrVerticalFigures('V', eliminateFigure)
-            case 'H': setTypeHorizontalOrVerticalFigures('H', eliminateFigure)
+    procedure determinateType(deletedFigure) do 
+        switch(deletedFigure.type) do 
+            case 'V': setTypeHorizontalOrVerticalFigures('V', deletedFigure)
+            case 'H': setTypeHorizontalOrVerticalFigures('H', deletedFigure)
             case 'L': 
                 type = 'W'
-                color = eliminateFigure.getColor()
+                color = deletedFigure.getColor()
             case 'T': 
                 type = 'W'
-                color = eliminateFigure.getColor()
+                color = deletedFigure.getColor()
                 
         end
     end
 
-    procedure setTypeHorizontalOrVerticalFigures (type, eliminateFigure) do
-        if eliminateFigure.items() <= 3 do
+    procedure setTypeHorizontalOrVerticalFigures (type, deletedFigure) do
+        if deletedFigure.items() <= 3 do
             type = '-'
             color = '-'
         end
 
-        else if eliminateFigure.items() == 4 do
+        else if deletedFigure.items() == 4 do
             type = type
-            color = eliminateFigure.getColor()
+            color = deletedFigure.getColor()
         end
 
-        else if eliminateFigure.items() >= 5 do
+        else if deletedFigure.items() >= 5 do
             type = 'B'
-            color = eliminateFigure.getColor()
+            color = deletedFigure.getColor()
         end
     end
 end

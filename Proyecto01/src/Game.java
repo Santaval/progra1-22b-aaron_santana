@@ -43,6 +43,7 @@ public class Game {
     // Create object to read data from standard input
     this.input = new Scanner(System.in);
     // Run problem solution
+ 
     try {
       this.start();
     } catch (IndexOutOfBoundsException err) {
@@ -73,10 +74,16 @@ public class Game {
       this.gameBoard.read(input);
       // if(gameBoard.validate()) do
       if (this.gameBoard.validate()) {
-        // gameBoard.searchFigures()
-        gameBoard.searchFigures();
-        // gameBoard.deleteFigure()
-        gameBoard.deleteFigure();
+        
+        do{
+          this.gameBoard.clearFigures();
+          // gameBoard.searchFigures()
+          gameBoard.searchFigures();
+          // gameBoard.deleteFigure()
+          gameBoard.deleteFigure();
+          this.gameBoard.gravity();
+        }while (gameBoard.haveFigures());
+        
         System.out.printf("\n%d:\n", this.gameBoardCount);
         this.gameBoard.print();
       } else {

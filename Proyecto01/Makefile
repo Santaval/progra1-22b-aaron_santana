@@ -28,7 +28,7 @@ CONSOLE_TXT = console
 TEST_PATH = Test
 MAIN_TEST_FL = $(TEST_PATH)/src/Test.py
 TEST_IN = $(TEST_PATH)/input/gen_test.txt
-TEST_PREV = $(TEST_PATH)/input/input001.txt
+TEST_PREV = $(TEST_PATH)/input/gen_test.txt
 
 #Linting
 JAVA_LINT = linter.jar
@@ -45,7 +45,7 @@ lint:
 #@$(JS) -jar $(JAVA_LINT) -c /sun_checks.xml $(wildcard $(SRC_PATH))/*.java
 	
 
-excecute: 
+execute: 
 		@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(TEST_PREV)
 
 run: compile gen_test
