@@ -240,6 +240,7 @@ public class Cell {
    * Determinate type
    * Verify is after eliminates a Figure in the first Cell 
    * of it generate a new Cells with an special type.
+
    * @param deletedFigure deleted figure
    */
   public void determinateType(Figure deletedFigure) {
@@ -295,8 +296,9 @@ public class Cell {
 
   /**
    * Check if one Cell appear first tham other in the game board.
+
    * @param otherCell other Cell to compare
-   * @return
+   * @return boolean
    */
   public boolean isFirst(Cell otherCell) {
     if (otherCell.colIndex > this.colIndex && otherCell.rowIndex > this.rowIndex) {
@@ -307,6 +309,7 @@ public class Cell {
 
   /**
    * Exchange the type and value of two cells.
+
    * @param otherCell other cell to change
    */
   public void changeCells(Cell otherCell) {
@@ -323,6 +326,7 @@ public class Cell {
 
   /**
    * Verify if the cell have no type and color.
+
    * @return boolean
    */
   public boolean isEmpty() {

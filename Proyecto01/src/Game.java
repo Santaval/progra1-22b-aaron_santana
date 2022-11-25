@@ -75,14 +75,14 @@ public class Game {
       // if(gameBoard.validate()) do
       if (this.gameBoard.validate()) {
         
-        do{
+        do {
           this.gameBoard.clearFigures();
           // gameBoard.searchFigures()
           gameBoard.searchFigures();
           // gameBoard.deleteFigure()
           gameBoard.deleteFigure();
           this.gameBoard.gravity();
-        }while (gameBoard.haveFigures());
+        } while (gameBoard.haveFigures());
         
         System.out.printf("\n%d:\n", this.gameBoardCount);
         this.gameBoard.print();

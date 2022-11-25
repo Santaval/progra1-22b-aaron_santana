@@ -324,12 +324,15 @@ public class GameBoard {
       for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++) {
         final Cell currentCell = this.gameBoard[rowIndex][colIndex];
         
-          System.out.printf("%s%s ", currentCell.type, currentCell.color);
+        System.out.printf("%s%s ", currentCell.type, currentCell.color);
       }
       System.out.print("\n");
     }  
   } //end
 
+  /**
+   * Delete the found figures an their references.
+   */
   public void clearFigures() {
     this.boardFigures.clear();
     for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++) {
@@ -344,6 +347,7 @@ public class GameBoard {
 
   /**
    * Check if the board have some figure.
+
    * @return boolean
    */
   public boolean haveFigures() {

@@ -18,6 +18,7 @@ public class Figure {
   /**
    * Figure constructor
    * CReate new Figure.
+
    * @param inType figure type 
    * @param inColor figure color
    */
@@ -141,6 +142,7 @@ public class Figure {
 
   /**
    * Check the first cell of the Figure that appears in the game board.
+
    * @return Cell
    */
   public Cell generateSpecialCell() {
