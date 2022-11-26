@@ -76,6 +76,99 @@ public class Cell {
     this.color = cellString.charAt(1);
   } // end
 
+
+  // SET METHODS
+  /**
+   * set L figure atribute.
+
+   * @param newFigure figure to insert
+   */
+  public void setlfigure(final Figure newFigure) {
+    this.lfigure = newFigure;
+  }
+
+  /**
+   * set T figure atribute.
+
+   * @param newFigure figure to insert
+  */
+  public void settfigure(final Figure newFigure) {
+    this.tfigure = newFigure;
+  }
+
+  /**
+   * set vertical figure atribute.
+
+   * @param newFigure figure to insert
+   */
+  public void setVerticalfigure(final Figure newFigure) {
+    this.verticalFigure = newFigure;
+  }
+
+  /**
+   * set horizontal figure atribute.
+
+   * @param newFigure figure to insert
+   */
+  public void sethorizontalfigure(final Figure newFigure) {
+    this.horizontalFigure = newFigure;
+  }
+
+  //GET METHODS
+  /**
+   * returns vertical figure.
+
+   * @return vertical figure
+   */
+  public Figure getVerticalFigure() {
+    return this.verticalFigure;
+  }
+
+  /**
+   * returns horizontal figure.
+
+   * @return horizontal figure
+   */
+  public Figure getHorizontalFigure() {
+    return this.horizontalFigure;
+  }
+
+  /**
+   * returns L figure.
+
+   * @return L figure
+   */
+  public Figure getlFigure() {
+    return this.lfigure;
+  }
+
+  /**
+   * returns T figure.
+
+   * @return T figure
+   */
+  public Figure gettFigure() {
+    return this.tfigure;
+  }
+
+  /**
+   * returns cell color.
+
+   * @return cell color
+   */
+  public char getColor() {
+    return this.color;
+  }
+
+  /**
+   * returns cell type.
+
+   * @return cell  type
+   */
+  public char getType() {
+    return this.type;
+  }
+
   // function validate () do
   /**
    * Validate Cell Type and color must be some of type and color constants.
@@ -274,7 +367,7 @@ public class Cell {
    */
   public void determinateType(final Figure deletedFigure) {
     //switch(deletedFigure.type) do
-    switch (deletedFigure.type) {
+    switch (deletedFigure.getType()) {
       //case colors'V': setTypeHorizontalOrVerticalFigures('V', deletedFigure)
       case 'V': this.setTypeHorizontalOrVerticalFigures('V', deletedFigure);
         break;
@@ -286,14 +379,14 @@ public class Cell {
         //type = 'W'
         this.type = 'W';
         //color = deletedFigure.getColor()
-        this.color = deletedFigure.color;
+        this.color = deletedFigure.getColor();
         break;
       //case 'T':
       case 'T':
         //type = 'W'
         this.type = 'W';
         //color = deletedFigure.getColor()
-        this.color = deletedFigure.color;
+        this.color = deletedFigure.getColor();
         break;
       default:
         this.color = '-';
@@ -324,12 +417,12 @@ public class Cell {
       //type = type
       this.type = deletedType;
       //color = deletedFigure.getColor()
-      this.color = deletedFigure.color;
+      this.color = deletedFigure.getColor();
     } else if (deletedFigure.items() >= bombFigureCells) {
       //type = 'B'
       this.type = 'B';
       //color = deletedFigure.getColor()
-      this.color = deletedFigure.color;
+      this.color = deletedFigure.getColor();
     } //end
   } //end
 

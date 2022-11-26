@@ -8,23 +8,31 @@ import java.util.Scanner;
 public class GameBoard {
   // atributes
   // set gameBoard := null
+  /**
+   * game board cells matrix.
+   */
   private Cell[][] gameBoard = null;
   // set boardFigures := null
+  /**
+   * figures found in the game board.
+   */
   private ArrayList<Figure> boardFigures = null;
 
   // constructor GameBoard (rowCount, colCount) do
   /**
-   * Game board constructor Generate a new Game Board that is a matrix of Cells with the params row
+   * Game board constructor Generate a new Game Board that is a matrix of
+   * Cells with the params row
    * and col count.
 
    * @param rowCount amount of rows
    * @param colCount amount of colunms
-   * 
+
    * @throws IndexOutOfBOundException if row or col count are minor than 3
    */
-  public GameBoard(int rowCount, int colCount) {
+  public GameBoard(final int rowCount, final int colCount) {
     // if (rowCount >= 3 AND colCount >= 3) do
-    if (rowCount >= 3 && colCount >= 3) {
+    final int minGameBoardRange = 3;
+    if (rowCount >= minGameBoardRange && colCount >= minGameBoardRange) {
       // gameBoard := new Cell[rowCount][colCount]
       this.gameBoard = new Cell[rowCount][colCount];
       this.boardFigures = new ArrayList<>(0);
@@ -34,34 +42,44 @@ public class GameBoard {
     } // end
   } // end
 
+  /**
+   * Check how many figures are in the game board.
+
+   * @return biard giures size
+   */
   public int getTotalFigures() {
     return this.boardFigures.size();
   }
 
   // procedure read() do
   /**
-   * Read game board from stdin In a for cicle reads the next token from the stdin and generates a
-   * new Cells object, then keeps that Cell in the atribure gameBoard at the position row and col
+   * Read game board from stdin In a for cicle reads the next token
+   *from the stdin and generates a new Cells object, then keeps that
+    Cell in the atribure gameBoard at the position row and col
    * index.
 
    * @param input Scanner instance
    */
-  public void read(Scanner input) {
+  public void read(final Scanner input) {
     // for rowIndex to gameBoard(row) do
     for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++) {
       // for colIndex to gameBoard(col) do
-      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++) {
+      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length;
+           colIndex++) {
         // input cellString
         final String cellString = input.next();
-        // gameBoard[rowIndex][colIndex] = new Cell(cellString, rowIndex, colIndex)
-        this.gameBoard[rowIndex][colIndex] = new Cell(cellString, rowIndex, colIndex);
+        // gameBoard[rowIndex][colIndex] = new Cell(cellString,
+        // rowIndex, colIndex)
+        this.gameBoard[rowIndex][colIndex] = new Cell(cellString,
+             rowIndex, colIndex);
       } // end
     } // end
   } // end
 
 
   /**
-   * Valdiates game board Cehck te game board and calls validate function from each Cell.
+   * Valdiates game board Cehck te game board and calls validate
+   * function from each Cell.
 
    * @return boolean
    */
@@ -69,7 +87,8 @@ public class GameBoard {
     // for 0 to gameBoard(row) do
     for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++) {
       // for 0 to gameBoard(col) do
-      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++) {
+      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length;
+           colIndex++) {
         // if(NOT gameBoard[rowIndex][colIndex].validate()) do
         if (!this.gameBoard[rowIndex][colIndex].validate()) {
           // return false
@@ -83,34 +102,37 @@ public class GameBoard {
 
   // procedure searchBoardFigures() do
   /**
-   * Search Board FIgures Check the game board matrix searching fugures and if find one append it to
-   * the boardFigures atribute list.
+   * Search Board FIgures Check the game board matrix searching fugures
+   *  and if find one append it to the boardFigures atribute list.
    */
   public void searchFigures() {
+    final int minCellsAmountInFigure = 3;
     // for rowIndex to gameBoard(row) do
     for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++) {
       // for colIndex to gameBoard(col) do
-      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++) {
+      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length;
+            colIndex++) {
 
         // if gameBoard[rowIndex][colIndex].verticalFigure == null do
-        if (this.gameBoard[rowIndex][colIndex].verticalFigure == null) {
+        if (this.gameBoard[rowIndex][colIndex].getVerticalFigure() == null) {
           // figures add searchVerticalFigure(rowIndex, colIndex)
           Figure verticalFigure = this.searchVerticalFigure(rowIndex, colIndex);
-          if (verticalFigure.items() >= 3) {
+          if (verticalFigure.items() >= minCellsAmountInFigure) {
             this.boardFigures.add(verticalFigure);
           }
         } // end
 
         // if gameBoard[rowIndex][colIndex].horizontalFigure == null do
-        if (this.gameBoard[rowIndex][colIndex].horizontalFigure == null) {
-          // figures add searchHorizontalFigure(rowIndex, colIndex) only if has 3 or more
+        if (this.gameBoard[rowIndex][colIndex].getHorizontalFigure() == null) {
+          // figures add searchHorizontalFigure(rowIndex, colIndex) only
+          // if has 3 or more
           // elements
-          Figure horizontalFigure = this.searchHorizontalFigure(rowIndex, colIndex);
-          if (horizontalFigure.items() >= 3) {
+          Figure horizontalFigure = this.searchHorizontalFigure(rowIndex,
+              colIndex);
+          if (horizontalFigure.items() >= minCellsAmountInFigure) {
             this.boardFigures.add(horizontalFigure);
           }
         } // end
-        
         // searchLFigure()
         this.searchlFigure(rowIndex, colIndex);
         this.searchtFigure(rowIndex, colIndex);
@@ -119,16 +141,25 @@ public class GameBoard {
     } // end
   } // end
 
-  
   // procedure searchVerticalFigure(rowIndex, colIndex) do
-  private Figure searchVerticalFigure(int rowIndex, int colIndex) {
+  /**
+   * Search vertical figures in the game board.
+
+   * @param rowIndex row start search
+   * @param colIndex col start search
+   * @return Figure found
+   */
+  private Figure searchVerticalFigure(final int rowIndex,
+      final int colIndex) {
     // set currentFigure = new Figure("V")
     Figure currentFigure = new Figure('V', this.gameBoard[rowIndex][colIndex]
-        .color);
+        .getColor());
     // if neighboor cell equals to current do
-    if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0) && this.gameBoard[rowIndex][colIndex]
+    if (Cell.exists(gameBoard, rowIndex + 1, colIndex + 0)
+          && this.gameBoard[rowIndex][colIndex]
         .compareEquals(this.gameBoard[rowIndex + 1][colIndex + 0])) {
-      // currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
+      // currentFigure := recursiveVerticalSearch(curentFigure,rowIndex + 1,
+      // colIndex + 0)
       return this.recursiveVerticalSearch(currentFigure, rowIndex, colIndex);
     } // end
 
@@ -147,19 +178,22 @@ public class GameBoard {
    * @param colIndex current cell col
    * @return Figure with cells appends
    */
-  public Figure recursiveVerticalSearch(Figure currentFigure, int rowIndex, int colIndex) {
+  public Figure recursiveVerticalSearch(final Figure currentFigure,
+        final int rowIndex, final int colIndex) {
     // curentFigure add currentCell
-    currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+    currentFigure.addCell(this.gameBoard[rowIndex][colIndex]);
     // current cell reference figure
-    this.gameBoard[rowIndex][colIndex].verticalFigure = currentFigure;
+    this.gameBoard[rowIndex][colIndex].setVerticalfigure(currentFigure);
     // if rowIndex >= gameBoard(row) OR NOT neighboor cell equals to current do
-    if (rowIndex + 1 >= this.gameBoard.length || !this.gameBoard[rowIndex][colIndex]
+    if (rowIndex + 1 >= this.gameBoard.length
+        || !this.gameBoard[rowIndex][colIndex]
         .compareEquals(this.gameBoard[rowIndex + 1][colIndex + 0])) {
       // return curentFigure
       return currentFigure;
     } // end
     // return recursiveVerticalSearch(curentFigure,rowIndex + 1, colIndex + 0)
-    return this.recursiveVerticalSearch(currentFigure, rowIndex + 1, colIndex + 0);
+    return this.recursiveVerticalSearch(currentFigure,
+        rowIndex + 1, colIndex + 0);
   } //end
 
 
@@ -169,18 +203,21 @@ public class GameBoard {
    * Create new H type Figure and check the game board matrix calling
    * the recursive horizontal search.
 
-   * @param rowIndex cell row 
+   * @param rowIndex cell row
    * @param colIndex cell col
    * @return Figure with cell appends
    */
-  private Figure searchHorizontalFigure(int rowIndex, int colIndex) {
+  private Figure searchHorizontalFigure(final int rowIndex,
+        final int colIndex) {
     // set currentFigure = new Figure("H")
     Figure currentFigure = new Figure('H', this.gameBoard[rowIndex][colIndex]
-        .color);
+        .getColor());
     // if neighboor cell equals to current do
-    if (Cell.exists(gameBoard, rowIndex + 0, colIndex + 1) && this.gameBoard[rowIndex][colIndex]
+    if (Cell.exists(gameBoard, rowIndex + 0, colIndex + 1)
+        && this.gameBoard[rowIndex][colIndex]
         .compareEquals(this.gameBoard[rowIndex + 0][colIndex + 1])) {
-      // currentFigure := recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)
+      // currentFigure := recursiveHorizontalSearch(curentFigure,
+      //rowIndex + 0, colIndex + 1)
       return this.recursiveHorizontalSearch(currentFigure, rowIndex, colIndex);
     } // end
 
@@ -199,11 +236,12 @@ public class GameBoard {
    * @param colIndex current cell col
    * @return Figure with cells appends
    */
-  private Figure recursiveHorizontalSearch(Figure currentFigure, int rowIndex, int colIndex) {
+  private Figure recursiveHorizontalSearch(final Figure currentFigure,
+      final int rowIndex, final int colIndex) {
     // curentFigure add currentCell
-    currentFigure.figure.add(this.gameBoard[rowIndex][colIndex]);
+    currentFigure.addCell(this.gameBoard[rowIndex][colIndex]);
     // current cell reference figure
-    this.gameBoard[rowIndex][colIndex].horizontalFigure = currentFigure;
+    this.gameBoard[rowIndex][colIndex].sethorizontalfigure(currentFigure);
     // if rowIndex >= gameBoard(col) OR NOT neighboor cell equals to current do
     if (colIndex + 1 >= this.gameBoard[rowIndex].length) {
       // return curentFigure
@@ -215,25 +253,37 @@ public class GameBoard {
       return currentFigure;
     }
     // return recursiveHorizontalSearch(curentFigure,rowIndex + 0, colIndex + 1)
-    return this.recursiveHorizontalSearch(currentFigure, rowIndex + 0, colIndex + 1);
+    return this.recursiveHorizontalSearch(currentFigure,
+         rowIndex + 0, colIndex + 1);
   } // end
 
 
   // procedure searchLFigure(rowIndex, colIndex) do
-  private void searchlFigure(int rowIndex, int colIndex) {
-    // if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure ==
+  /**
+   * Search L figures figures in the game board.
+
+   * @param rowIndex row start search
+   * @param colIndex col start search
+   */
+  private void searchlFigure(final int rowIndex, final int colIndex) {
+    final int minCellsAmountInFigure = 3;
+    //if gameBoard[rowIndex][colIndex] have horizontalFigure and
+    //verticalFigure and Lfigure ==
     // null do
     Cell curentCell = this.gameBoard[rowIndex][colIndex];
-    if (curentCell.horizontalFigure != null
-        && curentCell.horizontalFigure.isLastOrFirstCell(curentCell)) {
-      if (curentCell.verticalFigure != null
-          && curentCell.verticalFigure.isLastOrFirstCell(curentCell)) {
-        if (curentCell.verticalFigure.items() >= 3 && curentCell.horizontalFigure.items() >= 3) {
-          if (curentCell.lfigure == null) {
+    if (curentCell.getHorizontalFigure() != null
+        && curentCell.getHorizontalFigure().isLastOrFirstCell(curentCell)) {
+      if (curentCell.getVerticalFigure() != null
+          && curentCell.getVerticalFigure().isLastOrFirstCell(curentCell)) {
+        if (curentCell.getVerticalFigure().items() >= minCellsAmountInFigure
+            && curentCell.getHorizontalFigure().items()
+                >= minCellsAmountInFigure) {
+          if (curentCell.getlFigure() == null) {
             // lfigure := new Figure('L')
             // lfigure.figure.add(horizontalFigure and verticalFigure cells)
             Figure lfigure =
-                Figure.combine(curentCell.horizontalFigure, curentCell.verticalFigure, 'L');
+                Figure.combine(curentCell.getHorizontalFigure(),
+                  curentCell.getVerticalFigure(), 'L');
             this.boardFigures.add(lfigure);
 
 
@@ -245,22 +295,34 @@ public class GameBoard {
 
   } //end
 
-  // procedure searchLFigure(rowIndex, colIndex) do
-  private void searchtFigure(int rowIndex, int colIndex) {
-    // if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure ==
+  // procedure searchTFigure(rowIndex, colIndex) do
+  /**
+    * Search T figures figures in the game board.
+
+   * @param rowIndex row start search
+   * @param colIndex col start search
+   */
+  private void searchtFigure(final int rowIndex, final int colIndex) {
+    final int minCellsAmountInFigure = 3;
+    // if gameBoard[rowIndex][colIndex] have horizontalFigure and
+    //verticalFigure and Lfigure ==
     // null do
     Cell curentCell = this.gameBoard[rowIndex][colIndex];
-    if (curentCell.horizontalFigure != null && curentCell.verticalFigure != null) {
-      if ((!curentCell.verticalFigure.isLastOrFirstCell(curentCell)
-          && curentCell.horizontalFigure.isLastOrFirstCell(curentCell))
-          || (curentCell.verticalFigure.isLastOrFirstCell(curentCell)
-              && !curentCell.horizontalFigure.isLastOrFirstCell(curentCell))) {
-        if (curentCell.verticalFigure.items() >= 3 && curentCell.horizontalFigure.items() >= 3) {
-          if (curentCell.tfigure == null) {
+    if (curentCell.getHorizontalFigure() != null
+          && curentCell.getVerticalFigure() != null) {
+      if ((!curentCell.getVerticalFigure().isLastOrFirstCell(curentCell)
+          && curentCell.getHorizontalFigure().isLastOrFirstCell(curentCell))
+          || (curentCell.getVerticalFigure().isLastOrFirstCell(curentCell)
+              && !curentCell.getHorizontalFigure()
+                  .isLastOrFirstCell(curentCell))) {
+        if (curentCell.getVerticalFigure().items() >= minCellsAmountInFigure
+            && curentCell.getHorizontalFigure().items()
+                >= minCellsAmountInFigure) {
+          if (curentCell.gettFigure() == null) {
             // lfigure := new Figure('T')
             // lfigure.figure.add(horizontalFigure and verticalFigure cells)
-            Figure tfigure =
-                Figure.combine(curentCell.verticalFigure, curentCell.horizontalFigure, 'T');
+            Figure tfigure = Figure.combine(curentCell.getVerticalFigure(),
+                curentCell.getHorizontalFigure(), 'T');
             this.boardFigures.add(tfigure);
           }
         }
@@ -284,7 +346,7 @@ public class GameBoard {
       if (deleteFigure != null) {
         for (int index = 0; index < deleteFigure.items(); index++) {
           // figure[index].delete(gameBoard)
-          deleteFigure.figure.get(index).delete(this.gameBoard);
+          deleteFigure.getCell(index).delete(this.gameBoard);
         } // end
         // deleteFigure[0].determinateType(deleteFigure)
         deleteFigure.generateSpecialCell();
@@ -300,17 +362,21 @@ public class GameBoard {
 
     do {
       itemsChanged = 0;
-      for (int rowIndex = this.gameBoard.length - 1;  rowIndex >= 0; rowIndex--) {
-        for (int colIndex = this.gameBoard[rowIndex].length - 1;  colIndex >= 0; colIndex--) {
-          if (this.gameBoard[rowIndex][colIndex].isEmpty() && Cell.exists(gameBoard,
-              rowIndex - 1,  colIndex) && !this.gameBoard[rowIndex - 1][colIndex].isEmpty()) {
-            this.gameBoard[rowIndex][colIndex].changeCells(this.gameBoard[rowIndex - 1]
-                [colIndex]);
+      for (int rowIndex = this.gameBoard.length - 1;  rowIndex >= 0;
+          rowIndex--) {
+        for (int colIndex = this.gameBoard[rowIndex].length - 1;
+            colIndex >= 0; colIndex--) {
+          if (this.gameBoard[rowIndex][colIndex].isEmpty()
+              && Cell.exists(gameBoard,
+              rowIndex - 1,  colIndex) && !this.gameBoard[rowIndex - 1]
+                  [colIndex].isEmpty()) {
+            this.gameBoard[rowIndex][colIndex]
+                .changeCells(this.gameBoard[rowIndex - 1][colIndex]);
             itemsChanged++;
           }
         }
       }
-    }  while (itemsChanged > 0); 
+    }  while (itemsChanged > 0);
   }
 
 
@@ -321,13 +387,14 @@ public class GameBoard {
    */
   public void print() {
     for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++) {
-      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++) {
+      for (int colIndex = 0; colIndex < this.gameBoard
+          [rowIndex].length; colIndex++) {
         final Cell currentCell = this.gameBoard[rowIndex][colIndex];
-        
-        System.out.printf("%s%s ", currentCell.type, currentCell.color);
+        System.out.printf("%s%s ", currentCell.getType(),
+            currentCell.getColor());
       }
       System.out.print("\n");
-    }  
+    }
   } //end
 
   /**
@@ -336,11 +403,12 @@ public class GameBoard {
   public void clearFigures() {
     this.boardFigures.clear();
     for (int rowIndex = 0; rowIndex < this.gameBoard.length; rowIndex++) {
-      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length; colIndex++) {
-        this.gameBoard[rowIndex][colIndex].verticalFigure = null;
-        this.gameBoard[rowIndex][colIndex].horizontalFigure = null;
-        this.gameBoard[rowIndex][colIndex].lfigure = null;
-        this.gameBoard[rowIndex][colIndex].tfigure = null;
+      for (int colIndex = 0; colIndex < this.gameBoard[rowIndex]
+          .length; colIndex++) {
+        this.gameBoard[rowIndex][colIndex].setVerticalfigure(null);
+        this.gameBoard[rowIndex][colIndex].sethorizontalfigure(null);
+        this.gameBoard[rowIndex][colIndex].setlfigure(null);
+        this.gameBoard[rowIndex][colIndex].settfigure(null);
       }
     }
   }

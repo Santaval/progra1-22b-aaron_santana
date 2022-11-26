@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 /**
@@ -9,18 +10,18 @@ public class Figure {
   // atributes
   // set figure = Cell[]
   /**
-   * Array of cells that are in a Figure.
+   * Array to keep all cells of this figure.
    */
   private ArrayList<Cell> figure = new ArrayList<>(0);
   // set type := '\0'
   /**
-   * Figure type must be L, T, V or H.
+   * Type of the Figure, must be V, H, L or T.
    */
   private char type = '\0';
   // set color := '\0'
   /**
-  * Figure type must be 1, 2, 3, 4, 5 or 6.
-  */
+   * Type of the Figure, must be 1, 2, 3, 4, 5 or 6.
+   */
   private char color = '\0';
 
   // constructor Figure(type) do
@@ -38,12 +39,33 @@ public class Figure {
 
   } //end
 
+
+  //GET METHODS
+  /**
+   * returns figure color.
+
+   * @return figure color
+   */
+  public char getColor() {
+    return this.color;
+  }
+
+  /**
+   * returns figure type.
+
+   * @return figure  type
+   */
+  public char getType() {
+    return this.type;
+  }
+
+
   // function items() do
   /**
-   * Return amount of cells in the figure.
+   * Check how many cells are in the array figure.
 
    * @return amount of cells in the figure
-  */
+   */
   public int items() {
     // return figure(col)
     return figure.size();
@@ -60,29 +82,49 @@ public class Figure {
    * @param type type of figure generated
    * @return new Figure T or L
    */
-  public static Figure combine(final Figure first, final Figure second,
-      final char type) {
+  public static Figure combine(final Figure first,
+      final Figure second, final char type) {
     Figure newFigure = new Figure(type, first.color);
     for (int index = 0; index < first.figure.size(); index++) {
       if (type == 'L') {
-        first.figure.get(index).lfigure = newFigure;
+        first.figure.get(index).setlfigure(newFigure);
       } else {
-        first.figure.get(index).tfigure = newFigure;
+        first.figure.get(index).settfigure(newFigure);
       }
       newFigure.figure.add(first.figure.get(index));
     }
 
     for (int index = 0; index < second.figure.size(); index++) {
       if (type == 'L') {
-        second.figure.get(index).lfigure = newFigure;
+        second.figure.get(index).setlfigure(newFigure);
       } else {
-        second.figure.get(index).tfigure = newFigure;
+        second.figure.get(index).settfigure(newFigure);
       }
       newFigure.figure.add(second.figure.get(index));
     }
 
     return newFigure;
   }
+
+  /**
+   * Appends new Cell in the figure.
+
+   * @param newCell figure to append
+   */
+  public void addCell(final Cell newCell) {
+    this.figure.add(newCell);
+  }
+
+  /**
+   * Return a cell in a specific index.
+
+   * @param index index
+   * @return cell
+   */
+  public Cell getCell(final int index) {
+    return this.figure.get(index);
+  }
+
 
   // function isLastOrFirstCell(cell) do
   /**
@@ -117,39 +159,49 @@ public class Figure {
    */
   public static Figure priorityFigure(final ArrayList<Figure> boardFigures) {
     // for index to boardFigures.items() do
+    final int five = 5; //most priority cells amount H or V
+    final int six = 6; //min amount of cells in T or L figure
+    final int four = 4; // H or V figure wrapped amount of cells
+    final int three = 3; // H or V figure normal amount of cells
     for (int index = 0; index < boardFigures.size(); index++) {
-      // if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'V')
-      // AND size >= 5 do
+      // if (boardFigures[index].type == 'V' OR
+      //  boardFigures[index].type == 'V') AND size >= 5 do
       if ((boardFigures.get(index).type == 'V'
-          || boardFigures.get(index).type == 'H')
-          && boardFigures.get(index).items() >= 5) {
+           || boardFigures.get(index).type == 'H')
+          && boardFigures.get(index).items() >= five) {
         // return boardFigures[index]
         return boardFigures.get(index);
       } // end
     } // end
     // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
-      // if boardFigures[index].type == 'L' OR boardFigures[index].type == 'T' do
-      if ((boardFigures.get(index).type == 'L' || boardFigures.get(index).type == 'T')
-          && boardFigures.get(index).items() >= 6) {
+      // if boardFigures[index].type == 'L' OR
+      // boardFigures[index].type == 'T' do
+      if ((boardFigures.get(index).type == 'L'
+            || boardFigures.get(index).type == 'T')
+          && boardFigures.get(index).items() >= six) {
         // return boardFigures[index]
         return boardFigures.get(index);
       } // end
     } // end
     // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
-      // if (boardFigures[index].type == 'H' OR boardFigures[index].type == 'V') AND size == 4 do
-      if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H')
-          && boardFigures.get(index).items() == 4) {
+      // if (boardFigures[index].type == 'H' OR
+      //boardFigures[index].type == 'V') AND size == 4 do
+      if ((boardFigures.get(index).type == 'V'
+            || boardFigures.get(index).type == 'H')
+          && boardFigures.get(index).items() == four) {
         // return boardFigures[index]
         return boardFigures.get(index);
       } // end
     } // end
     // for index to boardFigures.items() do
     for (int index = 0; index < boardFigures.size(); index++) {
-      // if (boardFigures[index].type == 'V' OR boardFigures[index].type == 'H') AND size == 3 do
-      if ((boardFigures.get(index).type == 'V' || boardFigures.get(index).type == 'H')
-          && boardFigures.get(index).items() == 3) {
+      // if (boardFigures[index].type == 'V' OR
+      //boardFigures[index].type == 'H') AND size == 3 do
+      if ((boardFigures.get(index).type == 'V'
+            || boardFigures.get(index).type == 'H')
+          && boardFigures.get(index).items() == three) {
         // return boardFigures[index]
         return boardFigures.get(index);
       } // end
