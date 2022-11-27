@@ -27,7 +27,6 @@ public class GameBoard {
    * @param rowCount amount of rows
    * @param colCount amount of colunms
 
-   * @throws IndexOutOfBOundException if row or col count are minor than 3
    */
   public GameBoard(final int rowCount, final int colCount) {
     // if (rowCount >= 3 AND colCount >= 3) do

@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Game class
  * Main logic of Match3 engine. Call all the necesaries
  * functions to work
- */
+*/
 public class Game {
   // atributes
   // input declaration
@@ -23,6 +23,12 @@ public class Game {
    */
   private int gameBoardCount = 1;
 
+  /**
+   * Constructor.
+   */
+  public Game() {
+
+  }
 
   /**
    * Main function.
@@ -90,6 +96,7 @@ public class Game {
         // output invalid terrain
         System.out.printf("\n%d:\n%s", this.gameBoardCount, "invalid terrain");
       } // end
+      this.gameBoardCount++;
     } // end
   } //end
 
