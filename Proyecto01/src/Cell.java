@@ -1,4 +1,3 @@
-
 /**
  * Cell object
  * Represent a cell with type, color and position in the game board.

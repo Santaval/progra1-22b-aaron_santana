@@ -90,11 +90,12 @@ public class Game {
           this.gameBoard.gravity();
         } while (gameBoard.haveFigures());
 
-        System.out.printf("\n%d:\n", this.gameBoardCount);
+        System.out.printf("%d:\n", this.gameBoardCount);
         this.gameBoard.print();
+        System.out.println(' ');
       } else {
         // output invalid terrain
-        System.out.printf("\n%d:\n%s", this.gameBoardCount, "invalid terrain");
+        System.out.printf("%d:\n%s", this.gameBoardCount, "invalid terrain");
       } // end
       this.gameBoardCount++;
     } // end

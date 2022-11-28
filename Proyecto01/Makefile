@@ -30,8 +30,7 @@ MAIN_TEST_FL = $(TEST_PATH)/src/Test.py
 TEST_IN = $(TEST_PATH)/input
 TEST_OUT = $(TEST_PATH)/output
 TEST_PREV = $(TEST_PATH)/input/gen_test.txt
-input_files_amount =
-
+JAR_OUT = jar_out
 
 #Linting
 JAVA_LINT = linter.jar
@@ -73,26 +72,36 @@ else
 endif	
 
 
-bin: compile
-	cd build
-	jar -cfe Game.jar Game *
-	mkdir bin/
-	mv Game.jar ./ ../bin
+bin: clean compile
+	mv Makefile build
+	mkdir bin
+	$(MAKE) -C build gen_jar
+	
+	
 
+gen_jar: 
+	jar cfe Game.jar Game *
+	mv Game.jar ../bin
+	mv Makefile ../
 
 
 doc: 
 	javadoc -d doc/ src/*.java
 	
 
+test: 
+	cd Test/src; python3 MakeTest.py
 
-test: compile bin 
-	mkdir testout/
-	java -jar bin/Game.jar < $(TEST_IN)/input001.txt > testout/output001.txt
-	diff $(TEST_OUT)/output001.txt testout/output001.txt
+run_test:
+	java -jar bin/Game.jar < $(input) > $(jar_out)
+	@icdiff --no-bold  $(output) $(jar_out)
+
+
+
+
 
 
 
 
 clean: 
-	rm -rf build bin doc testout
+	rm -rf build bin doc testout jar_out
