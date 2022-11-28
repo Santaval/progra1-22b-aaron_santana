@@ -27,8 +27,11 @@ CONSOLE_TXT = console
 #Testing 
 TEST_PATH = Test
 MAIN_TEST_FL = $(TEST_PATH)/src/Test.py
-TEST_IN = $(TEST_PATH)/input/gen_test.txt
+TEST_IN = $(TEST_PATH)/input
+TEST_OUT = $(TEST_PATH)/output
 TEST_PREV = $(TEST_PATH)/input/gen_test.txt
+input_files_amount =
+
 
 #Linting
 JAVA_LINT = linter.jar
@@ -64,11 +67,32 @@ execute:
 #@cat $(CONSOLE_TXT)/Title.txt
 
 ifeq ($(INPUT_FILE), )
-	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS)
+	@$(JS)  -classpath $(OBJ_PATH) $(OBJS)
 else
-	@$(JS) $(run) -classpath $(OBJ_PATH) $(OBJS) < $(INPUT_FILE)
+	@$(JS) -classpath $(OBJ_PATH) $(OBJS) < $(INPUT_FILE)
 endif	
 
 
+bin: compile
+	cd build
+	jar -cfe Game.jar Game *
+	mkdir bin/
+	mv Game.jar ./ ../bin
+
+
+
+doc: 
+	javadoc -d doc/ src/*.java
+	
+
+
+test: compile bin 
+	mkdir testout/
+	java -jar bin/Game.jar < $(TEST_IN)/input001.txt > testout/output001.txt
+	diff $(TEST_OUT)/output001.txt testout/output001.txt
+
+
+
+
 clean: 
-	rm -rf build
+	rm -rf build bin doc testout
