@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+
 /**
  * Cell object
  * Represent a cell with type, color and position in the game board.
@@ -66,7 +68,8 @@ public class Cell {
    */
   public Cell(final String cellString, final int rowPosition,
       final int colPosition) {
-    // rowIndex := rowIndex
+    if (cellString.length() == 2) {
+      // rowIndex := rowIndex
     this.rowIndex = rowPosition;
     // colIndex := colIndex
     this.colIndex = colPosition;
@@ -74,6 +77,9 @@ public class Cell {
     this.type = cellString.charAt(0);
     // color := cellString[1]
     this.color = cellString.charAt(1);
+    } else {
+      throw new InputMismatchException("invalid input");
+    }
   } // end
 
 
@@ -178,8 +184,16 @@ public class Cell {
   public boolean validate() {
     // if types have type AND colors have color do
     if (types.contains(this.type + "") && colors.contains(this.color + "")) {
+      if ((this.type != '-' && this.color != '-')
+          || (this.type == '-' && this.color == '-')) {
+        return true;
+      }
+        if ((this.type == '-' && this.color != '-')
+          || (this.type != '-' && this.color == '-')) {
+            return true;
+        }
       // return true
-      return true;
+      return false;
     } // end
     // return false
     return false;
@@ -320,11 +334,13 @@ public class Cell {
     this.setDefaultValues();
     // for rowIndex = row 1 to row + 2 do
     for (int rowPosition = this.rowIndex - 1; rowPosition
-        < this.rowIndex + 1; rowPosition++) {
+        < this.rowIndex + 2; rowPosition++) {
       // for colIndex = col - 1 to row + 2 do
       for (int colPosition = this.colIndex - 1; colPosition
-          < this.colIndex + 1; colPosition++) {
-        if (colPosition >= 0 && rowPosition >= 0) {
+          < this.colIndex + 2; colPosition++) {
+        //System.out.printf("\nrow: %d col: %d\n", rowPosition, colPosition);
+        if ((rowPosition < gameBoard.length && rowPosition >= 0)
+            && (colPosition < gameBoard[rowIndex].length) && colPosition >= 0) {
           // gameBoard[rowPosition][colPosition].delete()
           gameBoard[rowPosition][colPosition].delete(gameBoard);
         }
@@ -434,10 +450,12 @@ public class Cell {
    * @return boolean
    */
   public boolean isFirst(final Cell otherCell) {
-    if (otherCell.colIndex > this.colIndex && otherCell.rowIndex
-        > this.rowIndex) {
+    if (this.rowIndex < otherCell.rowIndex)  {
       return true;
-    }
+    } else if (this.rowIndex == otherCell.rowIndex
+          && this.colIndex < otherCell.colIndex) {
+          return true;
+        }
     return false;
   }
 

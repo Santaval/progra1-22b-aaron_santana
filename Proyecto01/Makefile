@@ -73,28 +73,29 @@ endif
 
 
 bin: clean compile
-	mv Makefile build
-	mkdir bin
-	$(MAKE) -C build gen_jar
+	@mv Makefile build
+	@mkdir bin
+	@$(MAKE) -C build gen_jar
 	
 	
 
 gen_jar: 
-	jar cfe Game.jar Game *
-	mv Game.jar ../bin
-	mv Makefile ../
+	@jar cfe Game.jar Game *
+	@mv Game.jar ../bin
+	@mv Makefile ../
 
 
 doc: 
-	javadoc -d doc/ src/*.java
+	@javadoc -d doc/ src/*.java
+
+
+##testing 	
 	
-
 test: 
-	cd Test/src; python3 MakeTest.py
+	@python3 Test/src/MakeTest.py
 
-run_test:
-	java -jar bin/Game.jar < $(input) > $(jar_out)
-	@icdiff --no-bold  $(output) $(jar_out)
+
+	
 
 
 

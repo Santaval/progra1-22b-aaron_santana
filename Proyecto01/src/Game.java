@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -53,7 +55,13 @@ public class Game {
     try {
       this.start();
     } catch (IndexOutOfBoundsException err) {
-      System.out.println(this.gameBoardCount + ":");
+      this.printSpace();
+      System.out.println(err.getMessage());
+    } catch (InputMismatchException err) {
+      this.printSpace();
+      System.out.println(err.getMessage());
+    } catch (NoSuchElementException err) {
+      this.printSpace();
       System.out.println(err.getMessage());
     }
 
@@ -70,10 +78,20 @@ public class Game {
   */
   public void start() {
     // while hasNextInt do
-    while (this.input.hasNextInt()) {
+    while (this.input.hasNext()) {
       // input rowCount,colCount
-      final int rowCount = this.input.nextInt();
-      final int colCount = this.input.nextInt();
+      int rowCount = 0;
+      if (input.hasNextInt()) {
+        rowCount = this.input.nextInt();
+      } else {
+        throw new InputMismatchException("invalid input");
+      }
+      int colCount = 0;
+      if (input.hasNextInt()) {
+        colCount = this.input.nextInt();
+      } else {
+        throw new InputMismatchException("invalid input");
+      }
       // gameBoard := new GameBoard(rowCount, colCount)
       this.gameBoard = new GameBoard(rowCount, colCount);
       // read game board
@@ -87,20 +105,35 @@ public class Game {
           gameBoard.searchFigures();
           // gameBoard.deleteFigure()
           gameBoard.deleteFigure();
+          System.out.printf("\n");
+          this.gameBoard.print();
           this.gameBoard.gravity();
+          System.out.print("\n");
+          gameBoard.print();
+          System.out.print("\n");
+          System.out.println("----------------");
         } while (gameBoard.haveFigures());
-
+        if (this.gameBoardCount != 1) {
+          System.out.print("\n");
+        }
         System.out.printf("%d:\n", this.gameBoardCount);
         this.gameBoard.print();
-        System.out.println(' ');
       } else {
         // output invalid terrain
-        System.out.printf("%d:\n%s", this.gameBoardCount, "invalid terrain");
+        System.out.printf("\n%s", "invalid input");
       } // end
       this.gameBoardCount++;
     } // end
   } //end
 
+  /**
+   * Formating print.
+   */
+  private void printSpace() {
+    if (this.gameBoardCount != 1) {
+      System.out.print("\n");
+    }
+  }
 
 
 }

@@ -84,26 +84,28 @@ public class Figure {
    */
   public static Figure combine(final Figure first,
       final Figure second, final char type) {
-    Figure newFigure = new Figure(type, first.color);
-    for (int index = 0; index < first.figure.size(); index++) {
-      if (type == 'L') {
-        first.figure.get(index).setlfigure(newFigure);
-      } else {
-        first.figure.get(index).settfigure(newFigure);
+    final int maxCells = 3;
+      if (first.items() >= maxCells && second.items() >= maxCells) {
+        Figure newFigure = new Figure(type, first.color);
+        for (int index = 0; index < maxCells; index++) {
+          if (type == 'L') {
+            first.figure.get(index).setlfigure(newFigure);
+          } else {
+            first.figure.get(index).settfigure(newFigure);
+          }
+          newFigure.figure.add(first.figure.get(index));
+        }
+        for (int index = 0; index < maxCells; index++) {
+          if (type == 'L') {
+            second.figure.get(index).setlfigure(newFigure);
+          } else {
+            second.figure.get(index).settfigure(newFigure);
+          }
+          newFigure.figure.add(second.figure.get(index));
+        }
+        return newFigure;
       }
-      newFigure.figure.add(first.figure.get(index));
-    }
-
-    for (int index = 0; index < second.figure.size(); index++) {
-      if (type == 'L') {
-        second.figure.get(index).setlfigure(newFigure);
-      } else {
-        second.figure.get(index).settfigure(newFigure);
-      }
-      newFigure.figure.add(second.figure.get(index));
-    }
-
-    return newFigure;
+      return null;
   }
 
   /**
@@ -123,6 +125,22 @@ public class Figure {
    */
   public Cell getCell(final int index) {
     return this.figure.get(index);
+  }
+
+    /**
+   * Return last cell in figure.
+   * @return last Cell in the figure
+   */
+  public Cell getLast() {
+    return this.figure.get(0);
+  }
+
+  /**
+   * Return first cell in figure.
+   * @return first Cell in the figure
+   */
+  public Cell getFirst() {
+    return this.figure.get(this.figure.size() - 1);
   }
 
 
@@ -166,8 +184,9 @@ public class Figure {
     for (int index = 0; index < boardFigures.size(); index++) {
       // if (boardFigures[index].type == 'V' OR
       //  boardFigures[index].type == 'V') AND size >= 5 do
-      if ((boardFigures.get(index).type == 'V'
-           || boardFigures.get(index).type == 'H')
+      if ((boardFigures.get(index) != null
+            && (boardFigures.get(index).type == 'V'
+           || boardFigures.get(index).type == 'H'))
           && boardFigures.get(index).items() >= five) {
         // return boardFigures[index]
         return boardFigures.get(index);
@@ -177,7 +196,8 @@ public class Figure {
     for (int index = 0; index < boardFigures.size(); index++) {
       // if boardFigures[index].type == 'L' OR
       // boardFigures[index].type == 'T' do
-      if ((boardFigures.get(index).type == 'L'
+      if (boardFigures.get(index) != null
+            && (boardFigures.get(index).type == 'L'
             || boardFigures.get(index).type == 'T')
           && boardFigures.get(index).items() >= six) {
         // return boardFigures[index]
@@ -221,8 +241,9 @@ public class Figure {
       if (this.figure.get(index).isFirst(minor)) {
         minor = this.figure.get(index);
       }
-      minor.determinateType(this);
     }
+
+    minor.determinateType(this);
     return minor;
   }
 

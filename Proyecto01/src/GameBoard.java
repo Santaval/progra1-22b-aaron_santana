@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -37,7 +39,7 @@ public class GameBoard {
       this.boardFigures = new ArrayList<>(0);
     } else {
       // throw ERR
-      throw new IndexOutOfBoundsException("invalid terrain");
+      throw new IndexOutOfBoundsException("invalid input");
     } // end
   } // end
 
@@ -65,8 +67,13 @@ public class GameBoard {
       // for colIndex to gameBoard(col) do
       for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length;
            colIndex++) {
+            String cellString = "\0";
         // input cellString
-        final String cellString = input.next();
+          if (input.hasNext()) {
+            cellString = input.next();
+          } else {
+            throw new NoSuchElementException("invalid input");
+          }
         // gameBoard[rowIndex][colIndex] = new Cell(cellString,
         // rowIndex, colIndex)
         this.gameBoard[rowIndex][colIndex] = new Cell(cellString,
@@ -91,7 +98,7 @@ public class GameBoard {
         // if(NOT gameBoard[rowIndex][colIndex].validate()) do
         if (!this.gameBoard[rowIndex][colIndex].validate()) {
           // return false
-          return false;
+          throw new InputMismatchException("invalid input");
         } // end
       } // end
     } // end
@@ -269,28 +276,40 @@ public class GameBoard {
     //if gameBoard[rowIndex][colIndex] have horizontalFigure and
     //verticalFigure and Lfigure ==
     // null do
-    Cell curentCell = this.gameBoard[rowIndex][colIndex];
-    if (curentCell.getHorizontalFigure() != null
-        && curentCell.getHorizontalFigure().isLastOrFirstCell(curentCell)) {
-      if (curentCell.getVerticalFigure() != null
-          && curentCell.getVerticalFigure().isLastOrFirstCell(curentCell)) {
-        if (curentCell.getVerticalFigure().items() >= minCellsAmountInFigure
-            && curentCell.getHorizontalFigure().items()
-                >= minCellsAmountInFigure) {
-          if (curentCell.getlFigure() == null) {
-            // lfigure := new Figure('L')
-            // lfigure.figure.add(horizontalFigure and verticalFigure cells)
-            Figure lfigure =
-                Figure.combine(curentCell.getHorizontalFigure(),
-                  curentCell.getVerticalFigure(), 'L');
-            this.boardFigures.add(lfigure);
+    Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    if (currentCell.getlFigure() == null) {
+      if (currentCell.getVerticalFigure() != null && currentCell
+          .getVerticalFigure().items() >= minCellsAmountInFigure) {
+        if (currentCell.getVerticalFigure().getLast()
+            .getHorizontalFigure() != null) {
+            final Cell lastCell = currentCell.getVerticalFigure()
+                .getLast();
+              if (lastCell == lastCell.getHorizontalFigure().getFirst()) {
+                  this.boardFigures.add(Figure.combine(currentCell
+                      .getVerticalFigure(), lastCell.getHorizontalFigure(),
+                          'L'));
+              } else if (lastCell == lastCell.getHorizontalFigure().getLast()) {
+                this.boardFigures.add(Figure.combine(currentCell
+                  .getVerticalFigure(), lastCell.getHorizontalFigure(),
+                     'L'));
+              } else if (currentCell.getHorizontalFigure() != null) {
 
-
-          }
+                  if (currentCell == currentCell.getHorizontalFigure()
+                .getFirst()) {
+              this.boardFigures.add(Figure.combine(currentCell
+                  .getVerticalFigure(), currentCell.getHorizontalFigure(),
+                     'L'));
+                } else if (currentCell == currentCell.getHorizontalFigure()
+                    .getLast()) {
+                   this.boardFigures.add(Figure.combine(currentCell
+                  .getVerticalFigure(), currentCell.getHorizontalFigure(),
+                    'L'));
+              }
         }
       }
-    } // end
-
+    }
+  }
+    //System.out.println(this.boardFigures);
 
   } //end
 
@@ -389,8 +408,13 @@ public class GameBoard {
       for (int colIndex = 0; colIndex < this.gameBoard
           [rowIndex].length; colIndex++) {
         final Cell currentCell = this.gameBoard[rowIndex][colIndex];
-        System.out.printf("%s%s ", currentCell.getType(),
-            currentCell.getColor());
+            if (colIndex != 0) {
+              System.out.printf(" %s%s", currentCell.getType(),
+              currentCell.getColor());
+            } else {
+              System.out.printf("%s%s", currentCell.getType(),
+              currentCell.getColor());
+            }
       }
       System.out.print("\n");
     }
