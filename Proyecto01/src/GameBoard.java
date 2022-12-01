@@ -67,13 +67,13 @@ public class GameBoard {
       // for colIndex to gameBoard(col) do
       for (int colIndex = 0; colIndex < this.gameBoard[rowIndex].length;
            colIndex++) {
-            String cellString = "\0";
+        String cellString = "\0";
         // input cellString
-          if (input.hasNext()) {
-            cellString = input.next();
-          } else {
-            throw new NoSuchElementException("invalid input");
-          }
+        if (input.hasNext()) {
+          cellString = input.next();
+        } else {
+          throw new NoSuchElementException("invalid input");
+        }
         // gameBoard[rowIndex][colIndex] = new Cell(cellString,
         // rowIndex, colIndex)
         this.gameBoard[rowIndex][colIndex] = new Cell(cellString,
@@ -272,44 +272,13 @@ public class GameBoard {
    * @param colIndex col start search
    */
   private void searchlFigure(final int rowIndex, final int colIndex) {
-    final int minCellsAmountInFigure = 3;
+    this.l1(rowIndex, colIndex);
+    this.l2(rowIndex, colIndex);
+    this.l3(rowIndex, colIndex);
+    this.l4(rowIndex, colIndex);
     //if gameBoard[rowIndex][colIndex] have horizontalFigure and
     //verticalFigure and Lfigure ==
     // null do
-    Cell currentCell = this.gameBoard[rowIndex][colIndex];
-    if (currentCell.getlFigure() == null) {
-      if (currentCell.getVerticalFigure() != null && currentCell
-          .getVerticalFigure().items() >= minCellsAmountInFigure) {
-        if (currentCell.getVerticalFigure().getLast()
-            .getHorizontalFigure() != null) {
-            final Cell lastCell = currentCell.getVerticalFigure()
-                .getLast();
-              if (lastCell == lastCell.getHorizontalFigure().getFirst()) {
-                  this.boardFigures.add(Figure.combine(currentCell
-                      .getVerticalFigure(), lastCell.getHorizontalFigure(),
-                          'L'));
-              } else if (lastCell == lastCell.getHorizontalFigure().getLast()) {
-                this.boardFigures.add(Figure.combine(currentCell
-                  .getVerticalFigure(), lastCell.getHorizontalFigure(),
-                     'L'));
-              } else if (currentCell.getHorizontalFigure() != null) {
-
-                  if (currentCell == currentCell.getHorizontalFigure()
-                .getFirst()) {
-              this.boardFigures.add(Figure.combine(currentCell
-                  .getVerticalFigure(), currentCell.getHorizontalFigure(),
-                     'L'));
-                } else if (currentCell == currentCell.getHorizontalFigure()
-                    .getLast()) {
-                   this.boardFigures.add(Figure.combine(currentCell
-                  .getVerticalFigure(), currentCell.getHorizontalFigure(),
-                    'L'));
-              }
-        }
-      }
-    }
-  }
-    //System.out.println(this.boardFigures);
 
   } //end
 
@@ -320,32 +289,13 @@ public class GameBoard {
    * @param rowIndex row start search
    * @param colIndex col start search
    */
-  private void searchtFigure(final int rowIndex, final int colIndex) {
-    final int minCellsAmountInFigure = 3;
-    // if gameBoard[rowIndex][colIndex] have horizontalFigure and
-    //verticalFigure and Lfigure ==
-    // null do
-    Cell curentCell = this.gameBoard[rowIndex][colIndex];
-    if (curentCell.getHorizontalFigure() != null
-          && curentCell.getVerticalFigure() != null) {
-      if ((!curentCell.getVerticalFigure().isLastOrFirstCell(curentCell)
-          && curentCell.getHorizontalFigure().isLastOrFirstCell(curentCell))
-          || (curentCell.getVerticalFigure().isLastOrFirstCell(curentCell)
-              && !curentCell.getHorizontalFigure()
-                  .isLastOrFirstCell(curentCell))) {
-        if (curentCell.getVerticalFigure().items() >= minCellsAmountInFigure
-            && curentCell.getHorizontalFigure().items()
-                >= minCellsAmountInFigure) {
-          if (curentCell.gettFigure() == null) {
-            // lfigure := new Figure('T')
-            // lfigure.figure.add(horizontalFigure and verticalFigure cells)
-            Figure tfigure = Figure.combine(curentCell.getVerticalFigure(),
-                curentCell.getHorizontalFigure(), 'T');
-            this.boardFigures.add(tfigure);
-          }
-        }
-      }
-    } // end
+  private void searchtFigure(final int rowIndex,
+      final int colIndex) {
+    this.t1(rowIndex, colIndex);
+    this.t2(rowIndex, colIndex);
+    this.t3(rowIndex, colIndex);
+    this.t4(rowIndex, colIndex);
+
   } // end
 
 
@@ -408,13 +358,13 @@ public class GameBoard {
       for (int colIndex = 0; colIndex < this.gameBoard
           [rowIndex].length; colIndex++) {
         final Cell currentCell = this.gameBoard[rowIndex][colIndex];
-            if (colIndex != 0) {
-              System.out.printf(" %s%s", currentCell.getType(),
+        if (colIndex != 0) {
+          System.out.printf(" %s%s", currentCell.getType(),
               currentCell.getColor());
-            } else {
-              System.out.printf("%s%s", currentCell.getType(),
+        } else {
+          System.out.printf("%s%s", currentCell.getType(),
               currentCell.getColor());
-            }
+        }
       }
       System.out.print("\n");
     }
@@ -448,4 +398,327 @@ public class GameBoard {
     return false;
   }
 
+  /**
+   * Search l1.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void l1(final int rowIndex, final int colIndex) {
+
+
+
+
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure lfigure = new Figure('L', currentCell.getColor());
+    lfigure.addCell(currentCell);
+
+    if (rowIndex + 2 < this.gameBoard.length
+        && colIndex + 2 < this.gameBoard[rowIndex].length) {
+      if (this.gameBoard[rowIndex + 1][colIndex]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 1][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex + 1]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex + 1]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex + 2]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex + 2]);
+      }
+    }
+
+    if (lfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(lfigure);
+    }
+
+  }
+
+
+
+  /**
+   * Search l1.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void l2(final int rowIndex, final int colIndex) {
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure lfigure = new Figure('L', currentCell.getColor());
+    lfigure.addCell(currentCell);
+
+    if (rowIndex + 2 < this.gameBoard.length
+        && colIndex - 2 >= 0) {
+      if (this.gameBoard[rowIndex + 1][colIndex]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 1][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2 ][colIndex - 1]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex - 1]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex - 2]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex - 2]);
+      }
+    }
+
+    if (lfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(lfigure);
+    }
+
+  }
+
+  /**
+   * l3 search.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void l3(final int rowIndex, final int colIndex) {
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure lfigure = new Figure('L', currentCell.getColor());
+    lfigure.addCell(currentCell);
+
+    if (rowIndex + 2 < this.gameBoard.length
+        && colIndex + 2 < this.gameBoard[rowIndex].length) {
+      if (this.gameBoard[rowIndex + 1][colIndex]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 1][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex]);
+      }
+      if (this.gameBoard[rowIndex][colIndex + 1]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex][colIndex + 1]);
+      }
+      if (this.gameBoard[rowIndex][colIndex + 2]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex][colIndex + 2]);
+      }
+    }
+
+    if (lfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(lfigure);
+    }
+
+  }
+
+  /**
+   * l4 search.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void l4(final int rowIndex, final int colIndex) {
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure lfigure = new Figure('L', currentCell.getColor());
+    lfigure.addCell(currentCell);
+
+    if (rowIndex + 2 < this.gameBoard.length
+        && colIndex + 2 < this.gameBoard[rowIndex].length) {
+      if (this.gameBoard[rowIndex][colIndex + 1]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex ][colIndex + 1]);
+      }
+      if (this.gameBoard[rowIndex][colIndex + 2]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex][colIndex + 2]);
+      }
+      if (this.gameBoard[rowIndex + 1][colIndex + 2]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 1][colIndex + 2]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex + 2]
+              .compareEquals(currentCell)) {
+        lfigure.addCell(this.gameBoard[rowIndex + 2][colIndex + 2]);
+      }
+    }
+
+    if (lfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(lfigure);
+    }
+
+  }
+
+  /**
+   * Search t1.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void t1(final int rowIndex, final int colIndex) {
+
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure tfigure = new Figure('T', currentCell.getColor());
+    tfigure.addCell(currentCell);
+
+    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
+        && (colIndex + 2 < this.gameBoard[rowIndex]
+            .length && colIndex - 1 >= 0)) {
+
+      if (this.gameBoard[rowIndex ][colIndex + 1]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex ][colIndex + 1]);
+      }
+      if (this.gameBoard[rowIndex][colIndex + 2]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex][colIndex + 2]);
+      }
+      if (this.gameBoard[rowIndex + 1][colIndex + 1]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex + 1]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex + 1]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 2][colIndex + 1]);
+      }
+    }
+
+    if (tfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(tfigure);
+    }
+
+  }
+
+
+  /**
+   * Search t1.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void t2(final int rowIndex, final int colIndex) {
+
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure tfigure = new Figure('T', currentCell.getColor());
+    tfigure.addCell(currentCell);
+
+    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
+        && (colIndex + 2 < this.gameBoard[rowIndex]
+            .length && colIndex - 1 >= 0)) {
+
+      if (this.gameBoard[rowIndex + 1][colIndex]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 2][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex - 1]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 2][colIndex - 1]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex + 1]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 2][colIndex + 1]);
+      }
+    }
+
+    if (tfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(tfigure);
+    }
+
+  }
+
+  /**
+   * Search t1.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void t3(final int rowIndex, final int colIndex) {
+
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure tfigure = new Figure('T', currentCell.getColor());
+    tfigure.addCell(currentCell);
+
+    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
+        && (colIndex + 2 < this.gameBoard[rowIndex]
+            .length && colIndex - 1 >= 0)) {
+
+      if (this.gameBoard[rowIndex + 1][colIndex]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 2][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 1][colIndex + 1]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex + 1]);
+      }
+      if (this.gameBoard[rowIndex + 1][colIndex + 2]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex + 2]);
+      }
+    }
+
+    if (tfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(tfigure);
+    }
+
+  }
+
+
+  /**
+   * Search t1.
+
+   * @param rowIndex row
+   * @param colIndex col
+   */
+  private void t4(final int rowIndex, final int colIndex) {
+
+    final int minCellsAmountInFigure = 5;
+    final Cell currentCell = this.gameBoard[rowIndex][colIndex];
+    Figure tfigure = new Figure('T', currentCell.getColor());
+    tfigure.addCell(currentCell);
+
+    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
+        && (colIndex + 2 < this.gameBoard[rowIndex]
+            .length && colIndex - 2 >= 0)) {
+
+      if (this.gameBoard[rowIndex + 1][colIndex]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 2][colIndex]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 2][colIndex]);
+      }
+      if (this.gameBoard[rowIndex + 1][colIndex - 1]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex - 1]);
+      }
+      if (this.gameBoard[rowIndex + 1][colIndex - 2]
+              .compareEquals(currentCell)) {
+        tfigure.addCell(this.gameBoard[rowIndex + 1][colIndex - 2]);
+      }
+    }
+
+    if (tfigure.items() == minCellsAmountInFigure) {
+      this.boardFigures.add(tfigure);
+    }
+
+  }
 }

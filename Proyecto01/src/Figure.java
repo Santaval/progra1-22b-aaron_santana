@@ -85,27 +85,27 @@ public class Figure {
   public static Figure combine(final Figure first,
       final Figure second, final char type) {
     final int maxCells = 3;
-      if (first.items() >= maxCells && second.items() >= maxCells) {
-        Figure newFigure = new Figure(type, first.color);
-        for (int index = 0; index < maxCells; index++) {
-          if (type == 'L') {
-            first.figure.get(index).setlfigure(newFigure);
-          } else {
-            first.figure.get(index).settfigure(newFigure);
-          }
-          newFigure.figure.add(first.figure.get(index));
+    if (first.items() >= maxCells && second.items() >= maxCells) {
+      Figure newFigure = new Figure(type, first.color);
+      for (int index = 0; index < maxCells; index++) {
+        if (type == 'L') {
+          first.figure.get(index).setlfigure(newFigure);
+        } else {
+          first.figure.get(index).settfigure(newFigure);
         }
-        for (int index = 0; index < maxCells; index++) {
-          if (type == 'L') {
-            second.figure.get(index).setlfigure(newFigure);
-          } else {
-            second.figure.get(index).settfigure(newFigure);
-          }
-          newFigure.figure.add(second.figure.get(index));
-        }
-        return newFigure;
+        newFigure.figure.add(first.figure.get(index));
       }
-      return null;
+      for (int index = 0; index < maxCells; index++) {
+        if (type == 'L') {
+          second.figure.get(index).setlfigure(newFigure);
+        } else {
+          second.figure.get(index).settfigure(newFigure);
+        }
+        newFigure.figure.add(second.figure.get(index));
+      }
+      return newFigure;
+    }
+    return null;
   }
 
   /**
@@ -127,8 +127,9 @@ public class Figure {
     return this.figure.get(index);
   }
 
-    /**
+  /**
    * Return last cell in figure.
+
    * @return last Cell in the figure
    */
   public Cell getLast() {
@@ -137,6 +138,7 @@ public class Figure {
 
   /**
    * Return first cell in figure.
+
    * @return first Cell in the figure
    */
   public Cell getFirst() {
@@ -178,7 +180,6 @@ public class Figure {
   public static Figure priorityFigure(final ArrayList<Figure> boardFigures) {
     // for index to boardFigures.items() do
     final int five = 5; //most priority cells amount H or V
-    final int six = 6; //min amount of cells in T or L figure
     final int four = 4; // H or V figure wrapped amount of cells
     final int three = 3; // H or V figure normal amount of cells
     for (int index = 0; index < boardFigures.size(); index++) {
@@ -196,10 +197,11 @@ public class Figure {
     for (int index = 0; index < boardFigures.size(); index++) {
       // if boardFigures[index].type == 'L' OR
       // boardFigures[index].type == 'T' do
+
       if (boardFigures.get(index) != null
             && (boardFigures.get(index).type == 'L'
             || boardFigures.get(index).type == 'T')
-          && boardFigures.get(index).items() >= six) {
+          && boardFigures.get(index).items() == five) {
         // return boardFigures[index]
         return boardFigures.get(index);
       } // end

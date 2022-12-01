@@ -105,13 +105,13 @@ public class Game {
           gameBoard.searchFigures();
           // gameBoard.deleteFigure()
           gameBoard.deleteFigure();
-          System.out.printf("\n");
-          this.gameBoard.print();
+          // System.out.printf("\n");
+          // this.gameBoard.print();
           this.gameBoard.gravity();
-          System.out.print("\n");
-          gameBoard.print();
-          System.out.print("\n");
-          System.out.println("----------------");
+          // System.out.print("\n");
+          // gameBoard.print();
+          // System.out.print("\n");
+          // System.out.println("----------------");
         } while (gameBoard.haveFigures());
         if (this.gameBoardCount != 1) {
           System.out.print("\n");

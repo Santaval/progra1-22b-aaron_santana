@@ -93,6 +93,7 @@ doc:
 	
 test: 
 	@python3 Test/src/MakeTest.py
+	@make clean
 
 
 	
@@ -105,4 +106,4 @@ test:
 
 
 clean: 
-	rm -rf build bin doc testout jar_out
+	@rm -rf build bin doc testout jar_out

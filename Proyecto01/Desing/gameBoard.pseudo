@@ -86,14 +86,20 @@ GameBoard class do
 
 
 	procedure searchLFigure(rowIndex, colIndex) do 
-		if gameBoard[rowIndex][colIndex] have horizontalFigure and verticalFigure and Lfigure == null do 
-			set LFigure := new Figure('L')
-			LFigure.figure.add(horizontalFigure and verticalFigure cells)
+		if currentCell have vertical 
 
-		end
+			set thirdCell := curentFigure verticalFigure thirdCell
+		if thirdCell have horizontalFigure
+			if thirdCell is 3rd or 2nd in horizontalFigure
+					 
 	end
 
-
+	set ArrayList<Figure > Lside(Figure, increment) {
+		set counter = 
+		while () {
+			
+		}
+	}
 
 	procedure deleteFigure() do 
 		set deleteFigure = selectFigureTodelete()

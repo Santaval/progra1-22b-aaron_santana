@@ -70,13 +70,13 @@ public class Cell {
       final int colPosition) {
     if (cellString.length() == 2) {
       // rowIndex := rowIndex
-    this.rowIndex = rowPosition;
-    // colIndex := colIndex
-    this.colIndex = colPosition;
-    // type := cellString[0]
-    this.type = cellString.charAt(0);
-    // color := cellString[1]
-    this.color = cellString.charAt(1);
+      this.rowIndex = rowPosition;
+      // colIndex := colIndex
+      this.colIndex = colPosition;
+      // type := cellString[0]
+      this.type = cellString.charAt(0);
+      // color := cellString[1]
+      this.color = cellString.charAt(1);
     } else {
       throw new InputMismatchException("invalid input");
     }
@@ -184,14 +184,19 @@ public class Cell {
   public boolean validate() {
     // if types have type AND colors have color do
     if (types.contains(this.type + "") && colors.contains(this.color + "")) {
+
+      if (this.type != '-' && this.color == '-') {
+        return false;
+      }
+
       if ((this.type != '-' && this.color != '-')
           || (this.type == '-' && this.color == '-')) {
         return true;
       }
-        if ((this.type == '-' && this.color != '-')
+      if ((this.type == '-' && this.color != '-')
           || (this.type != '-' && this.color == '-')) {
-            return true;
-        }
+        return true;
+      }
       // return true
       return false;
     } // end
@@ -454,8 +459,8 @@ public class Cell {
       return true;
     } else if (this.rowIndex == otherCell.rowIndex
           && this.colIndex < otherCell.colIndex) {
-          return true;
-        }
+      return true;
+    }
     return false;
   }
 
