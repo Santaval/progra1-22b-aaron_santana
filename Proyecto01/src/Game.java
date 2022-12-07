@@ -100,6 +100,7 @@ public class Game {
       if (this.gameBoard.validate()) {
 
         do {
+          this.gameBoard.gravity();
           this.gameBoard.clearFigures();
           // gameBoard.searchFigures()
           gameBoard.searchFigures();
@@ -107,7 +108,6 @@ public class Game {
           gameBoard.deleteFigure();
           // System.out.printf("\n");
           // this.gameBoard.print();
-          this.gameBoard.gravity();
           // System.out.print("\n");
           // gameBoard.print();
           // System.out.print("\n");

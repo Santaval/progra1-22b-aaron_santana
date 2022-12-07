@@ -563,16 +563,12 @@ public class GameBoard {
    * @param colIndex col
    */
   private void t1(final int rowIndex, final int colIndex) {
-
     final int minCellsAmountInFigure = 5;
     final Cell currentCell = this.gameBoard[rowIndex][colIndex];
     Figure tfigure = new Figure('T', currentCell.getColor());
     tfigure.addCell(currentCell);
-
-    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
-        && (colIndex + 2 < this.gameBoard[rowIndex]
-            .length && colIndex - 1 >= 0)) {
-
+    if ((rowIndex + 2 < this.gameBoard.length)
+        && (colIndex + 2 < this.gameBoard[rowIndex].length)) {
       if (this.gameBoard[rowIndex ][colIndex + 1]
               .compareEquals(currentCell)) {
         tfigure.addCell(this.gameBoard[rowIndex ][colIndex + 1]);
@@ -611,8 +607,8 @@ public class GameBoard {
     Figure tfigure = new Figure('T', currentCell.getColor());
     tfigure.addCell(currentCell);
 
-    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
-        && (colIndex + 2 < this.gameBoard[rowIndex]
+    if ((rowIndex + 2 < this.gameBoard.length)
+        && (colIndex + 1 < this.gameBoard[rowIndex]
             .length && colIndex - 1 >= 0)) {
 
       if (this.gameBoard[rowIndex + 1][colIndex]
@@ -652,9 +648,9 @@ public class GameBoard {
     Figure tfigure = new Figure('T', currentCell.getColor());
     tfigure.addCell(currentCell);
 
-    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
+    if ((rowIndex + 2 < this.gameBoard.length)
         && (colIndex + 2 < this.gameBoard[rowIndex]
-            .length && colIndex - 1 >= 0)) {
+            .length)) {
 
       if (this.gameBoard[rowIndex + 1][colIndex]
               .compareEquals(currentCell)) {
@@ -694,9 +690,8 @@ public class GameBoard {
     Figure tfigure = new Figure('T', currentCell.getColor());
     tfigure.addCell(currentCell);
 
-    if ((rowIndex + 2 < this.gameBoard.length && rowIndex - 1 >= 0)
-        && (colIndex + 2 < this.gameBoard[rowIndex]
-            .length && colIndex - 2 >= 0)) {
+    if ((rowIndex + 2 < this.gameBoard.length)
+        && (colIndex - 2 >= 0)) {
 
       if (this.gameBoard[rowIndex + 1][colIndex]
               .compareEquals(currentCell)) {
